@@ -1,0 +1,5 @@
+{
+  "name": "kiosk",
+  "integrations": {},
+  "type": "react-vite"
+}
