@@ -19,7 +19,7 @@ ion-input {
   font-size: 3em !important;
 }
 
-ion-button {
+ion-button.numbutton{
   width: 90%;
   height: 90%;
   margin-top: 5%;

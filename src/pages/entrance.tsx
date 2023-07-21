@@ -5,6 +5,8 @@ import { RouteComponentProps } from 'react-router';
 import './Home.css';
 import Exit from './exit';
 import Entrance from './entrance';
+import InputNum from '../components/inputNum';
+
 
 const entrance: React.FC = () => {
   return (
@@ -42,12 +44,12 @@ const entrance: React.FC = () => {
 
         <IonGrid >
           <IonRow>
-            <IonCol id="second"> <IonNavLink routerDirection="forward" component={() => <Entrance />}>
+            <IonCol id="second"> <IonNavLink routerDirection="forward" component={() => <InputNum />}>
               <IonButton className="enumButton">회원번호로 입장</IonButton>
             </IonNavLink>
             </IonCol>
             <IonCol>
-              <IonNavLink routerDirection="forward" component={() => <Exit />}>
+              <IonNavLink routerDirection="forward" component={() => <InputNum />}>
                 <IonButton className="pnumButton">전화번호로 입장</IonButton>
               </IonNavLink></IonCol>
           </IonRow>

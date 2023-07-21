@@ -4,6 +4,7 @@ import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home';
 import Entrance from './pages/entrance';
 import Exit from './pages/exit';
+import InputNum from './components/inputNum';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -41,6 +42,10 @@ const App: React.FC = () => (
         
         <Route exact path="/Entrance">
           <Entrance />
+        </Route>
+        
+        <Route exact path="/InputNum">
+          <InputNum />
         </Route>
 
         <Route exact path="/">

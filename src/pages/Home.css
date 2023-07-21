@@ -100,16 +100,21 @@ ion-col {
   color: #8c8c8c;
 }
 
-ion-button{
+/* ion-button {
    width : 38vw;
    height: 43vh; 
    --border-radius: 30px;
    font-size: 2.125rem; 
 
-}
+} */
 
 
 ion-button.button1 {
+  width : 38vw;
+   height: 43vh; 
+   --border-radius: 30px;
+   font-size: 2.125rem; 
+
   /* 텍스트 색 지정 */
   color: white; 
   /* 버튼 색 */
@@ -119,6 +124,10 @@ ion-button.button1 {
 }
 
 ion-button.button2 {
+  width : 38vw;
+   height: 43vh; 
+   --border-radius: 30px;
+   font-size: 2.125rem; 
   color: white;
   --background: #DF1044;
   --background-hover: #f3124a;
@@ -130,6 +139,10 @@ ion-button.button2 {
 
 
 ion-button.enumButton {
+  width : 38vw;
+   height: 43vh; 
+   --border-radius: 30px;
+   font-size: 2.125rem; 
   /* 텍스트 색 지정 */
   color: white; 
   /* 버튼 색 */
@@ -139,6 +152,10 @@ ion-button.enumButton {
 
 
 ion-button.pnumButton {
+  width : 38vw;
+   height: 43vh; 
+   --border-radius: 30px;
+   font-size: 2.125rem; 
   /* 텍스트 색 지정 */
   color: white; 
   /* 버튼 색 */
