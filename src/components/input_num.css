@@ -1,0 +1,29 @@
+table {
+  position: relative;
+  table-layout: fixed;
+  width: 60vw;
+  height: 60vh;
+  margin: 0 auto;
+}
+
+td {
+  /* border: 1px solid blue; */
+  font-size: xx-large;
+  font-family: 'Courier New', Courier, monospace;
+  text-align: center;
+}
+
+ion-input {
+  position: inherit;
+  text-align: center;
+  font-size: 3em !important;
+}
+
+ion-button {
+  width: 90%;
+  height: 90%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
