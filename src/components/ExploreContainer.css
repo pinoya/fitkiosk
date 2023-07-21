@@ -1,4 +1,4 @@
-#container {
+/* #container {
   text-align: center;
   position: absolute;
   left: 0;
@@ -21,4 +21,56 @@
 
 #container a {
   text-decoration: none;
+} */
+
+/* */
+
+
+#container {
+  text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  /* 새로운 스타일 추가 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#container strong {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+#container p {
+  font-size: 16px;
+  line-height: 22px;
+  color: #8c8c8c;
+  margin: 0;
+}
+
+#container a {
+  text-decoration: none;
+}
+
+/* 버튼 뒤에 추가할 블록 스타일 */
+.block {
+  background-color: green;
+  width: 1200px;
+  height: 800px;
+  margin-top: 10px;
+  /* 새로운 스타일 추가 */
+  display: flex;
+  justify-content: space-between; /* 버튼 사이에 간격을 띄우기 위해 space-between 설정 */
+  align-items: center;
+  padding: 0 300px; /* 버튼 좌우로 20px의 패딩 추가 */
+}
+
+/* 버튼 스타일 수정 */
+.IonButton {
+  /* 원하는 버튼 크기로 설정 */
+  padding: 100px 100px; /* 상하로 20px, 좌우로 40px의 패딩으로 버튼 크기를 크게 설정 */
+  font-size: 20px; /* 폰트 크기 20px로 설정 */
 }
