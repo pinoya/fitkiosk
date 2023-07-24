@@ -22,7 +22,7 @@ function PageOne() {
     };
   }, []);
 
-  const handleLogin = (event) => {
+  const handleLogin = (event: any) => {
     event.preventDefault();
     if (username === "user" && password === "0000") {
       

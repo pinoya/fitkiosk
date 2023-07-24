@@ -20,6 +20,7 @@ import {
 import { Link } from 'react-router-dom';
 import { FiMapPin } from 'react-icons/fi';
 import PageFour from './page4';
+import './page.css';
 
 
 function PageThree() {
@@ -80,7 +81,7 @@ function PageThree() {
           <IonGrid>
             <IonCard className="page3_card">
               <IonCardHeader></IonCardHeader>
-              <div>
+              <div style={{color : 'black'}}>
                 <IonCardContent className="">
                   <IonRow>
                     <IonCol size="12">

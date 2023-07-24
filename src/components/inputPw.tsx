@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 interface ContainerProps { }
 
-import NextPage from './page-three';
+import NextPage from '../page/page3';
 
 const input_num: React.FC<ContainerProps> = () => {
   const [text, settext] = useState("");

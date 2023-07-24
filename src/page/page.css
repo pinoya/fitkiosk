@@ -5,7 +5,6 @@
     right: 0;
     top: 45%;
     transform: translateY(-50%);
-
     flex-wrap: wrap;
   }
 
@@ -136,18 +135,22 @@
     margin-bottom: 1.5rem;
     text-align: center;
     padding-bottom : 2rem;
+    color : black;
 }
 .client{
     font-size:1.8vw;
     margin-top: 1rem;
+    color : black;
 }
 .come{
     font-size: 1.8vw;
     margin-top: 1rem;
+    color : black;
 }
 .checkplz{
     font-size: 1.8vw;
     margin-top: 1rem;
+    color : black;
 }
 .page3_submit{ /*체육관 변경 버튼*/
     color : white;
