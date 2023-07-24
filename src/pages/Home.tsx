@@ -40,8 +40,6 @@ const Home: React.FC = () => {
             <IonCol>
               <br>
               </br>
-              <br>
-              </br>
 
             </IonCol>
           </IonRow>

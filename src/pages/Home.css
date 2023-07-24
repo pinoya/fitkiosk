@@ -41,6 +41,7 @@ IonContent {
 
 #setting-container {
   float: right;
+  padding-right: 20px;
 }
 
 #setting-container button{
@@ -125,7 +126,7 @@ ion-button.button1 {
 
 ion-button.button2 {
   width : 38vw;
-   height: 43vh; 
+  height: 43vh; 
    --border-radius: 30px;
    font-size: 2.125rem; 
   color: white;

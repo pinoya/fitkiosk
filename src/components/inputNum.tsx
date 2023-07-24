@@ -1,4 +1,4 @@
-import { IonBackButton, IonButton, IonButtons, IonContent, IonHeader, IonInput, IonNavLink, IonText, IonTitle, IonToolbar } from '@ionic/react';
+import { IonBackButton, IonButton, IonButtons, IonContent, IonHeader, IonInput, IonNavLink, IonText, IonTitle, IonToolbar, IonGrid, IonRow, IonCol } from '@ionic/react';
 import './inputNum.css';
 import { useState } from 'react';
 
@@ -57,38 +57,46 @@ const input_num: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonInput inputmode="none" label-placement="floating" fill="solid" value={text}></IonInput>
-        <table>
-          <thead></thead>
-          <tbody>
-            <tr>
-              <td><IonButton className="numbutton" onClick={addtext}>1</IonButton></td>
-              <td><IonButton className="numbutton" onClick={addtext}>2</IonButton></td>
-              <td><IonButton className="numbutton" onClick={addtext}>3</IonButton></td>
-            </tr>
-            <tr>
-              <td><IonButton className="numbutton" onClick={addtext}>4</IonButton></td>
-              <td><IonButton className="numbutton" onClick={addtext}>5</IonButton></td>
-              <td><IonButton className="numbutton" onClick={addtext}>6</IonButton></td>
-            </tr>
-            <tr>
-              <td><IonButton className="numbutton" onClick={addtext}>7</IonButton></td>
-              <td><IonButton className="numbutton" onClick={addtext}>8</IonButton></td>
-              <td><IonButton className="numbutton" onClick={addtext}>9</IonButton></td>
-            </tr>
-            <tr>
-              <td><IonButton className="numbutton" onClick={addtext}>0</IonButton></td>
-              <td colSpan={2}><IonButton className="numbutton" onClick={deletetext} style={backbtnstyle}>←</IonButton></td>
-            </tr>
-            <tr><td colSpan={3}><IonInput inputmode="none" label-placement="floating" fill="solid"></IonInput></td></tr>
-            <tr>
-              <td colSpan={3}>
-                <IonButton className="numbutton" style={confirmstyle} color='danger'>확인</IonButton>
-              </td>
-            </tr>
-          </tbody>
-          <tfoot></tfoot>
-        </table>
+        <IonGrid>
+          <IonRow>
+            <IonCol>  <IonInput inputmode="none" label-placement="floating" fill="solid" value={text}></IonInput></IonCol>
+            <IonCol>
+              <table>
+                <thead></thead>
+                <tbody>
+                  <tr>
+                    <td><IonButton className="numbutton" onClick={addtext}>1</IonButton></td>
+                    <td><IonButton className="numbutton" onClick={addtext}>2</IonButton></td>
+                    <td><IonButton className="numbutton" onClick={addtext}>3</IonButton></td>
+                  </tr>
+                  <tr>
+                    <td><IonButton className="numbutton" onClick={addtext}>4</IonButton></td>
+                    <td><IonButton className="numbutton" onClick={addtext}>5</IonButton></td>
+                    <td><IonButton className="numbutton" onClick={addtext}>6</IonButton></td>
+                  </tr>
+                  <tr>
+                    <td><IonButton className="numbutton" onClick={addtext}>7</IonButton></td>
+                    <td><IonButton className="numbutton" onClick={addtext}>8</IonButton></td>
+                    <td><IonButton className="numbutton" onClick={addtext}>9</IonButton></td>
+                  </tr>
+                  <tr>
+                    <td><IonButton className="numbutton" onClick={addtext}>0</IonButton></td>
+                    <td colSpan={2}><IonButton className="numbutton" onClick={deletetext} style={backbtnstyle}>←</IonButton></td>
+                  </tr>
+                  {/* <tr><td colSpan={3}><IonInput inputmode="none" label-placement="floating" fill="solid"></IonInput></td></tr> */}
+                  <tr>
+                  </tr>
+                </tbody>
+                <tfoot></tfoot>
+              </table></IonCol>
+          </IonRow>
+        </IonGrid>
+        <IonGrid>
+          <IonRow>
+            <IonCol>  <IonButton className="numbutton" style={confirmstyle} color='danger'>확인</IonButton></IonCol>
+
+          </IonRow>
+        </IonGrid>
       </IonContent>
     </>
   );

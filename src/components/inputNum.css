@@ -1,8 +1,8 @@
 table {
   position: relative;
   table-layout: fixed;
-  width: 60vw;
-  height: 60vh;
+  width: 50vw;
+  height: 50vh;
   margin: 0 auto;
 }
 
@@ -27,3 +27,10 @@ ion-button.numbutton{
   margin-left: 5%;
   margin-right: 5%;
 }
+
+/* ion-col {
+  background-color: #135d54;
+  border: solid 1px #fff;
+  color: #fff;
+  text-align: center;
+} */

@@ -28,8 +28,6 @@ const exit: React.FC = () => {
                         <IonCol>
                             <br>
                             </br>
-                            <br>
-                            </br>
                         </IonCol>
                     </IonRow>
                 </IonGrid>
