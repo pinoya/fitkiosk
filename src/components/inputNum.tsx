@@ -2,10 +2,11 @@ import { IonBackButton, IonButton, IonButtons, IonContent, IonHeader, IonInput, 
 import './inputNum.css';
 import { useState } from 'react';
 
+interface ContainerProps { }
 
-// import PageThree from './page-three';
+import NextPage from './page-two';
 
-const input_num: React.FC = () => {
+const input_num: React.FC<ContainerProps> = () => {
   const [text, settext] = useState("010");
 
   const addtext = (e: any) => {
@@ -30,68 +31,64 @@ const input_num: React.FC = () => {
     } else settext(text.slice(0, -1));
   }
 
-  const backbtnstyle = {
-    width: "95%",
-    height: "90%",
-    marginLeft: "2.5%",
-    marginRight: "2.5%",
-    marginTop: "5%"
-  }
 
-  const confirmstyle = {
-    width: "97%",
-    height: "90%",
-    marginLeft: "1.5%",
-    marginRight: "1.5%"
+const confirmstyle = {
+  width: "97%",
+  height: "50%",
+  marginLeft: "1.5%",
+  marginRight: "1.5%",
+  background: "#102B56"
+}
 
-  }
-
-  return (
-    <>
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonBackButton></IonBackButton>
-          </IonButtons>
-          <IonTitle><IonText>회원번호 입력</IonText></IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent>
-        <IonInput inputmode="none" label-placement="floating" fill="solid" value={text}></IonInput>
-        <table>
-          <thead></thead>
-          <tbody>
-            <tr>
-              <td><IonButton className="numbutton" onClick={addtext}>1</IonButton></td>
-              <td><IonButton className="numbutton" onClick={addtext}>2</IonButton></td>
-              <td><IonButton className="numbutton" onClick={addtext}>3</IonButton></td>
-            </tr>
-            <tr>
-              <td><IonButton className="numbutton" onClick={addtext}>4</IonButton></td>
-              <td><IonButton className="numbutton" onClick={addtext}>5</IonButton></td>
-              <td><IonButton className="numbutton" onClick={addtext}>6</IonButton></td>
-            </tr>
-            <tr>
-              <td><IonButton className="numbutton" onClick={addtext}>7</IonButton></td>
-              <td><IonButton className="numbutton" onClick={addtext}>8</IonButton></td>
-              <td><IonButton className="numbutton" onClick={addtext}>9</IonButton></td>
-            </tr>
-            <tr>
-              <td><IonButton className="numbutton" onClick={addtext}>0</IonButton></td>
-              <td colSpan={2}><IonButton className="numbutton" onClick={deletetext} style={backbtnstyle}>←</IonButton></td>
-            </tr>
-            <tr><td colSpan={3}><IonInput inputmode="none" label-placement="floating" fill="solid"></IonInput></td></tr>
-            <tr>
-              <td colSpan={3}>
-                <IonButton className="numbutton" style={confirmstyle} color='danger'>확인</IonButton>
-              </td>
-            </tr>
-          </tbody>
-          <tfoot></tfoot>
-        </table>
-      </IonContent>
-    </>
-  );
+return (
+  <>
+    <IonHeader>
+      <IonToolbar>
+        <IonButtons slot="start">
+          <IonBackButton></IonBackButton>
+        </IonButtons>
+        <IonTitle><IonText>전화번호 입력</IonText></IonTitle>
+      </IonToolbar>
+    </IonHeader>
+    <IonContent>
+      <IonInput class="float_window" inputmode="none" label-placement="floating" fill="solid" value={text}></IonInput>
+      <table className='input_table'>
+        <thead></thead>
+        <tbody>
+          <tr>
+            <td className='input_td'><IonButton className='input_num' onClick={addtext}>1</IonButton></td>
+            <td className='input_td'><IonButton className='input_num' onClick={addtext}>2</IonButton></td>
+            <td className='input_td'><IonButton className='input_num' onClick={addtext}>3</IonButton></td>
+          </tr>
+          <tr>
+            <td className='input_td'><IonButton className='input_num' onClick={addtext}>4</IonButton></td>
+            <td className='input_td'><IonButton className='input_num' onClick={addtext}>5</IonButton></td>
+            <td className='input_td'><IonButton className='input_num' onClick={addtext}>6</IonButton></td>
+          </tr>
+          <tr>
+            <td className='input_td'><IonButton className='input_num' onClick={addtext}>7</IonButton></td>
+            <td className='input_td'><IonButton className='input_num' onClick={addtext}>8</IonButton></td>
+            <td className='input_td'><IonButton className='input_num' onClick={addtext}>9</IonButton></td>
+          </tr>
+          <tr>
+            <td className='input_td'><IonButton className='input_num' onClick={addtext}>0</IonButton></td>
+            <td colSpan={2} className='input_td'><IonButton className='input_back' onClick={deletetext}>←</IonButton></td>
+          </tr>
+          <tr>
+            <td colSpan={3}>
+              {/* nav 누를 때 db에서 쿼리 날림과 동시에 인증되면 다음페이지
+                없으면 등록되지 않은 회원 정보입니다를 화면에 띄울 생각입니다. */}
+              <IonNavLink routerDirection="forward" component={() => <NextPage />}>
+                <IonButton style={confirmstyle} color='#102B56'>확인</IonButton>
+              </IonNavLink>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot></tfoot>
+      </table>
+    </IonContent>
+  </>
+);
 };
 
 export default input_num;

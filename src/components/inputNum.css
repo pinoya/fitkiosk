@@ -1,4 +1,4 @@
-table {
+.input_table {
   position: relative;
   table-layout: fixed;
   width: 60vw;
@@ -6,24 +6,35 @@ table {
   margin: 0 auto;
 }
 
-td {
+.input_td {
   /* border: 1px solid blue; */
   font-size: xx-large;
   font-family: 'Courier New', Courier, monospace;
   text-align: center;
 }
 
-ion-input {
+.float_window {
   position: inherit;
   text-align: center;
   font-size: 3em !important;
 }
 
-ion-button.numbutton{
+.input_num {
+  --background: #059D53;
   width: 90%;
   height: 90%;
   margin-top: 5%;
   margin-bottom: 5%;
   margin-left: 5%;
   margin-right: 5%;
+}
+
+.input_back {
+  --background: #074728;
+  width: 95%;
+  height: 90%;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  margin-top: 5%;
+  margin-bottom: 5%;
 }
