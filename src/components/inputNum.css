@@ -37,7 +37,7 @@ ion-input.float_window {
 }
 
 .input_num {
-  --background: #059D53;
+  --background: #DF1044;
   font-size: xx-large;
   width: 100%;
   height: 100%;
@@ -50,7 +50,7 @@ ion-input.float_window {
 }
 
 .input_back {
-  --background: #074728;
+  --background: #930025;
   font-size: xx-large;
   width: 95%;
   height: 100%;
