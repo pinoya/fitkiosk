@@ -6,6 +6,8 @@ import Entrance from './pages/entrance';
 import Exit from './pages/exit';
 import InputNum from './components/inputNum';
 
+import Input_Tel from './page/Input_Tel';
+
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 
@@ -46,6 +48,10 @@ const App: React.FC = () => (
         
         <Route exact path="/InputNum">
           <InputNum />
+        </Route>
+
+        <Route exact path="/Input_Tel">
+          <Input_Tel />
         </Route>
 
         <Route exact path="/">
