@@ -1,0 +1,236 @@
+#container {
+    text-align: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 45%;
+    transform: translateY(-50%);
+
+    flex-wrap: wrap;
+  }
+
+  .hello{ /*아이디 혹은 비밀번호 잘못됨*/
+    font-size: 1vw;
+  }
+.gym{ /*아이콘*/
+    color : #102B56;
+    font-size: 4vw;
+}
+.gymstart{/*체육관 출결관리 시스템*/
+    font-size: 4vw;
+    width: 100%;
+    font-weight: 600;
+    color : #102B56;
+}
+.gymstart2{ /*체육관 연동*/
+    width: 100%;
+    font-size: 2.2vw;
+}
+
+.codeName{/*form 태그*/
+    font-size: 1.5vw;
+    margin-top: 2.3rem;
+
+}
+.codeText{ /*체육관 코드 번호 인풋박스*/
+    font-weight: 500;
+    width: 65vmin;
+    height : 10vmin;
+    border : 1px solid#102B56;;
+    border-radius: 10px;
+    font-size: 1.5vw;
+}
+.codeText2{/*비밀번호 인풋박스*/
+    font-weight: 500;
+    width: 65vmin;
+    height : 10vmin;
+    border : 1px solid  #102B56;;
+    border-radius: 10px;
+    margin-top: 0.6rem;
+    font-size: 1.5vw;
+}
+.home_submit{/*로그인 submit*/
+    color : white;
+    margin-top: 2rem;
+    font-size: 3.5vw;
+    width: 65vmin;
+    height : 10vmin;
+    font-weight: 500;
+    border-radius: 10px;
+}
+
+
+.head1{ /*상단바*/
+    float:left;
+    clear:both;
+    display: inline-flex;
+}
+.title{ /*상단바- 체육관 설정*/
+    font-size: 110%;
+    font-weight: 500;
+    text-align: center;
+}
+.img{ /*체육관 이미지*/
+    width : 100%;
+    height : 42vmin;
+}
+.card{/*카드 전체*/
+    width: 67%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: 1.5rem;
+
+}
+.cardTitle{ /*카드 제목*/
+    font-size: 2.3vw;
+}
+.cardgym{ /*현재 연동된 체육관*/
+    font-size:1vw;
+
+}
+.cardlocation{ /*체육관 주소*/
+    font-size:1.4vw;
+
+
+}
+.gym_submit{/*로그인 submit*/
+    color : white;
+    margin-top: 1rem;
+    padding : 0.5rem;
+    font-size: 3vw;
+    width: 75%;
+    height : 11vmin;
+    font-weight: 500;
+    border-radius: 10px;
+
+
+}
+
+
+.page2_setting{ /*설정*/
+    font-weight: 500;
+    font-size: 4vw;
+
+}
+.page2_wheregym{ /*현제 체육관*/
+    font-weight: 500;
+    font-size: 3.5vw;
+}
+.page2_submit{ /*체육관 변경 버튼*/
+    color : white;
+
+    font-size: 3.5vw;
+    width: 65vmin;
+    height : 10vmin;
+    font-weight: 500;
+    border-radius: 10px;
+}
+
+.page3_card{
+    width: 70%;
+    height : 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    padding-bottom : 2rem;
+}
+.client{
+    font-size:1.8vw;
+    margin-top: 1rem;
+}
+.come{
+    font-size: 1.8vw;
+    margin-top: 1rem;
+}
+.checkplz{
+    font-size: 1.8vw;
+    margin-top: 1rem;
+}
+.page3_submit{ /*체육관 변경 버튼*/
+    color : white;
+    margin-top: 3rem;
+    font-size: 3vw;
+    width: 75%;
+    height : 10vmin;
+    font-weight: 500;
+    border-radius: 10px;
+}
+
+
+
+
+
+
+
+
+
+.test1{
+    width: 1133px;
+    height: 744px;
+    background-color : red;
+    position : fixed;
+}
+.setting{
+    float : right;
+    margin-top : 22px;
+    margin-right : 17px;
+}
+.Ioncard{
+    width : 969px; 
+    height:534px;
+    background-color: white;
+    color : black;
+    border-radius:23px;
+    margin-top : 116px;
+    margin-left : 82px;
+    margin-bottom : 94px;
+}
+.Iontitle{
+    text-align: center;
+    font-size:36px;
+    margin-top : 22px;
+    font-weight: border;
+
+}
+.Iontitles{
+    font-size : 20px;
+     text-align: center;
+     margin-top : 2rem;
+}
+.card1{
+    width:390px;
+    height:320px;
+    float:left;
+    color : white;
+    background-color : #5480F2;
+    border-radius:26px;
+    margin-top : 15px;
+    margin-left : 3rem;
+
+}
+.card1text{
+    font-size:36px;
+    text-align:center;
+    margin-top : 6rem;
+
+}
+.card2{
+    color : white;
+    background-color : #DF1044 ;
+    width:390px;
+    height:320px;
+    float :left;
+    border-radius:26px;
+    margin-top : 15px;
+    margin-left : 3rem;
+
+}
+.card2text{
+    font-size:36px;
+    text-align: center;
+    margin-top : 6rem;
+
+}
