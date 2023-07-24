@@ -6,6 +6,7 @@ import './Home.css';
 import Exit from './exit';
 import Entrance from './entrance';
 import InputNum from '../components/inputNum';
+import InputId from '../components/inputId';
 
 
 const entrance: React.FC = () => {
@@ -44,7 +45,7 @@ const entrance: React.FC = () => {
 
         <IonGrid >
           <IonRow>
-            <IonCol id="second"> <IonNavLink routerDirection="forward" component={() => <InputNum />}>
+            <IonCol id="second"> <IonNavLink routerDirection="forward" component={() => <InputId />}>
               <IonButton className="enumButton">회원번호로 입장</IonButton>
             </IonNavLink>
             </IonCol>
