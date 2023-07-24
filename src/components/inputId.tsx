@@ -7,28 +7,17 @@ interface ContainerProps { }
 import NextPage from './page-two';
 
 const input_num: React.FC<ContainerProps> = () => {
-  const [text, settext] = useState("010");
+  const [text, settext] = useState("");
 
   const addtext = (e: any) => {
-    if (text.length == 3 || text.length == 8) {
-      settext(text + '-' + e.target.textContent);
-    } else if (text.length >= 12) {
-      if (text.length > 12) {
-        console.log(text);
-      }
-      else {
-        settext(text + e.target.textContent);
-      }
-    }
-    else {
+    if (text.length == 6) {
+    } else {
       settext(text + e.target.textContent);
     }
   }
 
   const deletetext = () => {
-    if (text.length == 5 || text.length == 10) {
-      settext(text.slice(0, -2));
-    } else settext(text.slice(0, -1));
+    settext(text.slice(0, -1));
   }
 
   const confirmstyle = {
