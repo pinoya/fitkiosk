@@ -1,0 +1,40 @@
+.input_table {
+    position: relative;
+    table-layout: fixed;
+    width: 60vw;
+    height: 60vh;
+    margin: 0 auto;
+  }
+  
+  .input_td {
+    /* border: 1px solid blue; */
+    font-size: xx-large;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+  }
+  
+  .float_window {
+    position: inherit;
+    text-align: center;
+    font-size: 3em !important;
+  }
+  
+  .input_id {
+    --background: #DF1044;
+    width: 90%;
+    height: 90%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  .input_id_back {
+    width: 95%;
+    height: 90%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    --background: #930025;
+  }
