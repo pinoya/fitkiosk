@@ -81,7 +81,7 @@ const FaceRecognition: React.FC = () => {
                         context.lineWidth = 2;
                         context.strokeStyle = "red";
                         context.fillStyle = "red";
-                        context.font = "20px Arial";
+                        context.font = "100px Arial";
 
                         const landmarks = resizedDetections[i].landmarks;
                         const leftEye = landmarks.getLeftEye();
@@ -119,11 +119,11 @@ const FaceRecognition: React.FC = () => {
                 height="560"
                 autoPlay
                 muted
-                style={{ margin: "0 auto", position: "absolute" }}
+                style={{ width: "100%", height: "100%", marginBottom: "20px" }}
             />
             <canvas
                 ref={canvasRef}
-                style={{ margin: "0 auto", position: "absolute" }}
+                style={{ width: "100%", height: "100%", position: "absolute", top: 0, left: 0 }}
             />
         </>
     );

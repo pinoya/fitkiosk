@@ -4,6 +4,7 @@ import Logo from './logo';
 
 import Input_Box from '../components/inputNum';
 import { IonCol, IonContent, IonGrid, IonRow } from '@ionic/react';
+import FaceRecognition from "../components/FaceRecognition";
 
 function Kiosk() {
     return (
@@ -33,12 +34,12 @@ function Kiosk() {
                                 <IonGrid>
                                     <IonRow>
                                         <IonCol class="face">
-
+                                            <FaceRecognition />
                                         </IonCol>
                                     </IonRow>
                                     <IonRow>
                                         <IonCol class="btn">
-                                            
+
                                         </IonCol>
                                     </IonRow>
                                 </IonGrid>
