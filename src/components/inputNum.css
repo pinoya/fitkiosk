@@ -1,4 +1,5 @@
 ion-grid.input_box {
+    background-color: #232323;
     width: 100%;
     height: 100%;
 
@@ -22,6 +23,7 @@ ion-col.input_box {
 ion-row.input_segment {
     width: 100%;
     height: 60px;
+    border: 0px;
 }
 
 .input_segment {
@@ -55,6 +57,7 @@ div.input_div {
     width: 100%;
     height: 84px;
     font-size: large;
+    border: 0px;
 
     display: flex;
     align-items: center;
@@ -104,6 +107,7 @@ ion-row.input_pad {
 ion-row.input_row {
     width: 100%;
     height: 70px;
+    border: 0px;
 }
 
 ion-button.input_btn {
