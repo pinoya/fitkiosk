@@ -1,0 +1,97 @@
+div.background-image-img {
+    position: absolute;
+    background-image: url(./testimg.jpg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    filter: blur(10px);
+    width: 100vw;
+    height: 100vh;
+}
+
+div.background-image-gradient {
+    position: absolute;
+    background: linear-gradient(rgba(255,255,255,0) 0%, rgb(0, 0, 0) 30%, rgba(0,0,0,1) 100%);
+    width: 100vw;
+    height: 100vh;
+}
+
+div.background-image-init {
+    position: absolute;
+    background: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
+    width: 100vw;
+    height: 100vh;
+}
+
+div.content {
+    z-index: 10;
+}
+
+ion-grid.window {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 40px 40px;
+    /* background-color: blue; */
+}
+
+ion-row.title {
+    height: 320px;
+}
+
+ion-row.announcement {
+    height: 300px;
+}
+
+ion-col.announcement {
+    margin: 0px auto;
+    padding: 5px 5px;
+}
+
+div.announcement {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    color: black;
+    font-size: xx-large;
+}
+
+ion-row.bottom_side {
+    width: 100%;
+    height: 590px;
+    border: 2px red;
+    padding: 5px 0px;
+}
+
+ion-col.main_input_box {
+    height: 100%;
+    border: 0px;
+    padding: 0px 5px;
+    margin: 5px 0px;
+}
+
+div.main_input_box {
+    width: 100%;
+    height: 100%;
+    margin: 0px auto;
+    padding: 0px auto;
+}
+
+ion-col.btn_and_face {
+    height: 100%;
+    border: 0px;
+    padding: 0px 5px;
+    margin: 5px 0px;
+}
+
+ion-row.face {
+    width: 100%;
+    height: 420px;
+    margin-bottom: 20px;
+    background-color: green;
+} 
+
+ion-row.btn {
+    width: 100%;
+    height: 140px;
+    background-color: orange;
+}

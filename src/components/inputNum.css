@@ -1,5 +1,5 @@
-ion-grid.grid {
-    /* background-color: #232323; */
+ion-grid.input_box {
+    background-color: #232323;
     width: 100%;
     height: 100%;
 
@@ -7,11 +7,12 @@ ion-grid.grid {
     padding: 0px 0px 0px 0px;
 }
 
-ion-row {
+ion-row.input_box {
     background-color: #232323;
+    border: 0px;
 }
 
-ion-col {
+ion-col.input_box {
     padding: 0px 10px 0px 10px;
     border: 0px;
     width: 100%;
@@ -43,8 +44,10 @@ ion-segment-button::part(indicator-background) {
 
 /* -----------------------입력창----------------------- */
 ion-row.input_div_row {
+    background-color: #232323;
     width: 100%;
     height: 84px;
+    border: 0px;
 }
 
 div.input_div {
@@ -62,8 +65,10 @@ div.input_div {
 
 /* -----------------------설명창----------------------- */
 ion-row.input_desc {
+    background-color: #232323;
     width: 100%;
     height: 138px;
+    border: 0px;
 }
 
 div.input_desc {
@@ -78,6 +83,7 @@ div.input_desc {
 
     display: flex;
     align-items: center;
+    text-align: left;
 }
 
 .hr {
@@ -89,9 +95,11 @@ div.input_desc {
 /* -----------------------설명창----------------------- */
 
 ion-row.input_pad {
+    background-color: #232323;
     height: 298px;
-    padding-top: 3%;
-    padding-bottom: 3%;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    border: 0px;
 }
 
 ion-row.input_row {
@@ -104,4 +112,6 @@ ion-button.input_btn {
     width: 33.3%;
     height: 60px;
     margin: 5px 1% 5px 1%;
+
+    font-size: 2rem;
 }

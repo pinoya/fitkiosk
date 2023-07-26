@@ -61,7 +61,7 @@ const input_num: React.FC<ContainerProps> = () => {
       </IonHeader>
 
       <IonContent>
-        <IonGrid class="grid">
+        <IonGrid class="input_box">
           <IonRow class="input_segment">
             {/* 여기서 segment 상태 입력 받을 수 있다. */}
             <IonSegment class="input_segment" onIonChange={(e: any) => check_inputtext(e.target.value)}>
@@ -75,11 +75,11 @@ const input_num: React.FC<ContainerProps> = () => {
           </IonRow>
 
           <IonRow class="input_div_row">
-            <IonCol><div className="input_div ion-text-center">{inputtext}</div></IonCol>
+            <IonCol class="input_box"><div className="input_div ion-text-center">{inputtext}</div></IonCol>
           </IonRow>
 
           <IonRow class="input_desc">
-            <div className="hr"></div>
+            <div className="hr"/>
             <div className="input_desc">
               {description}
             </div>
@@ -87,28 +87,28 @@ const input_num: React.FC<ContainerProps> = () => {
 
           <IonRow class="input_pad">
             <IonRow class="input_row">
-              <IonCol>
+              <IonCol class="input_box">
                 <IonButton class="input_btn" onClick={addtext}>1</IonButton>
                 <IonButton class="input_btn" onClick={addtext}>2</IonButton>
                 <IonButton class="input_btn" onClick={addtext}>3</IonButton>
               </IonCol>
             </IonRow>
             <IonRow class="input_row">
-              <IonCol>
+              <IonCol class="input_box">
                 <IonButton class="input_btn" onClick={addtext}>4</IonButton>
                 <IonButton class="input_btn" onClick={addtext}>5</IonButton>
                 <IonButton class="input_btn" onClick={addtext}>6</IonButton>
               </IonCol>
             </IonRow>
             <IonRow class="input_row">
-              <IonCol>
+              <IonCol class="input_box">
                 <IonButton class="input_btn" onClick={addtext}>7</IonButton>
                 <IonButton class="input_btn" onClick={addtext}>8</IonButton>
                 <IonButton class="input_btn" onClick={addtext}>9</IonButton>
               </IonCol>
             </IonRow>
             <IonRow class="input_row">
-              <IonCol>
+              <IonCol class="input_box">
                 <IonButton class="input_btn" onClick={resettext}>취소</IonButton>
                 <IonButton class="input_btn" onClick={addtext}>0</IonButton>
                 <IonButton class="input_btn" onClick={deletetext}>←</IonButton>

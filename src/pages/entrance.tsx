@@ -6,7 +6,7 @@ import './Home.css';
 import Exit from './exit';
 import Entrance from './entrance';
 import InputNum from '../components/inputNum';
-import InputId from '../components/inputId';
+// import InputId from '../components/inputId';
 
 
 const entrance: React.FC = () => {
