@@ -1,5 +1,6 @@
 import './allinone.css';
 import MainImg from './testimg.jpg';
+import Logo from './logo';
 
 import Input_Box from '../components/inputNum';
 import { IonCol, IonContent, IonGrid, IonRow } from '@ionic/react';
@@ -16,7 +17,7 @@ function Kiosk() {
                     <IonGrid class="window">
                         <IonRow class="title">
                             <IonCol>
-                                체육관 이름<br/>및<br/>체육관 정보
+                                <Logo />
                             </IonCol>
                         </IonRow>
                         <IonRow class="announcement">
@@ -29,8 +30,18 @@ function Kiosk() {
                                 <div className='main_input_box'><Input_Box /></div>
                             </IonCol>
                             <IonCol size="4" class="btn_and_face">
-                                <IonRow class="face">1</IonRow>
-                                <IonRow class="btn">2</IonRow>
+                                <IonGrid>
+                                    <IonRow>
+                                        <IonCol class="face">
+
+                                        </IonCol>
+                                    </IonRow>
+                                    <IonRow>
+                                        <IonCol class="btn">
+                                            
+                                        </IonCol>
+                                    </IonRow>
+                                </IonGrid>
                             </IonCol>
                         </IonRow>
                     </IonGrid>
