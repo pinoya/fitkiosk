@@ -5,11 +5,10 @@ import {
   IonNav, IonBackButton, IonGrid, IonRow, IonCol, IonInput,
   IonList, IonItem, IonCheckbox, IonLabel, IonNote, IonBadge, IonFab, IonFabButton, IonIcon, IonNavLink
 } from '@ionic/react';
-import { settingsSharp } from 'ionicons/icons';
+// import { settingsSharp } from 'ionicons/icons';
 import Setlocation from "../page/page1";
 
 import { RouteComponentProps } from 'react-router';
-import ExploreContainer from '../components/ExploreContainer';
 
 import './Home.css';
 import Exit from './exit';
@@ -27,7 +26,7 @@ const Home: React.FC = () => {
           </div>
           <div id="setting-container">
             <IonNavLink routerDirection="forward" component={() => <Setlocation />}>
-              <button><IonIcon icon={settingsSharp} size="large"></IonIcon>
+              <button><IonIcon name='heart' size="large"></IonIcon>
               </button>
             </IonNavLink>
           </div>

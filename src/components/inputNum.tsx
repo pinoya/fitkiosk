@@ -1,78 +1,122 @@
+import { IonLabel, IonSegment, IonSegmentButton, setupIonicReact } from '@ionic/react'
+
+setupIonicReact({ mode: 'md' })
+
 import { IonBackButton, IonButton, IonButtons, IonCol, IonContent, IonFooter, IonGrid, IonHeader, IonInput, IonNavLink, IonRow, IonText, IonTitle, IonToolbar } from '@ionic/react';
 import './inputNum.css';
 import { useState } from 'react';
 
 interface ContainerProps { }
 
-import NextPage from './page-two';
-
 const input_num: React.FC<ContainerProps> = () => {
-  const [text, settext] = useState("010");
+  let what;
+  const [inputtext, setinputtext] = useState("회원번호 입력 (5자리)");
+  const [input_flag, setinput_flag] = useState(false);
+
+  const check_inputtext = (e: string) => {
+    if (e == "clubID") {
+      setinputtext("회원번호 입력 (5자리)");
+    }
+    else if (e == "Tel") {
+      setinputtext("010-");
+    }
+    setinput_flag(false);
+  }
+
+  const description = "만약 얼굴인식이 안되는 경우, \n본인의 회원번호(5자리) 혹은 휴대폰번호를 입력해주세요.";
 
   const addtext = (e: any) => {
-    if (text.length == 3 || text.length == 8) {
-      settext(text + '-' + e.target.textContent);
-    } else if (text.length >= 12) {
-      if (text.length > 12) {
-        console.log(text);
+    if (input_flag == false) {
+      setinputtext("" + e.target.textContent);
+      setinput_flag(true);
+    }
+    if (inputtext.length == 3 || inputtext.length == 8) {
+      setinputtext(inputtext + '-' + e.target.textContent);
+    } else if (inputtext.length >= 13) {
+      if (inputtext.length > 13) {
+        setinputtext(e.target.textContent);
       }
       else {
-        settext(text + e.target.textContent);
+
       }
     }
     else {
-      settext(text + e.target.textContent);
+      setinputtext(inputtext + e.target.textContent);
     }
   }
 
   const deletetext = () => {
-    if (text.length == 5 || text.length == 10) {
-      settext(text.slice(0, -2));
-    } else settext(text.slice(0, -1));
+    if (inputtext.length == 5 || inputtext.length == 10) {
+      setinputtext(inputtext.slice(0, -2));
+    } else setinputtext(inputtext.slice(0, -1));
+  }
+
+  const resettext = () => {
+    setinputtext("");
   }
 
   return (
     <>
       <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonBackButton></IonBackButton>
-          </IonButtons>
-          <IonTitle><IonText>전화번호 입력</IonText></IonTitle>
-        </IonToolbar>
       </IonHeader>
+
       <IonContent>
-        <IonGrid className='input_table ion-float-right'>
-          <IonRow class="screen">
-            <IonCol class="screen"><IonInput class="float_window ion-float-left ion-align-self-center" inputmode="none" label-placement="floating" fill="solid" value={text}></IonInput></IonCol>
-            <IonCol class="screen">
-              <IonRow class="inputNum">
-                <IonCol size="12" class='input_td'><IonButton className='input_num' onClick={addtext}>1</IonButton></IonCol>
-                <IonCol size="12" class='input_td'><IonButton className='input_num' onClick={addtext}>4</IonButton></IonCol>
-                <IonCol size="12" class='input_td'><IonButton className='input_num' onClick={addtext}>7</IonButton></IonCol>
-                <IonCol size="12" class='input_td'><IonButton className='input_num' onClick={addtext}>0</IonButton></IonCol>
-              </IonRow>
-              <IonRow class="inputNum">
-                <IonCol size="12" class='input_td'><IonButton className='input_num' onClick={addtext}>2</IonButton></IonCol>
-                <IonCol size="12" class='input_td'><IonButton className='input_num' onClick={addtext}>5</IonButton></IonCol>
-                <IonCol size="12" class='input_td'><IonButton className='input_num' onClick={addtext}>8</IonButton></IonCol>
-                <IonCol size="24" class='input_td'><IonButton className='input_back' onClick={deletetext}>←</IonButton></IonCol>
-              </IonRow>
-              <IonRow class="inputNum">
-                <IonCol size="12" class='input_td'><IonButton className='input_num' onClick={addtext}>3</IonButton></IonCol>
-                <IonCol size="12" class='input_td'><IonButton className='input_num' onClick={addtext}>6</IonButton></IonCol>
-                <IonCol size="12" class='input_td'><IonButton className='input_num' onClick={addtext}>9</IonButton></IonCol>
-                <IonCol size="12" class='input_td' onClick={deletetext}><br /></IonCol>
-              </IonRow>
-            </IonCol>
+        <IonGrid class="grid">
+          <IonRow class="input_segment">
+            {/* 여기서 segment 상태 입력 받을 수 있다. */}
+            <IonSegment class="input_segment" onIonChange={(e: any) => check_inputtext(e.target.value)}>
+              <IonSegmentButton class="input_segment" value="clubID">
+                <IonLabel>회원번호</IonLabel>
+              </IonSegmentButton>
+              <IonSegmentButton class="input_segment" value="Tel">
+                <IonLabel>휴대폰번호</IonLabel>
+              </IonSegmentButton>
+            </IonSegment>
+          </IonRow>
+
+          <IonRow class="input_div_row">
+            <IonCol><div className="input_div ion-text-center">{inputtext}</div></IonCol>
+          </IonRow>
+
+          <IonRow class="input_desc">
+            <div className="hr"></div>
+            <div className="input_desc">
+              {description}
+            </div>
+          </IonRow>
+
+          <IonRow class="input_pad">
+            <IonRow class="input_row">
+              <IonCol>
+                <IonButton class="input_btn" onClick={addtext}>1</IonButton>
+                <IonButton class="input_btn" onClick={addtext}>2</IonButton>
+                <IonButton class="input_btn" onClick={addtext}>3</IonButton>
+              </IonCol>
+            </IonRow>
+            <IonRow class="input_row">
+              <IonCol>
+                <IonButton class="input_btn" onClick={addtext}>4</IonButton>
+                <IonButton class="input_btn" onClick={addtext}>5</IonButton>
+                <IonButton class="input_btn" onClick={addtext}>6</IonButton>
+              </IonCol>
+            </IonRow>
+            <IonRow class="input_row">
+              <IonCol>
+                <IonButton class="input_btn" onClick={addtext}>7</IonButton>
+                <IonButton class="input_btn" onClick={addtext}>8</IonButton>
+                <IonButton class="input_btn" onClick={addtext}>9</IonButton>
+              </IonCol>
+            </IonRow>
+            <IonRow class="input_row">
+              <IonCol>
+                <IonButton class="input_btn" onClick={resettext}>취소</IonButton>
+                <IonButton class="input_btn" onClick={addtext}>0</IonButton>
+                <IonButton class="input_btn" onClick={deletetext}>←</IonButton>
+              </IonCol>
+            </IonRow>
           </IonRow>
         </IonGrid>
       </IonContent>
-      <IonFooter>
-        <IonNavLink class="" routerDirection="forward" component={() => <NextPage />}>
-          <IonButton class="confirmbtn">확인</IonButton>
-        </IonNavLink>
-      </IonFooter>
     </>
   );
 };
