@@ -39,7 +39,7 @@ function Logo() {
           </IonRow>
           <IonRow>
             <IonCol size='12'>
-              <div style={{ fontWeight: '700', fontSize: '2.2222rem', color: 'black', textAlign: 'center', letterSpacing: '-0.5px' }}>홀리데이 피트니스클럽(광주효천점)
+              <div style={{ fontWeight: '700', fontSize: '2.2222vw', color: 'black', textAlign: 'center', letterSpacing: '-0.0347vw' }}>홀리데이 피트니스클럽(광주효천점)
               </div>
             </IonCol>  
           </IonRow>
