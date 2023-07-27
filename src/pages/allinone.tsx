@@ -1,6 +1,7 @@
 import './allinone.css';
 import MainImg from './testimg.jpg';
 import Logo from './logo';
+import Buttons from '../components/inputBtn'
 
 import Input_Box from '../components/inputNum';
 import { IonCol, IonContent, IonGrid, IonRow } from '@ionic/react';
@@ -34,12 +35,12 @@ function Kiosk() {
                                 <IonGrid>
                                     <IonRow>
                                         <IonCol class="face">
-                                            <FaceRecognition />
+                                            {/* <FaceRecognition /> */}
                                         </IonCol>
                                     </IonRow>
                                     <IonRow>
                                         <IonCol class="btn">
-
+                                            <Buttons/>
                                         </IonCol>
                                     </IonRow>
                                 </IonGrid>
