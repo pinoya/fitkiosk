@@ -6,18 +6,18 @@ import { IonBackButton, IonButton, IonButtons, IonCol, IonContent, IonFooter, Io
 import './inputNum.css';
 import { useState } from 'react';
 
-interface ContainerProps { }
-
-const input_num: React.FC<ContainerProps> = () => {
-  let what;
+const input_num = (props: any) => {
+  const [inputwhat, setinputwhat] = useState(false);
   const [inputtext, setinputtext] = useState("회원번호 입력 (5자리)");
   const [input_flag, setinput_flag] = useState(false);
 
   const check_inputtext = (e: string) => {
     if (e == "clubID") {
+      setinputwhat(false);
       setinputtext("회원번호 입력 (5자리)");
     }
     else if (e == "Tel") {
+      setinputwhat(true);
       setinputtext("010-");
     }
     setinput_flag(false);
@@ -26,6 +26,29 @@ const input_num: React.FC<ContainerProps> = () => {
   const description = "만약 얼굴인식이 안되는 경우, \n본인의 회원번호(5자리) 혹은 휴대폰번호를 입력해주세요.";
 
   const addtext = (e: any) => {
+    if (inputwhat == false) {
+      ifclubid(e);
+    } else if (inputwhat == true) {
+      iftel(e);
+    }
+    props.AlertFunc(inputtext);
+  }
+
+  const ifclubid = (e: any) => {
+    if (input_flag == false && inputtext.length >= 6) {
+      setinputtext("" + e.target.textContent);
+      setinput_flag(true);
+    }
+    if (inputtext.length == 5) {
+      props.AlertFunc(inputtext);
+    } else if (inputtext.length > 5) {
+      setinputtext(e.target.textContent);
+    } else {
+      setinputtext(inputtext + e.target.textContent);
+    }
+  }
+
+  const iftel = (e: any) => {
     if (input_flag == false) {
       setinputtext("" + e.target.textContent);
       setinput_flag(true);
@@ -37,7 +60,7 @@ const input_num: React.FC<ContainerProps> = () => {
         setinputtext(e.target.textContent);
       }
       else {
-
+        props.AlertFunc(inputtext);
       }
     }
     else {
@@ -46,7 +69,7 @@ const input_num: React.FC<ContainerProps> = () => {
   }
 
   const deletetext = () => {
-    if (inputtext.length == 5 || inputtext.length == 10) {
+    if (inputwhat == true && (inputtext.length == 5 || inputtext.length == 10)) {
       setinputtext(inputtext.slice(0, -2));
     } else setinputtext(inputtext.slice(0, -1));
   }
@@ -79,7 +102,7 @@ const input_num: React.FC<ContainerProps> = () => {
           </IonRow>
 
           <IonRow class="input_desc">
-            <div className="hr"/>
+            <div className="hr" />
             <div className="input_desc">
               {description}
             </div>

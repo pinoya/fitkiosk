@@ -1,12 +1,13 @@
 import './inputBtn.css';
 
-import { IonButton, IonCol, IonContent, IonGrid, IonRow } from '@ionic/react';
+import { IonButton, IonCol, IonGrid, IonRow } from '@ionic/react';
 
-function click_check() {
-    console.log("check");
-}
-
-function InputBtn() {
+const InputBtn = (props: any) => {
+    function click_check() {
+        console.log(props.info1);
+        console.log(props.info2);
+        console.log(props.info3);
+    }
 
     return (
         <>
