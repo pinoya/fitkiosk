@@ -1,0 +1,56 @@
+.btns {
+    margin: 0px 0px;
+    padding: 0px 0px;
+}
+
+ion-col.out_btn {
+    color: black;
+    border: 0px;
+
+    height: 65px;
+    margin: 0px 0px 5px 0px;
+    padding: 0px 0px 0px 0px;
+}
+
+ion-button.out_btn {
+    --background: #A8B1CE;
+
+    width: 100%;
+    height: 100%;
+    
+    padding: 0px 0px 0px 0px;
+}
+
+ion-col.call_btn {
+    color: black;
+    border: 0px;
+    height: 65px;
+    margin: 0px 0px 5px 0px;
+    padding: 0px 0px 0px 0px;
+}
+
+ion-button.call_btn {
+    --background: #2C3D8F;
+
+    width: 100%;
+    height: 100%;
+    
+    padding: 0px 0px 0px 0px;
+}
+
+ion-col.in_btn {
+    color: black;
+    border: 0px;
+    height: 65px;
+    margin: 5px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+}
+
+ion-button.in_btn {
+    --background: #FF6300;
+
+    width: 100%;
+    height: 100%;
+
+    font-size: large;
+}
