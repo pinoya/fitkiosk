@@ -27,6 +27,7 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import Announcement from './pages/announcement';
 
 setupIonicReact();
 
@@ -57,6 +58,9 @@ const App: React.FC = () => (
 
         <Route exact path="/logo">
           <Logo />
+        </Route>
+        <Route exact path="/announcement">
+          <Announcement />
         </Route>
 
         <Route exact path="/numpad">

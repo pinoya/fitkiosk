@@ -1,7 +1,7 @@
 import './allinone.css';
 import MainImg from './testimg.jpg';
 import Logo from './logo';
-
+import Announcement from './announcement';
 import Input_Box from '../components/inputNum';
 import { IonCol, IonContent, IonGrid, IonRow } from '@ionic/react';
 import FaceRecognition from "../components/FaceRecognition";
@@ -21,9 +21,9 @@ function Kiosk() {
                                 <Logo />
                             </IonCol>
                         </IonRow>
-                        <IonRow class="announcement">
-                            <IonCol class="announcement">
-                                <div className='announcement'>공지사항</div>
+                        <IonRow >
+                            <IonCol >
+                                <Announcement />
                             </IonCol>
                         </IonRow>
                         <IonRow class="bottom_side">
