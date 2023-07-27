@@ -1,8 +1,4 @@
 import React, { useEffect, useState } from 'react';
-<<<<<<< HEAD
-=======
-import { IonCol, IonGrid, IonRow, IonContent, IonHeader, IonToolbar, IonTitle } from '@ionic/react';
->>>>>>> 1723b2510f5a0514f58cf0da96fc08df7e2ec3c3
 
 import { IonCol, IonGrid, IonRow, IonContent, IonHeader, IonToolbar, IonTitle } from '@ionic/react';
 import Test from '../pages/test.svg';
@@ -10,12 +6,7 @@ import Home from './Home';
 
 
 function Logo() {
-<<<<<<< HEAD
  /*체육관 코드 번호, 비밀번호*/ 
-=======
-
-  /*체육관 코드 번호, 비밀번호*/ 
->>>>>>> 1723b2510f5a0514f58cf0da96fc08df7e2ec3c3
   const [width, setWidth] = useState(window.innerWidth);
   const [Height, setHeight] = useState(window.innerHeight);
   /*브라우저 크기 조절 */ 
@@ -34,16 +25,16 @@ function Logo() {
     <>
       {window.innerWidth <= window.innerHeight ? (
 
-          <IonGrid>
-              <IonRow>
-                <IonCol size='12'>
+          <IonGrid style={{border: '0px'}}>
+              <IonRow style={{border: '0px'}}>
+                <IonCol size='12' style={{border: '0px'}}>
                   <img style={{
                     width : '13%',
                  }} src={Test} alt="Logo" />
                 </IonCol>
               </IonRow>
               <IonRow>
-                <IonCol>
+                <IonCol style={{border: '0px'}}>
                   <div style={{
                     textAlign : 'center',
                     fontSize : '180%',
@@ -60,8 +51,8 @@ function Logo() {
 
       ) : (
 
-          <IonGrid >
-              <IonRow >
+          <IonGrid style={{border: '0px'}} >
+              <IonRow style={{border: '0px'}}>
                 <IonCol size='auto' style={{marginLeft:'3%', marginBottom :'18%' ,border:'0px'}}>
                   <img style={{
                     width : '100%',
@@ -83,11 +74,8 @@ function Logo() {
           </IonGrid>
 
       )}
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 1723b2510f5a0514f58cf0da96fc08df7e2ec3c3
     </>
   );
 }

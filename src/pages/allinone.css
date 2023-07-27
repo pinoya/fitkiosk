@@ -34,17 +34,31 @@ ion-grid.window {
     /* background-color: blue; */
 }
 
-ion-row.title {
-    height: 320px;
+@media (orientation: portrait) {
+    ion-row.title {
+        height: 320px;
+    }
+}
+
+@media (orientation: landscape) {
+    ion-row.title {
+        height: 155px;
+    }
+}
+
+ion-row.title ion-col {
+    border: 0px;
 }
 
 ion-row.announcement {
     height: 300px;
+    border: 0px;
 }
 
 ion-col.announcement {
     margin: 0px auto;
     padding: 5px 5px;
+    border: 0px;
 }
 
 
@@ -94,5 +108,6 @@ ion-col.face video {
 ion-col.btn {
     width: 100%;
     height: 140px;
-    background-color: orange;
+    /* background-color: orange; */
+    border: 0px;
 }
