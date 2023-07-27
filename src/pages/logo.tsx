@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
+<<<<<<< HEAD
 import { IonCol, IonGrid, IonRow, IonContent, IonHeader, IonToolbar, IonTitle } from '@ionic/react';
+=======
+import { IonBackButton, IonButtons, IonCol, IonGrid, IonRow, IonContent, IonHeader, IonToolbar, IonTitle } from '@ionic/react';
+>>>>>>> a31d3b900d1c81e157bc71e1d5b6f7240bf5353c
 
 import Home from './Home';
 import Test from '../../public/test.svg';
 
 function Logo() {
+<<<<<<< HEAD
 
   /*체육관 코드 번호, 비밀번호*/ 
   const [width, setWidth] = useState(window.innerWidth);
@@ -79,6 +84,28 @@ function Logo() {
           </IonGrid>
         </IonContent>
       )}
+=======
+  return (
+    <>
+      <IonGrid>
+        <IonRow>
+          <IonCol size='12'>
+            <img style={{
+              width: '4.7222vw', height: '4.2979vw', marginTop: '7.0833vw', marginLeft: '25.4167vw', marginRight: '25.4167vw'
+            }} src={Test}></img>
+          </IonCol>
+        </IonRow>
+        <IonRow>
+          <IonCol size='12'>
+            <div style={{
+              fontWeight: '700', fontSize: '2.2222vw', color: 'black', textAlign: 'center', letterSpacing: '-0.0347vw', lineHeight: '3.2181vw',
+              marginTop: '2.5076vw', marginLeft: '11.0417vw', marginRight: '11.0417vw'
+            }}>홀리데이 피트니스클럽(광주효천점)
+            </div>
+          </IonCol>
+        </IonRow>
+      </IonGrid>
+>>>>>>> a31d3b900d1c81e157bc71e1d5b6f7240bf5353c
     </>
   );
 }

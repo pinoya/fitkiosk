@@ -4,6 +4,8 @@ import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home';
 import Entrance from './pages/entrance';
 import Exit from './pages/exit';
+import Logo from './pages/logo';
+import InputNum from './components/inputNum';
 
 import MainHome from './pages/allinone';
 
@@ -51,6 +53,14 @@ const App: React.FC = () => (
 
         <Route exact path="/">
           <Redirect to="/home" />
+        </Route>
+
+        <Route exact path="/logo">
+          <Logo />
+        </Route>
+
+        <Route exact path="/numpad">
+          <InputNum/>
         </Route>
 
         <Redirect exact from="/" to="/home" />
