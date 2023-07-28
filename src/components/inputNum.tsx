@@ -4,13 +4,13 @@ setupIonicReact({ mode: 'md' })
 
 import { IonBackButton, IonButton, IonButtons, IonCol, IonContent, IonFooter, IonGrid, IonHeader, IonInput, IonNavLink, IonRow, IonText, IonTitle, IonToolbar } from '@ionic/react';
 import './inputNum.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const input_num = (props: any) => {
   const [inputwhat, setinputwhat] = useState(false);
   const [inputtext, setinputtext] = useState("회원번호 입력 (5자리)");
   const [input_flag, setinput_flag] = useState(false);
-
+  
   const check_inputtext = (e: string) => {
     if (e == "clubID") {
       setinputwhat(false);
@@ -31,7 +31,6 @@ const input_num = (props: any) => {
     } else if (inputwhat == true) {
       iftel(e);
     }
-    props.AlertFunc(inputtext);
   }
 
   const ifclubid = (e: any) => {
@@ -40,7 +39,6 @@ const input_num = (props: any) => {
       setinput_flag(true);
     }
     if (inputtext.length == 5) {
-      props.AlertFunc(inputtext);
     } else if (inputtext.length > 5) {
       setinputtext(e.target.textContent);
     } else {
@@ -60,12 +58,13 @@ const input_num = (props: any) => {
         setinputtext(e.target.textContent);
       }
       else {
-        props.AlertFunc(inputtext);
+        
       }
     }
     else {
       setinputtext(inputtext + e.target.textContent);
     }
+    props.AlertFunc(inputtext);
   }
 
   const deletetext = () => {
@@ -77,6 +76,10 @@ const input_num = (props: any) => {
   const resettext = () => {
     setinputtext("");
   }
+
+  useEffect(() => {
+    props.AlertFunc(inputtext);
+  })
 
   return (
     <>
@@ -135,6 +138,7 @@ const input_num = (props: any) => {
                 <IonButton class="input_btn" onClick={resettext}>취소</IonButton>
                 <IonButton class="input_btn" onClick={addtext}>0</IonButton>
                 <IonButton class="input_btn" onClick={deletetext}>←</IonButton>
+                
               </IonCol>
             </IonRow>
           </IonRow>

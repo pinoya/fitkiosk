@@ -24,7 +24,6 @@ function Logo() {
   return (
     <>
       {window.innerWidth <= window.innerHeight ? (
-
           <IonGrid style={{border: '0px'}}>
               <IonRow style={{border: '0px'}}>
                 <IonCol size='12' style={{border: '0px'}}>
