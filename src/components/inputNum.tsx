@@ -1,16 +1,16 @@
-import { IonLabel, IonSegment, IonSegmentButton, setupIonicReact } from '@ionic/react'
+import { IonLabel, IonModal, IonSegment, IonSegmentButton, setupIonicReact } from '@ionic/react'
 
 setupIonicReact({ mode: 'md' })
 
 import { IonBackButton, IonButton, IonButtons, IonCol, IonContent, IonFooter, IonGrid, IonHeader, IonInput, IonNavLink, IonRow, IonText, IonTitle, IonToolbar } from '@ionic/react';
 import './inputNum.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const input_num = (props: any) => {
   const [inputwhat, setinputwhat] = useState(false);
   const [inputtext, setinputtext] = useState("회원번호 입력 (5자리)");
   const [input_flag, setinput_flag] = useState(false);
-  
+
   const check_inputtext = (e: string) => {
     if (e == "clubID") {
       setinputwhat(false);
@@ -58,7 +58,7 @@ const input_num = (props: any) => {
         setinputtext(e.target.textContent);
       }
       else {
-        
+
       }
     }
     else {
@@ -83,8 +83,7 @@ const input_num = (props: any) => {
 
   return (
     <>
-      <IonHeader>
-      </IonHeader>
+      <IonHeader />
 
       <IonContent>
         <IonGrid class="input_box">
@@ -138,7 +137,6 @@ const input_num = (props: any) => {
                 <IonButton class="input_btn" onClick={resettext}>취소</IonButton>
                 <IonButton class="input_btn" onClick={addtext}>0</IonButton>
                 <IonButton class="input_btn" onClick={deletetext}>←</IonButton>
-                
               </IonCol>
             </IonRow>
           </IonRow>

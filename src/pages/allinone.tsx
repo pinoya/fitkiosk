@@ -2,22 +2,32 @@ import './allinone.css';
 import Logo from './logo';
 import Announcement from './announcement';
 import Input_Box from '../components/inputNum';
-import { IonButton, IonCol, IonContent, IonGrid, IonRow } from '@ionic/react';
+import { IonButton, IonCol, IonContent, IonGrid, IonModal, IonRow, IonTitle, IonToolbar } from '@ionic/react';
 import FaceRecognition from "../components/FaceRecognition";
 import Buttons from '../components/inputBtn';
+import Modal from '../components/tempmodal';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 
 function Kiosk() {
+    const modal = useRef();
+    async function dismiss() {
+        modal.current?.dismiss();
+        setisOpen(false);
+    }
 
-
+    const [isOpen, setisOpen] = useState(false);
     const [id, setid] = useState('123');
-    const pw = "123456";
-    const face = true;
+    const [pw, setpw] = useState('pw');
+    const [face, isface] = useState(false);
+
     return (
         <>
             <IonContent>
+                <IonModal backdropDismiss={false} isOpen={isOpen} id="modaltest" ref={modal}>
+                    <Modal id={id} pw={pw} dismiss={dismiss}/>
+                </IonModal>
                 <div className='background-image-init' />
                 <div className='background-image-img' />
                 <div className='background-image-gradient' />
@@ -53,7 +63,7 @@ function Kiosk() {
                                     </IonRow>
                                     <IonRow>
                                         <IonCol class="btn">
-                                            <Buttons info1={id} info2={pw} info3={face} />
+                                            <Buttons id={id} pw={pw} face={face} setisOpen={setisOpen}/>
                                         </IonCol>
                                     </IonRow>
                                 </IonGrid>
