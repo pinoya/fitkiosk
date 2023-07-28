@@ -27,8 +27,10 @@ const input_num = (props: any) => {
 
   const addtext = (e: any) => {
     if (inputwhat == false) {
+      props.settypeid(false);
       ifclubid(e);
     } else if (inputwhat == true) {
+      props.settypeid(true);
       iftel(e);
     }
   }

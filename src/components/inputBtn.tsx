@@ -4,22 +4,39 @@ import { IonButton, IonCol, IonGrid, IonRow } from '@ionic/react';
 
 const InputBtn = (props: any) => {
     function btn_in() {
-        if (props.id.length != 5) {
-            console.log("id를 다시 확인해주세요.");
-        }
-        else {
-            console.log(props.id + "님 입장 하셨습니다.");
-            props.setisOpen(true);
-        }        
+        if(props.typeid == false) {
+            if (props.id.length != 5) {
+                console.log("id를 다시 확인해주세요.");
+            } else {
+                console.log(props.id + "님 입장 하셨습니다.");
+                props.setisOpen(true);
+            }    
+        } else {
+            if (props.id.length != 13) {
+                console.log("id를 다시 확인해주세요.");
+            } else {
+                console.log(props.id + "님 입장 하셨습니다.");
+                props.setisOpen(true);
+            }    
+        }    
     }
 
     function btn_out() {
-        if (props.id.length != 5) {
-            console.log("id를 다시 확인해주세요.");
-        }
-        else {
-            console.log(props.id + "님 퇴장 하셨습니다.");
-        }        
+        if(props.typeid == false) {
+            if (props.id.length != 5) {
+                console.log("id를 다시 확인해주세요.");
+            } else {
+                console.log(props.id + "님 퇴장 하셨습니다.");
+                props.setisOpen(true);
+            }    
+        } else {
+            if (props.id.length != 13) {
+                console.log("id를 다시 확인해주세요.");
+            } else {
+                console.log(props.id + "님 퇴장 하셨습니다.");
+                props.setisOpen(true);
+            }    
+        }    
     }
 
     function btn_call() {

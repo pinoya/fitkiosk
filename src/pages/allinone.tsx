@@ -19,6 +19,7 @@ function Kiosk() {
 
     const [isOpen, setisOpen] = useState(false);
     const [id, setid] = useState('123');
+    const [typeid, settypeid] = useState(false);
     const [pw, setpw] = useState('pw');
     const [face, isface] = useState(false);
 
@@ -50,7 +51,7 @@ function Kiosk() {
                         <IonRow class="bottom_side">
                             <IonCol size="8" class="main_input_box">
                                 <div className='main_input_box'>
-                                    <Input_Box AlertFunc={setid} />
+                                    <Input_Box AlertFunc={setid} settypeid={settypeid}/>
                                 </div>
                             </IonCol>
                             <IonCol size="4" class="btn_and_face">
@@ -63,7 +64,7 @@ function Kiosk() {
                                     </IonRow>
                                     <IonRow>
                                         <IonCol class="btn">
-                                            <Buttons id={id} pw={pw} face={face} setisOpen={setisOpen}/>
+                                            <Buttons id={id} pw={pw} face={face} setisOpen={setisOpen} typeid={typeid}/>
                                         </IonCol>
                                     </IonRow>
                                 </IonGrid>
