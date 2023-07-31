@@ -8,10 +8,14 @@ import Home from './Home';
 
 
 function Logo() {
+<<<<<<< HEAD
 
 
   /*체육관 코드 번호, 비밀번호*/ 
 
+=======
+ /*체육관 코드 번호, 비밀번호*/ 
+>>>>>>> 85c92eddcd54b2b13d27227c1115336ed9ba33cc
   const [width, setWidth] = useState(window.innerWidth);
   const [Height, setHeight] = useState(window.innerHeight);
   /*브라우저 크기 조절 */ 
@@ -29,17 +33,16 @@ function Logo() {
   return (
     <>
       {window.innerWidth <= window.innerHeight ? (
-
-          <IonGrid>
-              <IonRow>
-                <IonCol size='12'>
+          <IonGrid style={{border: '0px'}}>
+              <IonRow style={{border: '0px'}}>
+                <IonCol size='12' style={{border: '0px'}}>
                   <img style={{
                     width : '13%',
                  }} src={Test} alt="Logo" />
                 </IonCol>
               </IonRow>
               <IonRow>
-                <IonCol>
+                <IonCol style={{border: '0px'}}>
                   <div style={{
                     textAlign : 'center',
                     fontSize : '180%',
@@ -56,8 +59,8 @@ function Logo() {
 
       ) : (
 
-          <IonGrid >
-              <IonRow >
+          <IonGrid style={{border: '0px'}} >
+              <IonRow style={{border: '0px'}}>
                 <IonCol size='auto' style={{marginLeft:'3%', marginBottom :'18%' ,border:'0px'}}>
                   <img style={{
                     width : '100%',
@@ -79,6 +82,11 @@ function Logo() {
           </IonGrid>
 
       )}
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 85c92eddcd54b2b13d27227c1115336ed9ba33cc
     </>
   );
 }

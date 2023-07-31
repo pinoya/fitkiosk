@@ -19,7 +19,7 @@ import {
 } from '@ionic/react';
 import { Link } from 'react-router-dom';
 import { FiMapPin } from 'react-icons/fi';
-import Home from './gym_change';
+
 
 
 function Welcome(props) {
