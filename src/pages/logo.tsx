@@ -8,14 +8,10 @@ import Home from './Home';
 
 
 function Logo() {
-<<<<<<< HEAD
 
 
   /*체육관 코드 번호, 비밀번호*/ 
 
-=======
- /*체육관 코드 번호, 비밀번호*/ 
->>>>>>> 85c92eddcd54b2b13d27227c1115336ed9ba33cc
   const [width, setWidth] = useState(window.innerWidth);
   const [Height, setHeight] = useState(window.innerHeight);
   /*브라우저 크기 조절 */ 
@@ -82,11 +78,6 @@ function Logo() {
           </IonGrid>
 
       )}
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 85c92eddcd54b2b13d27227c1115336ed9ba33cc
     </>
   );
 }

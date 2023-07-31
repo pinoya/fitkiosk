@@ -1,15 +1,9 @@
 import './allinone.css';
 import Logo from './logo';
-<<<<<<< HEAD
 
 import Announcement from './announcement';
 
-import Buttons from '../components/inputBtn'
 
-
-=======
-import Announcement from './announcement';
->>>>>>> 85c92eddcd54b2b13d27227c1115336ed9ba33cc
 import Input_Box from '../components/inputNum';
 import { IonButton, IonCol, IonContent, IonGrid, IonModal, IonRow, IonTitle, IonToolbar } from '@ionic/react';
 import FaceRecognition from "../components/FaceRecognition";
@@ -67,8 +61,7 @@ function Kiosk() {
                                 <IonGrid>
                                     <IonRow>
                                         <IonCol class="face">
-                                            {id}<br></br>{pw}<br />{face}
-                                            {/* <FaceRecognition /> */}
+                                            <FaceRecognition />
                                         </IonCol>
                                     </IonRow>
                                     <IonRow>
