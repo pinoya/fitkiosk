@@ -25,3 +25,5 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
 };
 
 export default ModalComponent;
+
+

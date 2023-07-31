@@ -2,13 +2,7 @@ import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet, setupIonicReact, IonNav } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home';
-<<<<<<< HEAD
 import Logo from './pages/logo';
-=======
-import Entrance from './pages/entrance';
-import Exit from './pages/exit';
-import Logo from './pages/welecome';
->>>>>>> 58430361cb2142f7e73b74d6363092e1bfec5282
 import InputNum from './components/inputNum';
 
 import MainHome from './pages/allinone';

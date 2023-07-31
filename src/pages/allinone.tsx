@@ -8,14 +8,9 @@ import Input_Box from '../components/inputNum';
 import { IonButton, IonCol, IonContent, IonGrid, IonModal, IonRow, IonTitle, IonToolbar } from '@ionic/react';
 import FaceRecognition from "../components/FaceRecognition";
 import Buttons from '../components/inputBtn';
-<<<<<<< HEAD
-import TempModal from '../components/tempmodal';
-=======
 import Welcome from './welecome';
->>>>>>> 58430361cb2142f7e73b74d6363092e1bfec5282
 
 import React, { useEffect, useRef, useState } from 'react';
-import Welcome from './welecome';
 
 
 function Kiosk() {
@@ -39,18 +34,12 @@ function Kiosk() {
     return (
         <>
             <IonContent>
-<<<<<<< HEAD
-                <IonModal backdropDismiss={false} isOpen={isOpen} id="modaltest">
-                    <TempModal id={id} pw={pw} dismiss={dismiss}/>
-                    {/* <Welcome></Welcome> */}
-=======
                 <IonModal backdropDismiss={false} isOpen={isinOpen} ref={inmodal}>
                     <Welcome />
                 </IonModal>
 
                 <IonModal backdropDismiss={false} isOpen={isoutOpen} ref={outmodal}>
 
->>>>>>> 58430361cb2142f7e73b74d6363092e1bfec5282
                 </IonModal>
                 <div className='background-image-init' />
                 <div className='background-image-img' />
@@ -81,7 +70,7 @@ function Kiosk() {
                                 <IonGrid>
                                     <IonRow>
                                         <IonCol class="face">
-                                            {/* <FaceRecognition /> */}
+                                            <FaceRecognition />
                                         </IonCol>
                                     </IonRow>
                                     <IonRow>
