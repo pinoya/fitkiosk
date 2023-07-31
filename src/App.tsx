@@ -27,6 +27,7 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import Announcement from './pages/announcement';
 
 setupIonicReact();
 
@@ -52,18 +53,20 @@ const App: React.FC = () => (
         </Route>
 
         <Route exact path="/">
-          <Redirect to="/home" />
+          <Redirect to="/Main" />
         </Route>
 
         <Route exact path="/logo">
           <Logo />
         </Route>
+        
+        <Route exact path="/announcement">
+          <Announcement />
+        </Route>
 
         <Route exact path="/numpad">
           <InputNum/>
         </Route>
-
-        <Redirect exact from="/" to="/home" />
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

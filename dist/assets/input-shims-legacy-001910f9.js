@@ -1,4 +1,8 @@
+<<<<<<<< HEAD:dist/assets/input-shims-legacy-001910f9.js
 System.register(["./index-legacy-0dcd07af.js"],(function(e,t){"use strict";var n,o,i,r,s,a,d,l,c;return{setters:[e=>{n=e.K,o=e.b,i=e.d,r=e.a,s=e.f,a=e.e,d=e.g,l=e.h,c=e.j}],execute:function(){
+========
+System.register(["./index-legacy-f84963fd.js"],(function(e,t){"use strict";var n,o,i,r,s,a,d,l,c;return{setters:[e=>{n=e.K,o=e.d,i=e.e,r=e.b,s=e.f,a=e.g,d=e.h,l=e.j,c=e.k}],execute:function(){
+>>>>>>>> 9ffce132be5c33fa2ac99d96481e87a4c70b1077:dist/assets/input-shims-legacy-89adbbdf.js
 /*!
        * (C) Ionic http://ionicframework.com - MIT License
        */

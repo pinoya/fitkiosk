@@ -1,33 +1,94 @@
 import React, { useEffect, useState } from 'react';
-import { IonBackButton, IonButtons, IonCol, IonGrid, IonRow, IonContent, IonHeader, IonToolbar, IonTitle } from '@ionic/react';
 
+import { IonCol, IonGrid, IonRow, IonContent, IonHeader, IonToolbar, IonTitle } from '@ionic/react';
+
+
+import Test from './test.svg';
 import Home from './Home';
-import Test from '../../public/test.svg';
+
 
 function Logo() {
+<<<<<<< HEAD
+
+
+  /*체육관 코드 번호, 비밀번호*/ 
+
+=======
+ /*체육관 코드 번호, 비밀번호*/ 
+>>>>>>> 85c92eddcd54b2b13d27227c1115336ed9ba33cc
+  const [width, setWidth] = useState(window.innerWidth);
+  const [Height, setHeight] = useState(window.innerHeight);
+  /*브라우저 크기 조절 */ 
+  const handleResize = () => {
+    setWidth(window.innerWidth);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <>
-      <IonGrid>
-        <IonRow>
-          <IonCol size='12'>
-            <img style={{
-              width: '4.7222vw', height: '4.2979vw', marginTop: '7.0833vw', marginLeft: '25.4167vw', marginRight: '25.4167vw'
-            }} src={Test}></img>
-          </IonCol>
-        </IonRow>
-        <IonRow>
-          <IonCol size='12'>
-            <div style={{
-              fontWeight: '700', fontSize: '2.2222vw', color: 'black', textAlign: 'center', letterSpacing: '-0.0347vw', lineHeight: '3.2181vw',
-              marginTop: '2.5076vw', marginLeft: '11.0417vw', marginRight: '11.0417vw'
-            }}>홀리데이 피트니스클럽(광주효천점)
-            </div>
-          </IonCol>
-        </IonRow>
-      </IonGrid>
+      {window.innerWidth <= window.innerHeight ? (
+          <IonGrid style={{border: '0px'}}>
+              <IonRow style={{border: '0px'}}>
+                <IonCol size='12' style={{border: '0px'}}>
+                  <img style={{
+                    width : '13%',
+                 }} src={Test} alt="Logo" />
+                </IonCol>
+              </IonRow>
+              <IonRow>
+                <IonCol style={{border: '0px'}}>
+                  <div style={{
+                    textAlign : 'center',
+                    fontSize : '180%',
+                    fontWeight : 700,
+                    letterSpacing : '-3.12%',
+                    color : 'white',
+                    marginTop : '3%',
+                    marginBottom : '5%',
+                    
+                  }}>홀리데이 피트니스클럽(광주효천점)</div>
+                 </IonCol>
+              </IonRow>
+          </IonGrid>
+
+      ) : (
+
+          <IonGrid style={{border: '0px'}} >
+              <IonRow style={{border: '0px'}}>
+                <IonCol size='auto' style={{marginLeft:'3%', marginBottom :'18%' ,border:'0px'}}>
+                  <img style={{
+                    width : '100%',
+                    marginLeft : '5%'
+                  }} src={Test} alt="Logo" />
+                </IonCol>
+                <IonCol size='auto' style={{marginLeft:'0.7%', marginBottom :'18%',border:'0px'}}>
+                  <div style={{
+                     textAlign: 'center',
+                     color : 'white',
+                     fontWeight: 700,
+                     letterSpacing : '-3.12%',
+                     fontSize : '190%',
+                     marginTop : '3.3%',
+
+                  }}>홀리데이 피트니스클럽(광주효천점)</div>
+                </IonCol>
+              </IonRow>
+          </IonGrid>
+
+      )}
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 85c92eddcd54b2b13d27227c1115336ed9ba33cc
     </>
   );
 }
 
 export default Logo;
-
