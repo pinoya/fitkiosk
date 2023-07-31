@@ -8,9 +8,10 @@ import Input_Box from '../components/inputNum';
 import { IonButton, IonCol, IonContent, IonGrid, IonModal, IonRow, IonTitle, IonToolbar } from '@ionic/react';
 import FaceRecognition from "../components/FaceRecognition";
 import Buttons from '../components/inputBtn';
-import Modal from '../components/tempmodal';
+import TempModal from '../components/tempmodal';
 
 import React, { useEffect, useRef, useState } from 'react';
+import Welcome from './welecome';
 
 
 function Kiosk() {
@@ -26,11 +27,14 @@ function Kiosk() {
     const [pw, setpw] = useState('pw');
     const [face, isface] = useState(false);
 
+    
+
     return (
         <>
             <IonContent>
-                <IonModal backdropDismiss={false} isOpen={isOpen} id="modaltest" ref={modal}>
-                    <Modal id={id} pw={pw} dismiss={dismiss}/>
+                <IonModal backdropDismiss={false} isOpen={isOpen} id="modaltest">
+                    <TempModal id={id} pw={pw} dismiss={dismiss}/>
+                    {/* <Welcome></Welcome> */}
                 </IonModal>
                 <div className='background-image-init' />
                 <div className='background-image-img' />

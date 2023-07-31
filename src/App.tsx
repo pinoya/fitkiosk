@@ -2,8 +2,6 @@ import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet, setupIonicReact, IonNav } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home';
-import Entrance from './pages/entrance';
-import Exit from './pages/exit';
 import Logo from './pages/logo';
 import InputNum from './components/inputNum';
 
@@ -38,14 +36,6 @@ const App: React.FC = () => (
       <IonRouterOutlet>
         <Route exact path="/home">
           <IonNav root={() => <Home />}></IonNav>;
-        </Route>
-
-        <Route exact path="/Exit">
-          <Exit />
-        </Route>
-
-        <Route exact path="/Entrance">
-          <Entrance />
         </Route>
 
         <Route exact path="/Main">

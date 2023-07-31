@@ -106,7 +106,7 @@ function Welcome(props) {
           <IonGrid>
                   <IonRow>
                     <IonCol size="12">
-                      <div style={{color : 'black'}}>최민희 님 환영합니다.</div>
+                      <div style={{color : 'black'}}> 최민희 님 환영합니다.</div>
                     </IonCol>
                     </IonRow>
                   <IonRow>
