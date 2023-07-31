@@ -22,7 +22,7 @@ import { FiMapPin } from 'react-icons/fi';
 
 
 
-function Welcome(props) {
+function Welcome(props:any) {
   const [width, setWidth] = useState(window.innerWidth);
   const [timer, setTimer] = useState('0000년 00월 00일() 00:00:00');
   const [ddday, setDdday] = useState('D-'); //디데이 표시하려고 
