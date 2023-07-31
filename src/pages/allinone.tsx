@@ -1,12 +1,12 @@
 import './allinone.css';
 import MainImg from './testimg.jpg';
 import Logo from './logo';
-<<<<<<< HEAD
+
 import Announcement from './announcement';
-=======
+
 import Buttons from '../components/inputBtn'
 
->>>>>>> 1723b2510f5a0514f58cf0da96fc08df7e2ec3c3
+
 import Input_Box from '../components/inputNum';
 import { IonCol, IonContent, IonGrid, IonRow } from '@ionic/react';
 import FaceRecognition from "../components/FaceRecognition";
