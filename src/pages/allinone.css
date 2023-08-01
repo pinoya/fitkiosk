@@ -103,13 +103,6 @@ div.main_input_box {
 
 ion-col.btn_and_face {
     height: 100%;
-    border: 0px;
-    padding: 0px 0px;
-    margin: 5px 0px;
-}
-
-ion-col.btn_and_face {
-    height: 100%;
     margin: 0px 0px;
     padding: 0px 0px;
 }
