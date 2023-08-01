@@ -12,7 +12,6 @@ import Welcome from './welecome';
 
 import React, { useEffect, useRef, useState } from 'react';
 
-
 function Kiosk() {
     const inmodal = useRef();
     const outmodal = useRef();
@@ -22,6 +21,20 @@ function Kiosk() {
         setisoutOpen(false);
     }
 
+    const [width, setWidth] = useState(window.innerWidth);
+    const [Height, setHeight] = useState(window.innerHeight);
+    
+    const handleResize = () => {
+        setWidth(window.innerWidth);
+    };
+
+    useEffect(() => {
+        window.addEventListener("resize", handleResize);
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
+
     const [isinOpen, setisinOpen] = useState(false);
     const [isoutOpen, setisoutOpen] = useState(false);
     const [id, setid] = useState('123');
@@ -29,7 +42,7 @@ function Kiosk() {
     const [pw, setpw] = useState('pw');
     const [face, isface] = useState(false);
 
-    
+
 
     return (
         <>
@@ -63,7 +76,7 @@ function Kiosk() {
                         <IonRow class="bottom_side">
                             <IonCol size="8" class="main_input_box">
                                 <div className='main_input_box'>
-                                    <Input_Box AlertFunc={setid} settypeid={settypeid}/>
+                                    <Input_Box AlertFunc={setid} settypeid={settypeid} />
                                 </div>
                             </IonCol>
                             <IonCol size="4" class="btn_and_face">
@@ -75,7 +88,7 @@ function Kiosk() {
                                     </IonRow>
                                     <IonRow>
                                         <IonCol class="btn">
-                                            <Buttons id={id} pw={pw} face={face} setisinOpen={setisinOpen} setisoutOpen={setisoutOpen} typeid={typeid}/>
+                                            <Buttons id={id} pw={pw} face={face} setisinOpen={setisinOpen} setisoutOpen={setisoutOpen} typeid={typeid} />
                                         </IonCol>
                                     </IonRow>
                                 </IonGrid>
