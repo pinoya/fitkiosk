@@ -3,9 +3,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as faceapi from "face-api.js";
 import ModalComponent from "./ModalComponent";
+import img1 from './face.png';
+import img2 from './cat.jpg'
+import img3 from './load.png'
+import { IonSpinner } from "@ionic/react";
 
 const UNKNOWN_LABEL = "Unknown";
-const UNKNOWN_THRESHOLD = 0.5;
+const UNKNOWN_THRESHOLD = 0.4;
 
 const FaceRecognition: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -15,7 +19,8 @@ const FaceRecognition: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [detectedLabel, setDetectedLabel] = useState<string | null>(null);
   const [isModalShownForLabel, setIsModalShownForLabel] = useState<boolean>(false);
-  const [isloading, setIsLoading] = useState(false);
+  const [isloading, setIsLoading] = useState(true);
+  const [WebcamActive, setIsWebcamActive] = useState(false);
 
   const startWebcam = async () => {
     try {
@@ -26,8 +31,9 @@ const FaceRecognition: React.FC = () => {
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
       }
-      setIsLoading(true);
+      setIsLoading(false);
       webcamActive.current = true; // Set webcam state to active
+      setIsWebcamActive(true);
     } catch (error) {
       console.error("Error accessing webcam:", error);
     }
@@ -39,6 +45,7 @@ const FaceRecognition: React.FC = () => {
     tracks?.forEach((track) => track.stop());
     videoRef.current!.srcObject = null;
     webcamActive.current = false; // Set webcam state to inactive
+    setIsWebcamActive(false);
   };
 
   useEffect(() => {
@@ -94,8 +101,10 @@ const FaceRecognition: React.FC = () => {
 
             const context = canvas!.getContext("2d")!;
             context.lineWidth = 2;
-            context.strokeStyle = "red";
-            context.fillStyle = "red";
+            // context.strokeStyle = "red";
+            // context.fillStyle = "red";
+            context.strokeStyle = "transparent";
+            context.fillStyle = "transparent";
             context.font = "20px Arial";
 
             const landmarks = resizedDetections[i].landmarks;
@@ -174,9 +183,15 @@ const FaceRecognition: React.FC = () => {
   }, [detectedLabel]);
 
 
+  let img;
+  if (isloading) img = <IonSpinner style={{ width: "100px",
+  height: "100px"}} ></IonSpinner>
+  else if(!WebcamActive) img = <IonSpinner style={{ width: "100px",
+    height: "100px"}} ></IonSpinner>
+
+
   return (
     <>
-
         <video
             ref={videoRef}
             id="video"
@@ -185,7 +200,8 @@ const FaceRecognition: React.FC = () => {
             autoPlay
             muted
             style={{ margin: "0 auto", position: "absolute" }}
-        />
+        /> 
+
         <canvas ref={canvasRef} style={{ margin: "0 auto", position: "absolute" }} />
         <button
             onClick={handleStartWebcam}
@@ -199,6 +215,10 @@ const FaceRecognition: React.FC = () => {
         >
             Stop Webcam
         </button>
+
+        {img}
+        {/* {isloading? <img src ={img1}></img> : null} 
+        {WebcamActive? null: <img src ={img1}></img>}  */}
 
         <ModalComponent
             isOpen={isModalOpen && !isModalShownForLabel} // Show the modal only if it's open and not shown for the current detected label
