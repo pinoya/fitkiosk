@@ -16,9 +16,10 @@ function Kiosk() {
     const inmodal = useRef();
     const outmodal = useRef();
     async function dismiss() {
-        modal.current?.dismiss();
         setisinOpen(false);
         setisoutOpen(false);
+        inmodal.current?.dismiss();
+        outmodal.current?.dismiss();
     }
 
     const [width, setWidth] = useState(window.innerWidth);
@@ -48,7 +49,7 @@ function Kiosk() {
         <>
             <IonContent>
                 <IonModal backdropDismiss={false} isOpen={isinOpen} ref={inmodal}>
-                    <Welcome />
+                    <Welcome dismiss={dismiss}/>
                 </IonModal>
 
                 <IonModal backdropDismiss={false} isOpen={isoutOpen} ref={outmodal}>
