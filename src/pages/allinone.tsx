@@ -67,7 +67,7 @@ function Kiosk() {
                                 </div>
                             </IonCol>
                             <IonCol size="4" class="btn_and_face">
-                                <IonGrid>
+                                <IonGrid class="btn_and_face">
                                     <IonRow>
                                         <IonCol class="face">
                                             <FaceRecognition />
