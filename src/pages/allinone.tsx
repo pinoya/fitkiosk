@@ -9,7 +9,7 @@ import { IonButton, IonCol, IonContent, IonGrid, IonModal, IonRow, IonTitle, Ion
 import FaceRecognition from "../components/FaceRecognition";
 import Buttons from '../components/inputBtn';
 import Welcome from './welecome';
-
+import Test from '../components/test';
 import React, { useEffect, useRef, useState } from 'react';
 
 function Kiosk() {
@@ -53,7 +53,7 @@ function Kiosk() {
                 </IonModal>
 
                 <IonModal backdropDismiss={false} isOpen={isoutOpen} ref={outmodal}>
-
+                    <Test dismiss={dismiss} id={id} />
                 </IonModal>
                 <div className='background-image-init' />
                 <div className='background-image-img' />
