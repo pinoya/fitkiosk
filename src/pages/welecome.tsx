@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { IonGrid, IonButtons, IonButton, IonContent, IonTitle, IonToolbar,IonRow, IonCol, IonModal, IonHeader } from '@ionic/react';
 import './allinone.css';
-import './welcome.css';
+
+
+
 
 
 function Welcome(props) {
@@ -9,6 +11,9 @@ function Welcome(props) {
   const [ddday, setDdday] = useState('D-'); //디데이 표시하려고 
   const [use, setUse] = useState('');
   const [restday, setRestday] = useState('');
+  
+
+  
 
   
   const currentTimer = () => {
@@ -73,7 +78,7 @@ function Welcome(props) {
       const timesString = window.localStorage.getItem('times');
       let existingTimes = timesString ? JSON.parse(timesString) : []; 
       console.log(existingTimes);
-      existingTimes.push(newTimeEntry);
+      //existingTimes.push(newTimeEntry);
 
       // 로컬스토리지 업데이트
       window.localStorage.setItem('times', JSON.stringify(existingTimes));
@@ -88,6 +93,40 @@ function Welcome(props) {
     startTimer(); 
   }, []);
 
+  // console.log(props.onRequestClose);
+  console.log(props.onCancelButtonClick);
+
+
+let name;
+
+//이름값이 넘어오지 않으면 번호로 이름을 일단 대신
+if(props.detectedLabel == null){
+  name = <p style={{fontSize:'28.5px', color:'#FF6300',marginTop:'4.5%'}}>{props.id}</p>
+}
+else if(props.detectedLabel){
+  name = <p style={{fontSize:'28.5px', color:'#FF6300',marginTop:'4.5%'}}>{props.detectedLabel}</p>
+}
+
+let selfie;
+
+//사진값이 넘어오지 않았을때 일단 대체 이미지로
+if (props.selfieURL == null){
+  selfie =  <img style={{width:'230px',height:'180px',borderRadius:'10px'}} 
+  src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-MfxvSj7ZuZ6YhKYLnZAUlRuyF21-BlozWQ&usqp=CAU'></img>
+}
+else if(props.selfieURL){
+  selfie =  <img style={{width:'230px',height:'180px',borderRadius:'10px'}} 
+  src={props.selfieURL}></img>
+}
+
+let OkBtn;
+
+if(props.onCancelButtonClick == null){
+  OkBtn = <IonButton size='large' expand='block' onClick={() => props.dismiss()}>확인</IonButton>
+}
+else if (props.onCancelButtonClick){
+  OkBtn = <IonButton size='large' expand='block' onClick={() => props.onCancelButtonClick()}>확인</IonButton>
+}
 
   return (
 
@@ -99,15 +138,15 @@ function Welcome(props) {
             <div style={{display:'flex', marginLeft:'0.3%',marginTop:'3%'}}>
               <IonCol size='auto'>
                 <div style={{backgroundColor:'red', width:'230px', height:'180px', borderRadius:'10px'}}>
-                  <img style={{width:'230px',height:'180px',borderRadius:'10px'}} 
-                  src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-MfxvSj7ZuZ6YhKYLnZAUlRuyF21-BlozWQ&usqp=CAU'></img>
+                  {selfie}
                 </div>
               </IonCol>
               <IonCol size='auto'>
               <div style={{backgroundColor:'#313131', width:'360px', height:'180px', borderRadius:'10px',
               paddingLeft:'26px'}}>
                 <div style={{fontSize:'20px', color : 'white', fontWeight:'700',display:'flex'}}>
-                  <p style={{fontSize:'28.5px', color:'#FF6300',marginTop:'4.5%'}}>{props.id}</p>
+
+                  {name}
                   <p style={{marginTop:'7%',marginLeft:'0.8%'}}>님,</p>
                   <p style={{fontSize:'26px',marginTop:'5.2%',marginLeft:'2.2%'}}>환영합니다.</p>
 
@@ -231,8 +270,11 @@ function Welcome(props) {
               </div>
 
               <div style={{marginLeft:'28%',marginRight:'31%',marginTop:'9%'}}>
-                <IonButton size='large' expand='block' onClick={() => props.dismiss()}>확인</IonButton>
+                
+               {OkBtn}
+
               </div>
+
               </div>
              
            

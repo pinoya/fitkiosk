@@ -49,7 +49,7 @@ function Kiosk() {
         <>
             <IonContent>
                 <IonModal backdropDismiss={false} isOpen={isinOpen} ref={inmodal}>
-                    <Welcome dismiss={dismiss}/>
+                    <Welcome id={id} dismiss={dismiss}/>
                 </IonModal>
 
                 <IonModal backdropDismiss={false} isOpen={isoutOpen} ref={outmodal}>

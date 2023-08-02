@@ -9,6 +9,7 @@ import {
 } from '@ionic/react';
 
 import Check from './check.svg';
+import Welcome from "../pages/welecome";
 
 type ModalComponentProps = {
   isOpen: boolean;
@@ -27,12 +28,14 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
 
   const modalStyles = {
     content: {
-      width: "500px",
-      height: "800px",
+      width: "640px",
+      height: "710px",
       margin: "auto",
       background: "#232323",
+
     },
   };
+
 
   const handleConfirm = () => {
     setIsNewModalOpen(true);
@@ -98,12 +101,17 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
       {/* New Modal */}
       {isNewModalOpen && (
         <Modal isOpen={true} onRequestClose={() => setIsNewModalOpen(false)} contentLabel="New Modal" style={modalStyles}>
-          {selfieURL && <img src={selfieURL} alt="Captured Selfie" style={{ width: "100%", height: "350px" }} />}
-          <h2>New Modal Content</h2>
-          <p>This is the content of the new modal.</p>
-          <button className="btn_cancel" onClick={handleNewModalCancel}>
+          <Welcome
+            detectedLabel={detectedLabel}
+            selfieURL={selfieURL}
+            onRequestClose={() => setIsNewModalOpen(false)}
+            onCancelButtonClick={handleNewModalCancel} // Pass the function here
+          />
+
+          {/* <button className="btn_cancel" onClick={handleNewModalCancel}>
             확인(이지만 아직은 취소)
-          </button>
+          </button> */}
+
         </Modal>
       )}
     </>

@@ -130,6 +130,8 @@ ion-col.btn {
     border: 0px;
     padding: 0px 0px;
 }
+
+
 ion-modal {
     --width : 640px;
     --height : 710px;
