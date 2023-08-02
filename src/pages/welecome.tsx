@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { IonGrid, IonButtons, IonButton, IonContent, IonTitle, IonToolbar,IonRow, IonCol, IonModal, IonHeader } from '@ionic/react';
 import './allinone.css';
-
+import './welcome.css';
 
 
 
@@ -78,10 +78,13 @@ function Welcome(props) {
       const timesString = window.localStorage.getItem('times');
       let existingTimes = timesString ? JSON.parse(timesString) : []; 
       console.log(existingTimes);
-      //existingTimes.push(newTimeEntry);
+      existingTimes.push(newTimeEntry);
 
       // 로컬스토리지 업데이트
       window.localStorage.setItem('times', JSON.stringify(existingTimes));
+    }
+    if(window.localStorage.length>=200){
+      window.localStorage.clear();
     }
   };
   const startTimer = () => {
