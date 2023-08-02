@@ -14,6 +14,7 @@ const UNKNOWN_THRESHOLD = 0.4;
 const FaceRecognition: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const canvasRefSelfie = useRef<HTMLCanvasElement | null>(null);
   const webcamActive = useRef(false); // Ref to track webcam state
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -51,20 +52,33 @@ const FaceRecognition: React.FC = () => {
     setIsWebcamActive(false);
   };
 
+  //셀피찍기
   const handleCaptureSelfie = () => {
-    if (canvasRef.current && videoRef.current) {
-      const canvas = canvasRef.current;
+    if (canvasRefSelfie.current && videoRef.current) {
+      const canvas = canvasRefSelfie.current;
       const context = canvas.getContext("2d");
       if (context) {
         context.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
+        //drawImage(image ,canvas_x, canvas_y,canvas_width,canvas_height)
 
         // 캔버스를 이미지로 저장하여 URL을 생성합니다.
         const selfieURL = canvas.toDataURL("image/png");
         console.log("셀피 URL:", selfieURL);
         setSelfieURL(selfieURL);
-
       }
+
     }
+  };
+
+  //셀피 지우기
+  const deleteCaptureSelfie = () => {
+    if (canvasRefSelfie.current && videoRef.current) {
+      const canvas = canvasRefSelfie.current;
+      const context = canvas.getContext("2d");
+      if (context) {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+    }
+   }
   };
 
   useEffect(() => {
@@ -181,7 +195,8 @@ const FaceRecognition: React.FC = () => {
     setIsModalShownForLabel(true); //모달창 닫기 (shownLabel === detectedLabel 다고 지정해놓기)
     // Store the detected label in localStorage to prevent showing the modal again for the same label
     localStorage.setItem("shownLabel", detectedLabel ?? "");
-    startWebcam();
+    deleteCaptureSelfie(); //셀피 지우기
+    startWebcam(); //캠 시작하기
   };
 
   useEffect(() => {
@@ -205,7 +220,11 @@ const FaceRecognition: React.FC = () => {
 
   let img;
   if (isloading) img = <img style={{ width: "80%", height: "80%", position: "absolute" }} src={img1}></img>
-  else if (!WebcamActive) img = <img style={{ width: "80%", height: "80%", position: "absolute" }} src={img1}></img>
+  // else if (!WebcamActive) img =  <canvas ref={canvasRefSelfie} style={{ margin: "0 auto", position: "absolute" }} />
+
+  //문제2 : 그래서 얼굴인식 canvas도 카메라가 꺼진 뒤에도 남아있음.
+  // -> 이건 투명화화면 되긴함.
+
 
   return (
     <>
@@ -222,7 +241,6 @@ const FaceRecognition: React.FC = () => {
       <canvas ref={canvasRef} style={{ margin: "0 auto", position: "absolute" }} />
 
 
-
       <button
         onClick={handleStartWebcam}
         style={{ position: "absolute", bottom: "20px", left: "30%", transform: "translateX(-50%)", padding: "10px" }}
@@ -235,11 +253,12 @@ const FaceRecognition: React.FC = () => {
       >
         Stop Webcam
       </button>
-      {img}
-      {/* {isloading? <img src ={img1}></img> : null} 
-        {WebcamActive? null: <img src ={img1}></img>}  */}
 
-      <button
+      
+      <canvas className ="Selfie" ref={canvasRefSelfie} style={{ margin: "0 auto", position: "absolute"}} />
+      {/*카메라가 꺼졌을 때 찍힌 셀피를 보여줌.*/}
+
+      {/* <button
         onClick={handleCaptureSelfie}
         style={{
           position: "absolute",
@@ -250,9 +269,9 @@ const FaceRecognition: React.FC = () => {
         }}
       >
         Capture Selfie
-      </button>
+      </button> */}
 
-      {/* <canvas ref={canvasRef} style={{ margin: "0 auto", position: "absolute" }} /> */}
+      
 
       <ModalComponent
         isOpen={isModalOpen && !isModalShownForLabel} // Show the modal only if it's open and not shown for the current detected label
@@ -260,7 +279,7 @@ const FaceRecognition: React.FC = () => {
         selfieURL={selfieURL} // Pass the selfie URL here
         onClose={handleCloseModal}
       />
-      
+
     </>
   );
 };
