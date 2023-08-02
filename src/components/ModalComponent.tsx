@@ -4,18 +4,20 @@ import Modal from "react-modal";
 type ModalComponentProps = {
   isOpen: boolean;
   detectedLabel: string | null;
+  selfieURL: string | null; // Add selfieURL prop
   onClose: () => void;
 };
 
 const ModalComponent: React.FC<ModalComponentProps> = ({
   isOpen,
   detectedLabel,
+  selfieURL,
   onClose,
 }) => {
   const modalStyles = {
     content: {
-      width: "300px", // 모달 창의 너비를 300px로 설정
-      height: "200px", // 모달 창의 높이를 200px로 설정
+      width: "500px", // 모달 창의 너비를 300px로 설정
+      height: "800px", // 모달 창의 높이를 200px로 설정
       margin: "auto", // 모달을 화면 가운데로 정렬
     },
   };
@@ -25,10 +27,18 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
       isOpen={isOpen}
       onRequestClose={onClose}
       contentLabel="Detected Label Modal"
-      style={modalStyles} // 스타일 적용
+      style={modalStyles}
     >
-      <h2>{`환영합니다, ${detectedLabel}님!`}</h2>
-      <button onClick={onClose}>Close Modal</button>
+
+
+      <h2>{`${detectedLabel}님\n인증 완료되었습니다.`}</h2>
+      {/* Display the selfie image */}
+      {selfieURL && <img src={selfieURL} alt="Captured Selfie" style={{ width: "100%", height: "auto" }} />}
+      <p>{'회원번호 20230315'}</p>
+      <p>{'전화번호 010-2143-5287'}</p>
+
+      <button style={{background: "#FF6300" }}>출석</button>
+      <button style={{background: "#A8B1CE" }} onClick={onClose}>취소</button>
     </Modal>
   );
 };

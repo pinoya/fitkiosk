@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as faceapi from "face-api.js";
 import ModalComponent from "./ModalComponent";
-import img1 from './face.png';
+import img1 from './face2.jpg';
 import img2 from './cat.jpg'
 import img3 from './load.png'
 import { IonSpinner } from "@ionic/react";
@@ -21,6 +21,9 @@ const FaceRecognition: React.FC = () => {
   const [isModalShownForLabel, setIsModalShownForLabel] = useState<boolean>(false);
   const [isloading, setIsLoading] = useState(true);
   const [WebcamActive, setIsWebcamActive] = useState(false);
+  const [selfieURL, setSelfieURL] = useState<string | null>(null);
+
+
 
   const startWebcam = async () => {
     try {
@@ -46,6 +49,22 @@ const FaceRecognition: React.FC = () => {
     videoRef.current!.srcObject = null;
     webcamActive.current = false; // Set webcam state to inactive
     setIsWebcamActive(false);
+  };
+
+  const handleCaptureSelfie = () => {
+    if (canvasRef.current && videoRef.current) {
+      const canvas = canvasRef.current;
+      const context = canvas.getContext("2d");
+      if (context) {
+        context.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
+
+        // 캔버스를 이미지로 저장하여 URL을 생성합니다.
+        const selfieURL = canvas.toDataURL("image/png");
+        console.log("셀피 URL:", selfieURL);
+        setSelfieURL(selfieURL);
+
+      }
+    }
   };
 
   useEffect(() => {
@@ -101,10 +120,10 @@ const FaceRecognition: React.FC = () => {
 
             const context = canvas!.getContext("2d")!;
             context.lineWidth = 2;
-            // context.strokeStyle = "red";
-            // context.fillStyle = "red";
-            context.strokeStyle = "transparent";
-            context.fillStyle = "transparent";
+            context.strokeStyle = "red";
+            context.fillStyle = "red";
+            // context.strokeStyle = "transparent";
+            // context.fillStyle = "transparent";
             context.font = "20px Arial";
 
             const landmarks = resizedDetections[i].landmarks;
@@ -175,58 +194,76 @@ const FaceRecognition: React.FC = () => {
     const shownLabel = localStorage.getItem("shownLabel");
     if (shownLabel === detectedLabel) {
       setIsModalShownForLabel(true);
-    } else {
+    } else { //이전에 감지한 내용과 다를때만 모달창이 열릴 수 있음.
       setIsModalShownForLabel(false);
-      stopWebcam();//이때만 모달창이 열릴 수 있음.
+      handleCaptureSelfie(); //셀피 찍기
+      stopWebcam(); //캠 끄기
     }
 
   }, [detectedLabel]);
 
 
   let img;
-  if (isloading) img = <IonSpinner style={{ width: "100px",
-  height: "100px"}} ></IonSpinner>
-  else if(!WebcamActive) img = <IonSpinner style={{ width: "100px",
-    height: "100px"}} ></IonSpinner>
-
+  if (isloading) img = <img style={{ width: "80%", height: "80%", position: "absolute" }} src={img1}></img>
+  else if (!WebcamActive) img = <img style={{ width: "80%", height: "80%", position: "absolute" }} src={img1}></img>
 
   return (
     <>
-        <video
-            ref={videoRef}
-            id="video"
-            width="720"
-            height="560"
-            autoPlay
-            muted
-            style={{ margin: "0 auto", position: "absolute" }}
-        /> 
+      <video
+        ref={videoRef}
+        id="video"
+        width="720"
+        height="560"
+        autoPlay
+        muted
+        style={{ margin: "0 auto", position: "absolute" }}
+      />
 
-        <canvas ref={canvasRef} style={{ margin: "0 auto", position: "absolute" }} />
-        <button
-            onClick={handleStartWebcam}
-            style={{ position: "absolute", bottom: "20px", left: "30%", transform: "translateX(-50%)", padding: "10px" }}
-        >
-            Start Webcam
-        </button>
-        <button
-            onClick={handleStopWebcam}
-            style={{ position: "absolute", bottom: "20px", left: "60%", transform: "translateX(-50%)", padding: "10px" }}
-        >
-            Stop Webcam
-        </button>
+      <canvas ref={canvasRef} style={{ margin: "0 auto", position: "absolute" }} />
 
-        {img}
-        {/* {isloading? <img src ={img1}></img> : null} 
+
+
+      <button
+        onClick={handleStartWebcam}
+        style={{ position: "absolute", bottom: "20px", left: "30%", transform: "translateX(-50%)", padding: "10px" }}
+      >
+        Start Webcam
+      </button>
+      <button
+        onClick={handleStopWebcam}
+        style={{ position: "absolute", bottom: "20px", left: "60%", transform: "translateX(-50%)", padding: "10px" }}
+      >
+        Stop Webcam
+      </button>
+      {img}
+      {/* {isloading? <img src ={img1}></img> : null} 
         {WebcamActive? null: <img src ={img1}></img>}  */}
 
-        <ModalComponent
-            isOpen={isModalOpen && !isModalShownForLabel} // Show the modal only if it's open and not shown for the current detected label
-            detectedLabel={detectedLabel}
-            onClose={handleCloseModal}
-        />
+      <button
+        onClick={handleCaptureSelfie}
+        style={{
+          position: "absolute",
+          bottom: "20px",
+          left: "45%",
+          transform: "translateX(-50%)",
+          padding: "10px",
+        }}
+      >
+        Capture Selfie
+      </button>
+
+      {/* <canvas ref={canvasRef} style={{ margin: "0 auto", position: "absolute" }} /> */}
+
+      <ModalComponent
+        isOpen={isModalOpen && !isModalShownForLabel} // Show the modal only if it's open and not shown for the current detected label
+        detectedLabel={detectedLabel}
+        selfieURL={selfieURL} // Pass the selfie URL here
+        onClose={handleCloseModal}
+      />
+      
     </>
-);
+  );
 };
 
 export default FaceRecognition;
+
