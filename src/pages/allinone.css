@@ -1,6 +1,3 @@
-ion-modal {
-    --border-radius: 10px;
-}
 
 div.background-image-img {
     position: absolute;
@@ -126,4 +123,11 @@ ion-col.btn {
     /* background-color: orange; */
     border: 0px;
     padding: 0px 0px;
+}
+ion-modal {
+    --width : 640px;
+    --height : 710px;
+    --border-radius: 10px;
+    --background : #232323;
+
 }
