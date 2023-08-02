@@ -25,7 +25,7 @@ function Kiosk() {
 
     const [width, setWidth] = useState(window.innerWidth);
     const [Height, setHeight] = useState(window.innerHeight);
-    
+
     const handleResize = () => {
         setWidth(window.innerWidth);
     };
@@ -70,7 +70,7 @@ function Kiosk() {
         <>
             <IonContent>
                 <IonModal backdropDismiss={false} isOpen={isinOpen} ref={inmodal}>
-                    <Welcome id={id} dismiss={dismiss}/>
+                    <Welcome id={id} dismiss={dismiss} />
                 </IonModal>
 
                 <IonModal backdropDismiss={false} isOpen={isoutOpen} ref={outmodal}>
@@ -118,6 +118,8 @@ function Kiosk() {
                         </IonRow>
                     </IonGrid>
                 </div>
+                <IonButton onClick={get_userinfo}></IonButton>
+                <IonButton onClick={print_jsondata}></IonButton>
             </IonContent>
         </>
     );
