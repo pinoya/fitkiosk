@@ -8,9 +8,13 @@ import './welcome.css';
 
 function Welcome(props:any) {
   const [timer, setTimer] = useState('0000년 00월 00일() 00:00:00');
-  const [ddday, setDdday] = useState('D-'); //디데이 표시하려고 
+  const [dday, setDdday] = useState('D-'); //디데이1 표시하려고  
+  const [dday2, setDdday2] = useState('D-');
+  const [dday3, setDdday3] = useState('D-');
   const [use, setUse] = useState('');
   const [restday, setRestday] = useState('');
+  const [restday2, setRestday2] = useState('');
+  const [restday3, setRestday3] = useState('');
 
   const [isWelcomeOpen, setIsWelcomeOpen] = useState(false);
   
@@ -35,25 +39,68 @@ function Welcome(props:any) {
     
     setTimer(`${years}년 ${months}월 ${days}일(${dayofweeks}) ${hours}:${minutes}:${seconds}`);
 
-    //디데이
-  //임의로 설정한 값
-    var dday = new Date(2023, 11, 30); //월은 -1로 생각해야함 0부터 시작하는듯.. 사실 7월이였던것 입력할때 -1월로 입력하기 (ex 12월 -> 11월)
+   //디데이1 - 회원권 만료일
+    //임의로 설정한 값
+    var dday = new Date((props.product).substring(0,4), (props.product).substring(5,7)-1, (props.product).substring(8,10)); //월은 -1로 생각해야함 0부터 시작하는듯.. 사실 7월이였던것 입력할때 -1월로 입력하기 (ex 12월 -> 11월)
+
+    
     const dyear = String(dday.getFullYear());
     const dmonth = String(dday.getMonth()+1).padStart(2,"0");
-    const ddate = String(dday.getDate()).padStart(2,"0");
+    const date = String(dday.getDate()).padStart(2,"0");
+
     //디데이 계산 로직
     var gap = dday.getTime()-now.getTime(); 
     var result = Math.ceil(gap / (1000 * 60 * 60 * 24));
-    setRestday(`${dyear}년 ${dmonth}월 ${ddate}일`);
+    setRestday(`${dyear}년 ${dmonth}월 ${date}일`);
+
     setDdday(`D-${result}`);
     if(result>0){
       setUse('사용중');
     }
+    else{
+      setUse('미사용');
+    }
 
 
+    //디데이2 - 개인락커
+    //임의로 설정한 값
+    var dday2 = new Date((props.locker).substring(0,4), (props.locker).substring(5,7)-1, (props.locker).substring(8,10)); //월은 -1로 생각해야함 0부터 시작하는듯.. 사실 7월이였던것 입력할때 -1월로 입력하기 (ex 12월 -> 11월)
+
+    
+    const dyear2 = String(dday2.getFullYear());
+    const dmonth2 = String(dday2.getMonth()+1).padStart(2,"0");
+    const date2 = String(dday2.getDate()).padStart(2,"0");
+
+    //디데이 계산 로직
+    var gap2 = dday2.getTime()-now.getTime(); 
+    var result2 = Math.ceil(gap2 / (1000 * 60 * 60 * 24));
+    setRestday2(`${dyear2}년 ${dmonth2}월 ${date2}일`);
+
+    setDdday2(`D-${result2}`);
+    if(result2>0){
+      setUse('사용중');
+    }
+    else{
+      setUse('미사용');
+    }
+    //디데이3
+
+    var dday3 = new Date((props.duclass).substring(0,4), (props.duclass).substring(5,7)-1, (props.duclass).substring(8,10)); //월은 -1로 생각해야함 0부터 시작하는듯.. 사실 7월이였던것 입력할때 -1월로 입력하기 (ex 12월 -> 11월)
+
+    
+    const dyear3 = String(dday3.getFullYear());
+    const dmonth3 = String(dday3.getMonth()+1).padStart(2,"0");
+    const date3 = String(dday3.getDate()).padStart(2,"0");
+
+    //디데이 계산 로직
+    var gap3 = dday3.getTime()-now.getTime(); 
+    var result3 = Math.ceil(gap3 / (1000 * 60 * 60 * 24));
+    setRestday3(`${dyear3}년 ${dmonth3}월 ${date3}일`);
+
+    setDdday3(`D-${result3}`);
 
     //로컬스토리지
-      const time = [
+    /*  const time = [
       {
         id : '22223', //임의로
         hour : hours,
@@ -87,7 +134,7 @@ function Welcome(props:any) {
     }
     if(window.localStorage.length>=200){
       window.localStorage.clear();
-    }
+    }*/
   };
   const startTimer = () => {
     currentTimer();
@@ -139,7 +186,7 @@ else if (props.onCancelButtonClick){
 
      
         <IonGrid>
-          <IonRow>
+        <IonRow>
             <div style={{display:'flex', marginLeft:'0.3%',marginTop:'3%'}}>
               <IonCol size='auto'>
                 <div style={{backgroundColor:'red', width:'230px', height:'180px', borderRadius:'10px'}}>
@@ -149,21 +196,20 @@ else if (props.onCancelButtonClick){
               <IonCol size='auto'>
               <div style={{backgroundColor:'#313131', width:'360px', height:'180px', borderRadius:'10px',
               paddingLeft:'26px'}}>
-
                 <div style={{fontSize:'20px', color : 'white', fontWeight:'700',display:'flex'}}>
                   {name}
                   <p style={{marginTop:'7%',marginLeft:'0.8%'}}>님,</p>
                   <p style={{fontSize:'26px',marginTop:'5.2%',marginLeft:'2.2%'}}>환영합니다.</p>
+                  
                 </div>
-
                 <div style={{marginTop : '-6.5%', fontSize:'18px', color : '#B1AEAF'}}>{timer}</div>
                 <div style={{fontSize:'18px', color : '#B1AEAF',display:'flex'}}>
                   <p style={{letterSpacing:'-0.5px'}}>보유 마일리지</p>
-                  <p style={{marginLeft:'5%',fontWeight:'700'}}>2,500점</p>
+                  <p style={{marginLeft:'5%',fontWeight:'700'}}>{props.mile}점</p>
                 </div>
                 <div style={{marginTop:'-9%',fontSize:'18px', color : '#B1AEAF',display:'flex'}}>
                   <p style={{letterSpacing:'-0.5px'}}>이달 출석횟수</p>
-                  <p style={{marginLeft:'5%',fontWeight:'700'}}>12회</p>
+                  <p style={{marginLeft:'5%',fontWeight:'700'}}>{props.come}회</p>
                 </div>
               </div>
               </IonCol>
@@ -185,7 +231,7 @@ else if (props.onCancelButtonClick){
                         {restday}</p>
                   <p style={{width:'70px', height:'25px', borderRadius:'3px', backgroundColor:'#FF6300',
                     color : 'white', fontSize:'18px', textAlign:'center',marginLeft:'2%'}}> {/*디데이*/}
-                      {ddday}</p>
+                      {dday}</p>
                 </div>
               </div>
 
@@ -193,7 +239,7 @@ else if (props.onCancelButtonClick){
                 <p style={{fontWeight:'700',fontSize:'18px',color:'#848484',letterSpacing:'-0.5px'}}>회원권 상품명</p>
                 <div style={{display:'flex',marginLeft:'28%',marginTop:'-12.2%'}}> {/*오른쪽 부분*/}
                   <p style={{fontSize:'18px', color : '#B1AEAF', fontWeight:'400'}}>
-                        필라테스 6개월 체험권</p>
+                       {props.have}</p>
                 </div>
               </div>
 
@@ -201,6 +247,7 @@ else if (props.onCancelButtonClick){
             </div>
           </IonCol>
         </IonRow> 
+
 
         <IonRow>
             <IonCol size='auto'>
@@ -249,10 +296,10 @@ else if (props.onCancelButtonClick){
                 <p style={{fontWeight:'700',fontSize:'18px',color:'#848484',letterSpacing:'-0.5px'}}>수강권 만료일</p>
                 <div style={{display:'flex',marginLeft:'28%',marginTop:'-12.2%'}}>
                  <p style={{fontSize:'18px', color : '#B1AEAF'}}>
-                        {restday}</p>
+                        {restday3}</p>
                 <p style={{width:'70px', height:'25px', borderRadius:'3px', backgroundColor:'#FF6300',
                     color : 'white', fontSize:'18px', textAlign:'center',marginLeft:'3%'}}>
-                      {ddday}</p>
+                      {dday3}</p>
                 </div>
               </div>
 
@@ -260,7 +307,7 @@ else if (props.onCancelButtonClick){
                 <p style={{fontWeight:'700',fontSize:'18px',color:'#848484',letterSpacing:'-0.5px'}}>남은 횟수</p>
                 <div style={{display:'flex',marginLeft:'28%',marginTop:'-12.2%'}}>
                  <p style={{fontSize:'18px', color : '#FF6300',fontWeight:'700'}}>
-                        12회</p>
+                        {props.left}회</p>
                   <p style={{fontSize:'18px', color : '#B1AEAF',fontWeight:'400',marginLeft:'1.5%'}}>
                         남음</p>
                 </div>
@@ -270,13 +317,13 @@ else if (props.onCancelButtonClick){
                 <p style={{fontWeight:'700',fontSize:'18px',color:'#848484',letterSpacing:'-0.5px'}}>수강권 상품권</p>
                 <div style={{display:'flex',marginLeft:'28%',marginTop:'-12.2%'}}>
                   <p style={{fontSize:'18px', color : '#B1AEAF',fontWeight:'400'}}>
-                        [PT권] 1:1 PT 3개월 풀코스 체험권</p>
+                        {props.inclass}</p>
                 </div>
               </div>
 
               <div style={{marginLeft:'28%',marginRight:'31%',marginTop:'9%'}}>
+                
                {OkBtn}
-
 
               </div>
 
