@@ -119,7 +119,13 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
   useEffect(() => {
     const getLabeledFaceDescriptions = async () => {
       const gymLabel = "gym"; // 설정한 체육관이 사용하는 폴더명 받아오기
-      const labels = ["Daegwon", "IU", "Jane", "jo", "Yeongseo"]; // 폴더 내에 있는 파일 이름
+      //폴더명
+      const labels = ["33333", "11111", "44444", "22222"]; // 폴더 내에 있는 파일 이름
+
+      //11111 : 이재인
+      //
+    
+      
 
       return Promise.all(
         labels.map(async (label) => {
