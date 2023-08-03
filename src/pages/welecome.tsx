@@ -33,9 +33,6 @@ function Welcome(props: any) {
   const [img, setimg] = useState('');
 
 
-  
-
-
 
 
 
@@ -167,17 +164,17 @@ function Welcome(props: any) {
   // print_jsondata();
 
 
-
-
   let name;
 
   //이름값이 넘어오지 않으면 번호로 이름을 일단 대신
   //인식 -> 회원 아이디가 넘어옴 
   if (props.detectedName == null) {
+
     name = <p style={{ fontSize: '27px', color: '#FF6300', marginTop: '4.9%',fontWeight:'700' }}>{props.idd}</p>
   }
   else if (props.detectedName) {
     name = <p style={{ fontSize: '27px', color: '#FF6300',  marginTop: '4.9%',fontWeight:'700' }}>{props.detectedName}</p>
+
   }
 
 
@@ -208,8 +205,10 @@ function Welcome(props: any) {
   else if (props.onCancelButtonClick) {
     OkBtn = <IonButton size='large' expand='block' onClick={() => props.onCancelButtonClick()}>확인</IonButton>
   }
+
   console.log(props.detectedName);
   console.log(props.mile);
+
   return (
 
     <>
@@ -231,6 +230,7 @@ function Welcome(props: any) {
                   <p className='body2_welcome'>환영합니다.</p>
 
                 </div>
+
                 <div className='body2_time'>{timer}</div>
                 <div className='body2_p1'>
                   <p className='body2_mil'>보유 마일리지</p>
@@ -248,6 +248,8 @@ function Welcome(props: any) {
                 <div className='body2_p2'>
                   <p className='body2_mil'>이달 출석횟수</p>
                   <p className='body2_score'>{props.come}회</p>
+
+
                 </div>
               </div>
             </IonCol>
@@ -343,10 +345,12 @@ function Welcome(props: any) {
                 </div>
               </div>
 
+
               <div className='body5_p2'>
                 <p className='body3_p1_finish'>수강권 상품권</p>
                 <div className='body3_p1_r'>
                   <p className='body3_p1_r_date' style={{marginTop:'5%'}}>
+
                     {props.inclass}</p>
                 </div>
               </div>
