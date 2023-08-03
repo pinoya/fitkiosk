@@ -144,10 +144,6 @@ function Kiosk() {
                                         <IonCol class="face">
                                             <FaceRecognition isbtnopen={isbtnOpen} setisbtnOpen={setisbtnOpen} 
                                                 id={id} />
-{/* 
-idd={idd} mile={mile} come={come}
-                                                product={product} have={have} locker={locker}
-                                                duclass={duclass} left={left} inclass={inclass} */}
                                         </IonCol>
                                     </IonRow>
                                     <IonRow>

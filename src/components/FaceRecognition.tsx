@@ -7,6 +7,7 @@ import Welcome from "../pages/welecome";
 import { IonModal } from "@ionic/react";
 import { CapacitorHttp } from "@capacitor/core";
 
+
 const UNKNOWN_LABEL = "Unknown";
 const UNKNOWN_THRESHOLD = 0.4;
 
@@ -271,7 +272,7 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
 
     if (props.isbtnopen) {
       stopWebcam();
-      get_btn_userinfo();
+      get_btn_userinfo(); //버튼일때 유저 정보 가져오기
     }
   }, [props.isbtnopen]);
 
@@ -281,7 +282,6 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
       console.log(detectedLabel);
     }
     get_userinfo();
-
     setIsGetLabel(true);
   }
 
@@ -312,8 +312,6 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
         setinclass(JSON.parse(response.data)[i].inclass);
       }
     }
-
-    console.log("성공");
   }
 
 
@@ -351,21 +349,6 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
   }
 
 
-  // const clear_userinfo = () =>{
-  //     setidd(null); //이름
-  //     setmile(JSON.parse(response.data)[i].mile); //마일리지
-  //     setcome(JSON.parse(response.data)[i].comeinm); //출석횟수
-  //     setproduct(JSON.parse(response.data)[i].duetoproduct); //회원권 만료일
-  //     sethave(JSON.parse(response.data)[i].haveproduct); //회원권 상품명
-  //     setlocker(JSON.parse(response.data)[i].indivlockerinfo);
-  //     setduclass(JSON.parse(response.data)[i].duetoclass);
-  //     setleft(JSON.parse(response.data)[i].leftclasstime);
-  //     setinclass(JSON.parse(response.data)[i].inclass);
-  //   }
-  // }
-  // }
-
-
   // let img;
   // if (isloading) img = <img style={{ width: "80%", height: "80%", position: "absolute" }} src={img1}></img>
 
@@ -394,23 +377,10 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
       <canvas className="Selfie" ref={canvasRefSelfie} style={{ margin: "0 auto", position: "absolute" }} />
       {/*카메라가 꺼졌을 때 찍힌 셀피를 보여줌.*/}
 
-      {/* <button
-        onClick={handleCaptureSelfie}
-        style={{
-          position: "absolute",
-          bottom: "20px",
-          left: "45%",
-          transform: "translateX(-50%)",
-          padding: "10px",
-        }}
-      >
-        Capture Selfie
-      </button> */}
-
+      <IonModal isOpen={isModalOpen && !isModalShownForLabel && isgetlabel}>
       <ModalComponent
-        isOpen={isModalOpen && !isModalShownForLabel && isgetlabel} // Show the modal only if it's open and not shown for the current detected label
         detectedName={idd} //회원 id
-        selfieURL={selfieURL} // Pass the selfie URL here
+        selfieURL={selfieURL} // Pass the selfie URL here // Show the modal only if it's open and not shown for the current detected label
         mile={mile}
         come={come}
         product={product}
@@ -420,7 +390,7 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
         left={left}
         inclass={inclass}
         onClose={handleCloseModal} />
-
+   </IonModal>
 
 
 
