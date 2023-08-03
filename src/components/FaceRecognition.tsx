@@ -350,7 +350,8 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
       <IonModal isOpen={props.isbtnopen}>
         <Welcome
         handleClosebtnModal = {handleClosebtnModal}
-        id={props.id}  
+        id={props.id} 
+         
         />
       </IonModal>
 
