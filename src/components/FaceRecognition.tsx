@@ -13,9 +13,22 @@ const UNKNOWN_THRESHOLD = 0.4;
 interface FaceRecognitionProps {
   setisbtnOpen(arg0: boolean): unknown;
   isbtnopen : boolean;
+  // idd : string | null;
+  // mile : string | null;
+  // come : string | null;
+  // product : string | null;
+  // have : string | null;
+  // locker : string | null;
+  // duclass : string | null;
+  // left : string | null;
+  // inclass : string | null;
   id : string | null;
-  
+
 }
+
+
+
+
 
 
 const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
@@ -340,7 +353,7 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
 
       <ModalComponent
         isOpen={isModalOpen && !isModalShownForLabel} // Show the modal only if it's open and not shown for the current detected label
-        detectedLabel={detectedLabel}
+        detectedLabel={detectedLabel} //회원 id
         selfieURL={selfieURL} // Pass the selfie URL here
         onClose={handleCloseModal} />
 
@@ -351,9 +364,22 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
         <Welcome
         handleClosebtnModal = {handleClosebtnModal}
         id={props.id} 
-         
+        // idd = {props.idd}
+        // mile = {props.mile}
+
+        // come = {props.come}
+
+        // product = {props.product}
+
+        // have = {props.have}
+        // locker = {props.locker}
+        // duclass= {props.duclass}
+
+        // left= {props.left}
+        // inclass= {props.inclass}
         />
       </IonModal>
+
 
 
     </>

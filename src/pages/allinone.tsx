@@ -37,7 +37,7 @@ function Kiosk() {
             window.removeEventListener("resize", handleResize);
         };
     }, []);
-    
+
 
     const [isinOpen, setisinOpen] = useState(false);
     const [isbtnOpen, setisbtnOpen] = useState(false);
@@ -51,58 +51,59 @@ function Kiosk() {
 
     //db
     const [idd, setidd] = useState(''); //jsondata 이름
-    const [mile, setmile] = useState(''); 
+    const [mile, setmile] = useState('');
     const [come, setcome] = useState('');
     const [product, setproduct] = useState('');
-    const [have, sethave]=useState('');
+    const [have, sethave] = useState('');
     const [locker, setlocker] = useState(''); //락커
-    const [duclass, setduclass] = useState(''); 
+    const [duclass, setduclass] = useState('');
     const [left, setleft] = useState('');
     const [inclass, setinclass] = useState('');
 
-    const get_userinfo = async () => {
-        let url = 'http://dev.wisevill.com/ur03/test.php';
-        const options = {
-            url: url,
-            params: {id : id},
-            data: {}
-        }
-        const response = await CapacitorHttp.post(options);
-        setjsondata(JSON.parse(response.data));
-        return 0;
-    }
+    //데이터 가져오는 함수
+    // const get_userinfo = async () => {
+    //     let url = 'http://dev.wisevill.com/ur03/get_page_from_db.php';
+    //     const options = {
+    //         url: url,
+    //         params: { id: id },
+    //         data: {}
+    //     }
+    //     const response = await CapacitorHttp.post(options);
+    //     setjsondata(JSON.parse(response.data));
+    //     return 0;
+    // }
 
-    function print_jsondata() {
-        if (jsondata == undefined) return 0;
-        else {
-            jsondata.forEach(element => {
-                console.log(element);
-            });
-            for(let i=0; i<jsondata.length; i++){
-                console.log(jsondata[i].id);
-                console.log(jsondata[i].name);
-                setidd(jsondata[i].name); //이름
-                setmile(jsondata[i].mile); //마일리지
-                setcome(jsondata[i].comeinm); //출석횟수
-                setproduct(jsondata[i].duetoproduct); //회원권 만료일
-                sethave(jsondata[i].haveproduct); //회원권 상품명
-                setlocker(jsondata[i].indivlockerinfo);
-                setduclass(jsondata[i].duetoclass);
-                setleft(jsondata[i].leftclasstime);
-                setinclass(jsondata[i].inclass);
-            }
-        }
-    }
+    // function print_jsondata() {
+    //     if (jsondata == undefined) return 0;
+    //     else {
+    //         jsondata.forEach(element => {
+    //             console.log(element);
+    //         });
+    //         for (let i = 0; i < jsondata.length; i++) {
+    //             console.log(jsondata[i].id);
+    //             console.log(jsondata[i].name);
+    //             setidd(jsondata[i].name); //이름
+    //             setmile(jsondata[i].mile); //마일리지
+    //             setcome(jsondata[i].comeinm); //출석횟수
+    //             setproduct(jsondata[i].duetoproduct); //회원권 만료일
+    //             sethave(jsondata[i].haveproduct); //회원권 상품명
+    //             setlocker(jsondata[i].indivlockerinfo);
+    //             setduclass(jsondata[i].duetoclass);
+    //             setleft(jsondata[i].leftclasstime);
+    //             setinclass(jsondata[i].inclass);
+    //         }
+    //     }
+    // }
 
     return (
         <>
             <IonContent>
-            <IonModal backdropDismiss={false} isOpen={isinOpen} ref={inmodal}>
-                    <Welcome idd={idd} mile={mile} come={come} 
-                    product={product} have={have} locker={locker}
-                    duclass={duclass} left={left} inclass={inclass}
-                    id={id} dismiss={dismiss} />
-                </IonModal>
+                {/* <IonModal backdropDismiss={false} isOpen={isinOpen} ref={inmodal}>
+                    <Welcome idd={idd} mile={mile} come={come}
+                        product={product} have={have} locker={locker}
+                        duclass={duclass} left={left} inclass={inclass}
+                        id={id} dismiss={dismiss} />
+                </IonModal> */}
 
                 {/* <IonModal backdropDismiss={false} isOpen={isbtnOpen} ref={inmodal}>
                     <Welcome id={id} dismiss={dismiss} />
@@ -141,7 +142,12 @@ function Kiosk() {
                                 <IonGrid class="btn_and_face">
                                     <IonRow>
                                         <IonCol class="face">
-                                            <FaceRecognition isbtnopen={isbtnOpen} setisbtnOpen = {setisbtnOpen} id={id} />
+                                            <FaceRecognition isbtnopen={isbtnOpen} setisbtnOpen={setisbtnOpen} 
+                                                id={id} />
+{/* 
+idd={idd} mile={mile} come={come}
+                                                product={product} have={have} locker={locker}
+                                                duclass={duclass} left={left} inclass={inclass} */}
                                         </IonCol>
                                     </IonRow>
                                     <IonRow>
@@ -159,8 +165,8 @@ function Kiosk() {
                         </IonRow>
                     </IonGrid>
                 </div>
-                <IonButton onClick={get_userinfo}></IonButton>
-                <IonButton onClick={print_jsondata}></IonButton>
+                {/* <IonButton onClick={get_userinfo}></IonButton>
+                <IonButton onClick={print_jsondata}></IonButton> */}
             </IonContent>
         </>
     );
