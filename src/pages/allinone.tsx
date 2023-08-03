@@ -3,6 +3,7 @@ import Logo from './logo';
 
 import Announcement from './announcement';
 
+import { CapacitorHttp } from '@capacitor/core';
 
 import Input_Box from '../components/inputNum';
 import { IonButton, IonCol, IonContent, IonGrid, IonModal, IonRow, IonTitle, IonToolbar } from '@ionic/react';
@@ -45,8 +46,28 @@ function Kiosk() {
     const [typeid, settypeid] = useState(false);
     const [pw, setpw] = useState('pw');
     const [face, isface] = useState(false);
+    const [jsondata, setjsondata] = useState([]);
 
+    const get_userinfo = async () => {
+        let url = 'http://dev.wisevill.com/ur03/test.php';
+        const options = {
+            url: url,
+            params: {},
+            data: {}
+        }
+        const response = await CapacitorHttp.post(options);
+        setjsondata(JSON.parse(response.data));
+        return 0;
+    }
 
+    function print_jsondata() {
+        if (jsondata == undefined) return 0;
+        else {
+            jsondata.forEach(element => {
+                console.log(element);
+            });
+        }
+    }
 
     return (
         <>
@@ -110,6 +131,8 @@ function Kiosk() {
                         </IonRow>
                     </IonGrid>
                 </div>
+                <IonButton onClick={get_userinfo}></IonButton>
+                <IonButton onClick={print_jsondata}></IonButton>
             </IonContent>
         </>
     );
