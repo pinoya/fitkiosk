@@ -13,17 +13,33 @@ import Welcome from "../pages/welecome";
 
 type ModalComponentProps = {
   isOpen: boolean;
-  detectedLabel: string | null;
+  detectedName: string | null;
   selfieURL: string | null;
+  mile: string | null;
+  come: string | null;
+  product: string | null;
+  have: string | null;
+  locker: string | null;
+  duclass: string | null;
+  left: string | null;
+  inclass: string | null;
   onClose: () => void;
+
   
 };
 
-
 const ModalComponent: React.FC<ModalComponentProps> = ({
   isOpen,
-  detectedLabel,
+  detectedName,
   selfieURL,
+  mile,
+  come,
+  product,
+  have,
+  locker,
+  duclass,
+  left,
+  inclass,
   onClose,
 }) => {
   const [isNewModalOpen, setIsNewModalOpen] = useState(false);
@@ -47,6 +63,8 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
     setIsNewModalOpen(false);
     onClose();
   };
+
+
   
 
   return (
@@ -59,7 +77,7 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
             <IonCol>
               <img className="Check_logo" src={Check} />
               <div className="modal_text">
-                <h2 className="modal_h2">{`${detectedLabel}님`}</h2>
+                <h2 className="modal_h2">{`${detectedName}님`}</h2>
                 <h2 className="modal_h2">{`인증 완료되었습니다.`}</h2>
               </div>
             </IonCol>
@@ -106,8 +124,16 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
       {isNewModalOpen && (
         <IonModal isOpen={true} onRequestClose={() => setIsNewModalOpen(false)} contentLabel="New Modal" style={modalStyles}>
           <Welcome
-            detectedLabel={detectedLabel}
+            detectedName={detectedName}
             selfieURL={selfieURL}
+            mile={mile}
+            come={come}
+            product={product}
+            have={have}
+            locker={locker}
+            duclass={duclass}
+            left={left}
+            inclass={inclass}
             onRequestClose={() => setIsNewModalOpen(false)}
             onCancelButtonClick={handleNewModalCancel} // Pass the function here
           />
@@ -124,6 +150,12 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
 };
 
 export default ModalComponent;
+
+
+
+
+
+
 
 
 

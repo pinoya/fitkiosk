@@ -30,67 +30,10 @@ function Welcome(props: any) {
   const [duclass, setduclass] = useState('');
   const [left, setleft] = useState('');
   const [inclass, setinclass] = useState('');
+  const [img, setimg] = useState('');
 
 
-  const get_userinfo = async () => {
-    let url = 'http://dev.wisevill.com/ur03/get_page_from_db.php';
-    if (props.detectedLabel == null) {
-      const options = {
-        url: url,
-        params: { id: props.id },
-        data: {}
-      }
-      const response = await CapacitorHttp.post(options);
-      setjsondata(JSON.parse(response.data));
-      return 0;
-    }
-    else {
-      const options = {
-        url: url,
-        params: { id: props.detectedLabel },
-        data: {}
-      }
-      const response = await CapacitorHttp.post(options);
-      setjsondata(JSON.parse(response.data));
-      return 0;
-    }
-  }
-
-  //가져오기 
-
-
-  //얼굴인식 -> 사진 가
-  //사진 
   
-  //버튼 입력으로 출/퇴 하는 상황
-  //프로필 사진 o -> 프로필 사진 보여주고
-  // x -> 기본 이미지 보여주고
-
-  //모달창 안에는 재인이가했느데
-  
-
-
-  function print_jsondata() {
-    if (jsondata == undefined) return 0;
-    else {
-      jsondata.forEach(element => {
-        console.log(element);
-      });
-      for (let i = 0; i < jsondata.length; i++) {
-        console.log(jsondata[i].id);
-        console.log(jsondata[i].name);
-        setidd(jsondata[i].name); //이름
-        setmile(jsondata[i].mile); //마일리지
-        setcome(jsondata[i].comeinm); //출석횟수
-        setproduct(jsondata[i].duetoproduct); //회원권 만료일
-        sethave(jsondata[i].haveproduct); //회원권 상품명
-        setlocker(jsondata[i].indivlockerinfo);
-        setduclass(jsondata[i].duetoclass);
-        setleft(jsondata[i].leftclasstime);
-        setinclass(jsondata[i].inclass);
-      }
-    }
-  }
 
 
 
@@ -100,7 +43,7 @@ function Welcome(props: any) {
     var now = new Date();
     const hours = now.getHours();
     const minutes = String(now.getMinutes()).padStart(2, "0");
-    const seconds = now.getSeconds();
+    const seconds = String(now.getSeconds()).padStart(2, "0");
     const years = now.getFullYear();
     const months = now.getMonth() + 1;
     const days = now.getDate();
@@ -114,65 +57,63 @@ function Welcome(props: any) {
     setTimer(`${years}년 ${months}월 ${days}일(${dayofweeks}) ${hours}:${minutes}:${seconds}`);
 
     // //디데이1 - 회원권 만료일
-    // //임의로 설정한 값
-    // var dday = new Date((props.product).substring(0, 4), (props.product).substring(5, 7) - 1, (props.product).substring(8, 10)); //월은 -1로 생각해야함 0부터 시작하는듯.. 사실 7월이였던것 입력할때 -1월로 입력하기 (ex 12월 -> 11월)
+    var dday = new Date((props.product).substring(0,4), (props.product).substring(5,7)-1, (props.product).substring(8,10)); 
 
-
-    // const dyear = String(dday.getFullYear());
-    // const dmonth = String(dday.getMonth() + 1).padStart(2, "0");
-    // const date = String(dday.getDate()).padStart(2, "0");
+    const dyear = String(dday.getFullYear());
+    const dmonth = String(dday.getMonth() + 1).padStart(2, "0");
+    const date = String(dday.getDate()).padStart(2, "0");
 
     // //디데이 계산 로직
-    // var gap = dday.getTime() - now.getTime();
-    // var result = Math.ceil(gap / (1000 * 60 * 60 * 24));
-    // setRestday(`${dyear}년 ${dmonth}월 ${date}일`);
+    var gap = dday.getTime() - now.getTime();
+    var result = Math.ceil(gap / (1000 * 60 * 60 * 24));
+    setRestday(`${dyear}년 ${dmonth}월 ${date}일`);
 
-    // setDdday(`D-${result}`);
-    // if (result > 0) {
-    //   setUse('사용중');
-    // }
-    // else {
-    //   setUse('미사용');
-    // }
-
-
-    // //디데이2 - 개인락커
-    // //임의로 설정한 값
-    // var dday2 = new Date((props.locker).substring(0, 4), (props.locker).substring(5, 7) - 1, (props.locker).substring(8, 10)); //월은 -1로 생각해야함 0부터 시작하는듯.. 사실 7월이였던것 입력할때 -1월로 입력하기 (ex 12월 -> 11월)
+    setDdday(`D-${result}`);
+    if (result > 0) {
+       setUse('사용중');
+     }
+   else {
+      setUse('미사용');
+     }
 
 
-    // const dyear2 = String(dday2.getFullYear());
-    // const dmonth2 = String(dday2.getMonth() + 1).padStart(2, "0");
-    // const date2 = String(dday2.getDate()).padStart(2, "0");
+   //디데이2 - 개인락커
+
+   var dday2 = new Date((props.locker).substring(0,4), (props.locker).substring(5,7)-1, (props.locker).substring(8,10)); 
+   const dyear2 = String(dday2.getFullYear());
+   const dmonth2 = String(dday2.getMonth() + 1).padStart(2, "0");
+   const date2 = String(dday2.getDate()).padStart(2, "0");
 
     // //디데이 계산 로직
-    // var gap2 = dday2.getTime() - now.getTime();
-    // var result2 = Math.ceil(gap2 / (1000 * 60 * 60 * 24));
-    // setRestday2(`${dyear2}년 ${dmonth2}월 ${date2}일`);
+   var gap2 = dday2.getTime() - now.getTime();
+   var result2 = Math.ceil(gap2 / (1000 * 60 * 60 * 24));
+   setRestday2(`${dyear2}년 ${dmonth2}월 ${date2}일`);
 
-    // setDdday2(`D-${result2}`);
-    // if (result2 > 0) {
-    //   setUse('사용중');
-    // }
-    // else {
-    //   setUse('미사용');
-    // }
-    // //디데이3
-
-    // var dday3 = new Date((props.duclass).substring(0, 4), (props.duclass).substring(5, 7) - 1, (props.duclass).substring(8, 10)); //월은 -1로 생각해야함 0부터 시작하는듯.. 사실 7월이였던것 입력할때 -1월로 입력하기 (ex 12월 -> 11월)
+   setDdday2(`D-${result2}`);
+   if (result2 > 0) {
+     setUse('사용중');
+   }
+   else {
+     setUse('미사용');
+   }
 
 
-    // const dyear3 = String(dday3.getFullYear());
-    // const dmonth3 = String(dday3.getMonth() + 1).padStart(2, "0");
-    // const date3 = String(dday3.getDate()).padStart(2, "0");
+    //디데이3
 
-    // //디데이 계산 로직
-    // var gap3 = dday3.getTime() - now.getTime();
-    // var result3 = Math.ceil(gap3 / (1000 * 60 * 60 * 24));
-    // setRestday3(`${dyear3}년 ${dmonth3}월 ${date3}일`);
+   var dday3 = new Date((props.duclass).substring(0,4), (props.duclass).substring(5,7)-1, (props.duclass).substring(8,10)); 
+   
+   const dyear3 = String(dday3.getFullYear());
+   const dmonth3 = String(dday3.getMonth() + 1).padStart(2, "0");
+   const date3 = String(dday3.getDate()).padStart(2, "0");
 
-    // setDdday3(`D-${result3}`);
+   //디데이 계산 로직
+   var gap3 = dday3.getTime() - now.getTime();
+   var result3 = Math.ceil(gap3 / (1000 * 60 * 60 * 24));
+   setRestday3(`${dyear3}년 ${dmonth3}월 ${date3}일`);
 
+   setDdday3(`D-${result3}`);
+
+   
     //로컬스토리지
     /*  const time = [
       {
@@ -227,25 +168,18 @@ function Welcome(props: any) {
 
 
 
-  useEffect(() => {
-
-    get_userinfo();
-    console.log(print_jsondata());
-    print_jsondata();
-
-  
-  }, []);
 
   let name;
 
   //이름값이 넘어오지 않으면 번호로 이름을 일단 대신
   //인식 -> 회원 아이디가 넘어옴 
-  if (props.detectedLabel == null) {
-    name = <p style={{ fontSize: '28.5px', color: '#FF6300', marginTop: '4.5%' }}>{idd}</p>
+  if (props.detectedName == null) {
+    name = <p style={{ fontSize: '27px', color: '#FF6300', marginTop: '4.9%',fontWeight:'700' }}>{props.idd}</p>
   }
-  else if (props.detectedLabel) {
-    name = <p style={{ fontSize: '28.5px', color: '#FF6300', marginTop: '4.5%' }}>{idd}</p>
+  else if (props.detectedName) {
+    name = <p style={{ fontSize: '27px', color: '#FF6300',  marginTop: '4.9%',fontWeight:'700' }}>{props.detectedName}</p>
   }
+
 
   //1. 연결
   // 2. ui 2-1 사진 서버에  
@@ -254,7 +188,11 @@ function Welcome(props: any) {
   //사진값이 넘어오지 않았을때 일단 대체 이미지로
   if (props.selfieURL == null) {
     selfie = <img style={{ width: '230px', height: '180px', borderRadius: '10px' }}
-      src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-MfxvSj7ZuZ6YhKYLnZAUlRuyF21-BlozWQ&usqp=CAU'></img>
+      src=
+      {
+        props.img != null ? props.img : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9iL4bgiu-EHKCRgcUbE979g2G896JGyJeaw&usqp=CAU'
+      }
+      ></img>
   }
   else if (props.selfieURL) {
     selfie = <img style={{ width: '230px', height: '180px', borderRadius: '10px' }}
@@ -270,7 +208,8 @@ function Welcome(props: any) {
   else if (props.onCancelButtonClick) {
     OkBtn = <IonButton size='large' expand='block' onClick={() => props.onCancelButtonClick()}>확인</IonButton>
   }
-
+  console.log(props.detectedName);
+  console.log(props.mile);
   return (
 
     <>
@@ -278,31 +217,37 @@ function Welcome(props: any) {
 
       <IonGrid>
         <IonRow>
-          <div style={{ display: 'flex', marginLeft: '0.3%', marginTop: '3%' }}>
+          <div className='head'>
             <IonCol size='auto'>
-              <div style={{ backgroundColor: 'red', width: '230px', height: '180px', borderRadius: '10px' }}>
+              <div>
                 {selfie}
               </div>
             </IonCol>
             <IonCol size='auto'>
-              <div style={{
-                backgroundColor: '#313131', width: '360px', height: '180px', borderRadius: '10px',
-                paddingLeft: '26px'
-              }}>
-                <div style={{ fontSize: '20px', color: 'white', fontWeight: '700', display: 'flex' }}>
+              <div className='body2'>
+                <div className='body2_name'>
                   {name}
-                  <p style={{ marginTop: '7%', marginLeft: '0.8%' }}>님,</p>
-                  <p style={{ fontSize: '26px', marginTop: '5.2%', marginLeft: '2.2%' }}>환영합니다.</p>
+                  <p className='body2_nim'>님,</p>
+                  <p className='body2_welcome'>환영합니다.</p>
 
                 </div>
-                <div style={{ marginTop: '-6.5%', fontSize: '18px', color: '#B1AEAF' }}>{timer}</div>
-                <div style={{ fontSize: '18px', color: '#B1AEAF', display: 'flex' }}>
-                  <p style={{ letterSpacing: '-0.5px' }}>보유 마일리지</p>
-                  <p style={{ marginLeft: '5%', fontWeight: '700' }}>{mile}점</p>
+                <div className='body2_time'>{timer}</div>
+                <div className='body2_p1'>
+                  <p className='body2_mil'>보유 마일리지</p>
+                  <p className='body2_score'>
+                    
+                  {
+                    props.mile.length>3
+                    ? props.mile.substring(0,1)+','+props.mile.substring(1)
+                    : props.mile
+                  } 
+                                
+                  점</p>
+ 
                 </div>
-                <div style={{ marginTop: '-9%', fontSize: '18px', color: '#B1AEAF', display: 'flex' }}>
-                  <p style={{ letterSpacing: '-0.5px' }}>이달 출석횟수</p>
-                  <p style={{ marginLeft: '5%', fontWeight: '700' }}>{come}회</p>
+                <div className='body2_p2'>
+                  <p className='body2_mil'>이달 출석횟수</p>
+                  <p className='body2_score'>{props.come}회</p>
                 </div>
               </div>
             </IonCol>
@@ -312,30 +257,24 @@ function Welcome(props: any) {
         <IonRow>
           <IonCol size='auto'>
             {/*왼쪽 마진 0.3고정*/}
-            <div style={{
-              width: '600px', height: '100px', backgroundColor: '#313131', borderRadius: '10px',
-              paddingLeft: '20px', paddingTop: '17px', marginLeft: '0.3%'
-            }}> {/*박스*/}
-              <div style={{ width: '65px', height: '65px', borderRadius: '100px', backgroundColor: '#FDEFE5' }}></div> {/* 원*/}
+            <div className='body3'> {/*박스*/}
+              <div className='body3_circle'></div> {/* 원*/}
 
-              <div style={{ marginLeft: '14%', marginTop: '-13.8%' }}>{/*회원권 만료일 줄*/}
-                <p style={{ fontWeight: '700', fontSize: '18px', color: '#848484', letterSpacing: '-0.5px' }}>회원권 만료일</p>
+              <div className='body3_p1'>{/*회원권 만료일 줄*/}
+                <p className='body3_p1_finish'>회원권 만료일</p>
 
-                <div style={{ display: 'flex', marginLeft: '28%', marginTop: '-12.2%' }}>{/*오른쪽 날짜 부분*/}
-                  <p style={{ fontSize: '18px', color: '#B1AEAF' }}> {/*날짜*/}
+                <div className='body3_p1_r'>{/*오른쪽 날짜 부분*/}
+                  <p className='body3_p1_r_date'> {/*날짜*/}
                     {restday}</p>
-                  <p style={{
-                    width: '70px', height: '25px', borderRadius: '3px', backgroundColor: '#FF6300',
-                    color: 'white', fontSize: '18px', textAlign: 'center', marginLeft: '2%'
-                  }}> {/*디데이*/}
+                  <p className='dday'> {/*디데이*/}
                     {dday}</p>
                 </div>
               </div>
 
-              <div style={{ marginLeft: '14%', marginTop: '-4.5%' }}> {/*회원권 상품명 줄*/}
-                <p style={{ fontWeight: '700', fontSize: '18px', color: '#848484', letterSpacing: '-0.5px' }}>회원권 상품명</p>
-                <div style={{ display: 'flex', marginLeft: '28%', marginTop: '-12.2%' }}> {/*오른쪽 부분*/}
-                  <p style={{ fontSize: '18px', color: '#B1AEAF', fontWeight: '400' }}>
+              <div className='body3_p2'> {/*회원권 상품명 줄*/}
+                <p className='body3_p2_product'>회원권 상품명</p>
+                <div className='body3_p2_r'> {/*오른쪽 부분*/}
+                  <p className='body3_p1_r_date'>
                     {props.have}</p>
                 </div>
               </div>
@@ -348,40 +287,28 @@ function Welcome(props: any) {
 
         <IonRow>
           <IonCol size='auto'>
-            <div style={{
-              width: '600px', height: '100px', backgroundColor: '#313131', borderRadius: '10px',
-              paddingLeft: '20px', paddingTop: '17px', marginLeft: '0.3%'
-            }}> {/*박스*/}
-              <div style={{ width: '65px', height: '65px', borderRadius: '100px', backgroundColor: '#FDEFE5' }}></div> {/* 원*/}
+            <div className='body3'> {/*박스*/}
+              <div className='body3_circle'></div> {/* 원*/}
 
-              <div style={{ marginLeft: '14%', marginTop: '-13.8%' }}>{/*개인 락커 줄*/}
-                <p style={{ fontWeight: '700', fontSize: '18px', color: '#848484', letterSpacing: '-0.5px' }}>개인 락커</p>
+              <div className='body3_p1'>{/*개인 락커 줄*/}
+                <p className='body3_p1_finish'>개인 락커</p>
 
-                <div style={{ display: 'flex', marginLeft: '28%', marginTop: '-12.2%' }}>{/*오른쪽 날짜 부분*/}
-                  <p style={{
-                    backgroundColor: '#DDEBF8', width: '53px', height: '19px', borderRadius: '3px', fontSize: '13px',
-                    color: '#232323', textAlign: 'center', marginTop: '6%'
-                  }}>
+                <div className='body3_p1_r'>{/*오른쪽 날짜 부분*/}
+                  <p className='use'>
                     {use}</p>
-                  <p style={{ fontSize: '18px', color: '#B1AEAF', marginLeft: '2%' }}> {/*날짜*/}
-                    {restday}</p>
-                  <p style={{
-                    width: '70px', height: '25px', borderRadius: '3px', backgroundColor: '#FF6300',
-                    color: 'white', fontSize: '18px', textAlign: 'center', marginLeft: '2%'
-                  }}> {/*디데이*/}
-                    {dday}</p>
+                  <p style={{marginTop:'4.2%'}}className='body4_date'> {/*날짜*/}
+                    {restday2}</p>
+                  <p className='dday' style={{marginTop:'4%'}}> {/*디데이*/}
+                    {dday2}</p>
                 </div>
               </div>
 
-              <div style={{ marginLeft: '14%', marginTop: '-4.5%' }}> {/*운동복 줄*/}
-                <p style={{ fontWeight: '700', fontSize: '18px', color: '#848484', letterSpacing: '-0.5px' }}>운동복</p>
-                <div style={{ display: 'flex', marginLeft: '28%', marginTop: '-12.2%' }}> {/*오른쪽 부분*/}
-                  <p style={{
-                    backgroundColor: '#DDEBF8', width: '53px', height: '19px', borderRadius: '3px', fontSize: '13px',
-                    color: '#232323', textAlign: 'center', marginTop: '6%'
-                  }}>
+              <div className='body3_p2'> {/*운동복 줄*/}
+                <p className='body3_p2_product' style={{marginTop:'4%'}}>운동복</p>
+                <div className='body3_p2_r'> {/*오른쪽 부분*/}
+                  <p className='use' style={{marginTop:'6.7%'}}>
                     {use}</p>
-                  <p style={{ fontSize: '18px', color: '#B1AEAF', fontWeight: '400', marginLeft: '2%' }}>
+                  <p className='body4_date' style={{marginTop:'5.7%'}}>
                     운동복이용권</p>
                 </div>
               </div>
@@ -393,44 +320,38 @@ function Welcome(props: any) {
 
         <IonRow>
           <IonCol size='auto'>
-            <div style={{
-              width: '600px', height: '140px', backgroundColor: '#313131', borderRadius: '10px',
-              paddingLeft: '20px', paddingTop: '17px', marginLeft: '0.3%'
-            }}>
-              <div style={{ width: '65px', height: '65px', borderRadius: '100px', backgroundColor: '#FDEFE5', marginTop: '4%' }}></div> {/* 원*/}
+            <div className='body5'>
+              <div className='body5_circle'></div> {/* 원*/}
 
-              <div style={{ marginLeft: '14%', marginTop: '-16.8%' }}>
-                <p style={{ fontWeight: '700', fontSize: '18px', color: '#848484', letterSpacing: '-0.5px' }}>수강권 만료일</p>
-                <div style={{ display: 'flex', marginLeft: '28%', marginTop: '-12.2%' }}>
-                  <p style={{ fontSize: '18px', color: '#B1AEAF' }}>
+              <div className='body5_p1'>
+                <p className='body3_p1_finish'>수강권 만료일</p>
+                <div className='body3_p1_r'>
+                  <p className='body3_p1_r_date'>
                     {restday3}</p>
-                  <p style={{
-                    width: '70px', height: '25px', borderRadius: '3px', backgroundColor: '#FF6300',
-                    color: 'white', fontSize: '18px', textAlign: 'center', marginLeft: '3%'
-                  }}>
+                  <p className='dday'>
                     {dday3}</p>
                 </div>
               </div>
 
-              <div style={{ marginLeft: '14%', marginTop: '-4.8%' }}>
-                <p style={{ fontWeight: '700', fontSize: '18px', color: '#848484', letterSpacing: '-0.5px' }}>남은 횟수</p>
-                <div style={{ display: 'flex', marginLeft: '28%', marginTop: '-12.2%' }}>
-                  <p style={{ fontSize: '18px', color: '#FF6300', fontWeight: '700' }}>
+              <div className='body5_p2'>
+                <p className='body3_p1_finish'>남은 횟수</p>
+                <div className='body3_p1_r'>
+                  <p className='body5_left'>
                     {props.left}회</p>
-                  <p style={{ fontSize: '18px', color: '#B1AEAF', fontWeight: '400', marginLeft: '1.5%' }}>
+                  <p className='body5_left2'>
                     남음</p>
                 </div>
               </div>
 
-              <div style={{ marginLeft: '14%', marginTop: '-4.8%' }}>
-                <p style={{ fontWeight: '700', fontSize: '18px', color: '#848484', letterSpacing: '-0.5px' }}>수강권 상품권</p>
-                <div style={{ display: 'flex', marginLeft: '28%', marginTop: '-12.2%' }}>
-                  <p style={{ fontSize: '18px', color: '#B1AEAF', fontWeight: '400' }}>
-                    {inclass}</p>
+              <div className='body5_p2'>
+                <p className='body3_p1_finish'>수강권 상품권</p>
+                <div className='body3_p1_r'>
+                  <p className='body3_p1_r_date' style={{marginTop:'5%'}}>
+                    {props.inclass}</p>
                 </div>
               </div>
 
-              <div style={{ marginLeft: '28%', marginRight: '31%', marginTop: '9%' }}>
+              <div className='btn'>
 
                 {OkBtn}
 

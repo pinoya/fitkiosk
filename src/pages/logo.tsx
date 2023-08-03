@@ -34,6 +34,8 @@ function Logo() {
                 <IonCol size='12' style={{border: '0px'}}>
                   <img style={{
                     width : '13%',
+                    marginLeft : '45%',
+                    marginTop : '7.5%'
                  }} src={Test} alt="Logo" />
                 </IonCol>
               </IonRow>
@@ -45,7 +47,7 @@ function Logo() {
                     fontWeight : 700,
                     letterSpacing : '-3.12%',
                     color : 'white',
-                    marginTop : '3%',
+                    marginTop : '2%',
                     marginBottom : '5%',
                     
                   }}>홀리데이 피트니스클럽(광주효천점)</div>
@@ -70,7 +72,7 @@ function Logo() {
                      fontWeight: 700,
                      letterSpacing : '-3.12%',
                      fontSize : '190%',
-                     marginTop : '3.3%',
+                     marginTop : '6%',
 
                   }}>홀리데이 피트니스클럽(광주효천점)</div>
                 </IonCol>

@@ -29,8 +29,8 @@ function Announcement() {
              <IonRow style={{ height: '280px'}} >
                 <IonCol style={{ border:'0px', margin : '0px auto', padding : '5px 5px'}}>
                    <div style={{
-                        width : '100%',
-                        height: '100%',
+                        width : '710px',
+                        height: '300px',
                         backgroundColor: 'white',
                         borderRadius: '1.2%',
                         color : 'black',
@@ -40,6 +40,8 @@ function Announcement() {
                         fontSize: '125%',
                         fontWeight : 400,
                         lineHeight: '190%',
+                        marginTop:'-5.5%',
+                        marginLeft:'-1%'
                    
                    }}>
                      ∙ 여름시즌 다이어트 프로그램 안내
