@@ -6,11 +6,13 @@ import './allinone.css';
 
 
 
-function Welcome(props) {
+function Welcome(props:any) {
   const [timer, setTimer] = useState('0000년 00월 00일() 00:00:00');
   const [ddday, setDdday] = useState('D-'); //디데이 표시하려고 
   const [use, setUse] = useState('');
   const [restday, setRestday] = useState('');
+
+  const [isWelcomeOpen, setIsWelcomeOpen] = useState(false);
   
 
   
@@ -122,7 +124,7 @@ else if(props.selfieURL){
 let OkBtn;
 
 if(props.onCancelButtonClick == null){
-  OkBtn = <IonButton size='large' expand='block' onClick={() => props.dismiss()}>확인</IonButton>
+  OkBtn = <IonButton size='large' expand='block' onClick={() => props.handleClosebtnModal()}>확인</IonButton>
 }
 else if (props.onCancelButtonClick){
   OkBtn = <IonButton size='large' expand='block' onClick={() => props.onCancelButtonClick()}>확인</IonButton>
@@ -144,13 +146,13 @@ else if (props.onCancelButtonClick){
               <IonCol size='auto'>
               <div style={{backgroundColor:'#313131', width:'360px', height:'180px', borderRadius:'10px',
               paddingLeft:'26px'}}>
-                <div style={{fontSize:'20px', color : 'white', fontWeight:'700',display:'flex'}}>
 
+                <div style={{fontSize:'20px', color : 'white', fontWeight:'700',display:'flex'}}>
                   {name}
                   <p style={{marginTop:'7%',marginLeft:'0.8%'}}>님,</p>
                   <p style={{fontSize:'26px',marginTop:'5.2%',marginLeft:'2.2%'}}>환영합니다.</p>
-
                 </div>
+
                 <div style={{marginTop : '-6.5%', fontSize:'18px', color : '#B1AEAF'}}>{timer}</div>
                 <div style={{fontSize:'18px', color : '#B1AEAF',display:'flex'}}>
                   <p style={{letterSpacing:'-0.5px'}}>보유 마일리지</p>
@@ -270,8 +272,8 @@ else if (props.onCancelButtonClick){
               </div>
 
               <div style={{marginLeft:'28%',marginRight:'31%',marginTop:'9%'}}>
-                
                {OkBtn}
+
 
               </div>
 

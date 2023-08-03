@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 import './ModalComponent.css';
-
 import {
   IonRow,
   IonCol,
-  IonGrid
+  IonGrid,
+  IonModal
 } from '@ionic/react';
 
 import Check from './check.svg';
@@ -16,7 +16,9 @@ type ModalComponentProps = {
   detectedLabel: string | null;
   selfieURL: string | null;
   onClose: () => void;
+  
 };
+
 
 const ModalComponent: React.FC<ModalComponentProps> = ({
   isOpen,
@@ -45,11 +47,13 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
     setIsNewModalOpen(false);
     onClose();
   };
+  
 
   return (
     <>
-      {/* Original Modal */}
-      <Modal isOpen={isOpen} onRequestClose={onClose} contentLabel="Detected Label Modal" style={modalStyles}>
+      {/* Original Modal style={modalStyles} */ }
+      
+      <IonModal isOpen={isOpen} onRequestClose={onClose} contentLabel="Detected Label Modal" >
         <IonGrid>
           <IonRow>
             <IonCol>
@@ -65,7 +69,7 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
         <IonGrid>
           <IonRow>
             <IonCol>
-              {selfieURL && <img src={selfieURL} alt="Captured Selfie" style={{ width: "100%", height: "350px" }} />}
+              {selfieURL && <img src={selfieURL} className = "selfie"alt="Captured Selfie" style={{ width: "100%",  height: "310px" }} />}
             </IonCol>
           </IonRow>
         </IonGrid>
@@ -96,11 +100,11 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
             </IonCol>
           </IonRow>
         </IonGrid>
-      </Modal>
+      </IonModal>
 
       {/* New Modal */}
       {isNewModalOpen && (
-        <Modal isOpen={true} onRequestClose={() => setIsNewModalOpen(false)} contentLabel="New Modal" style={modalStyles}>
+        <IonModal isOpen={true} onRequestClose={() => setIsNewModalOpen(false)} contentLabel="New Modal" style={modalStyles}>
           <Welcome
             detectedLabel={detectedLabel}
             selfieURL={selfieURL}
@@ -112,7 +116,8 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
             확인(이지만 아직은 취소)
           </button> */}
 
-        </Modal>
+
+        </IonModal>
       )}
     </>
   );

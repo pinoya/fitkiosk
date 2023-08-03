@@ -12,6 +12,7 @@ import Welcome from './welecome';
 import Test from '../components/test';
 import React, { useEffect, useRef, useState } from 'react';
 
+
 function Kiosk() {
     const inmodal = useRef();
     const outmodal = useRef();
@@ -24,7 +25,7 @@ function Kiosk() {
 
     const [width, setWidth] = useState(window.innerWidth);
     const [Height, setHeight] = useState(window.innerHeight);
-    
+
     const handleResize = () => {
         setWidth(window.innerWidth);
     };
@@ -37,6 +38,8 @@ function Kiosk() {
     }, []);
 
     const [isinOpen, setisinOpen] = useState(false);
+    const [isbtnOpen, setisbtnOpen] = useState(false);
+    const [isbtnClose, setisbtnClose] = useState(false);
     const [isoutOpen, setisoutOpen] = useState(false);
     const [id, setid] = useState('123');
     const [typeid, settypeid] = useState(false);
@@ -48,13 +51,18 @@ function Kiosk() {
     return (
         <>
             <IonContent>
-                <IonModal backdropDismiss={false} isOpen={isinOpen} ref={inmodal}>
-                    <Welcome id={id} dismiss={dismiss}/>
-                </IonModal>
+                {/* <IonModal backdropDismiss={false} isOpen={isinOpen} ref={inmodal}>
+                    <Welcome id={id} dismiss={dismiss} />
+                </IonModal> */}
 
-                <IonModal backdropDismiss={false} isOpen={isoutOpen} ref={outmodal}>
+                {/* <IonModal backdropDismiss={false} isOpen={isbtnOpen} ref={inmodal}>
+                    <Welcome id={id} dismiss={dismiss} />
+                </IonModal> */}
+
+                {/* <IonModal backdropDismiss={false} isOpen={isoutOpen} ref={outmodal}>
                     <Test dismiss={dismiss} id={id} />
-                </IonModal>
+                </IonModal> */}
+
                 <div className='background-image-init' />
                 <div className='background-image-img' />
                 <div className='background-image-gradient' />
@@ -84,13 +92,18 @@ function Kiosk() {
                                 <IonGrid class="btn_and_face">
                                     <IonRow>
                                         <IonCol class="face">
-                                            <FaceRecognition />
+                                            <FaceRecognition isbtnopen={isbtnOpen} id={id} setisbtnOpen = {setisbtnOpen}/>
                                         </IonCol>
                                     </IonRow>
                                     <IonRow>
                                         <IonCol class="btn">
-                                            <Buttons id={id} pw={pw} face={face} setisinOpen={setisinOpen} setisoutOpen={setisoutOpen} typeid={typeid} />
+                                            {/* <Buttons id={id} pw={pw} face={face} setisinOpen={setisinOpen} setisoutOpen={setisoutOpen} typeid={typeid} /> */}
+                                            <Buttons id={id} pw={pw} face={face}
+                                                setisbtnOpen={setisbtnOpen} setisoutOpen={setisoutOpen} typeid={typeid} />
                                         </IonCol>
+
+
+
                                     </IonRow>
                                 </IonGrid>
                             </IonCol>

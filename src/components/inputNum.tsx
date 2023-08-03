@@ -2,9 +2,11 @@ import { IonLabel, IonModal, IonSegment, IonSegmentButton, setupIonicReact } fro
 
 setupIonicReact({ mode: 'md' })
 
-import { IonBackButton, IonButton, IonButtons, IonCol, IonContent, IonFooter, IonGrid, IonHeader, IonInput, IonNavLink, IonRow, IonText, IonTitle, IonToolbar } from '@ionic/react';
+import {IonButton, IonCol, IonContent, IonGrid, IonHeader, IonRow, IonText, IonTitle, IonToolbar } from '@ionic/react';
 import './inputNum.css';
 import { useEffect, useRef, useState } from 'react';
+
+
 
 const input_num = (props: any) => {
   const [inputwhat, setinputwhat] = useState(false);

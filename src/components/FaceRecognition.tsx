@@ -3,15 +3,24 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as faceapi from "face-api.js";
 import ModalComponent from "./ModalComponent";
-import img1 from './face2.jpg';
-import img2 from './cat.jpg'
-import img3 from './load.png'
-import { IonSpinner } from "@ionic/react";
+import Welcome from "../pages/welecome";
+import { IonModal } from "@ionic/react";
 
 const UNKNOWN_LABEL = "Unknown";
 const UNKNOWN_THRESHOLD = 0.4;
 
-const FaceRecognition: React.FC = () => {
+
+interface FaceRecognitionProps {
+  setisbtnOpen(arg0: boolean): unknown;
+  isbtnopen : boolean;
+  id : string | null;
+  
+}
+
+
+const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
+
+
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const canvasRefSelfie = useRef<HTMLCanvasElement | null>(null);
@@ -24,6 +33,32 @@ const FaceRecognition: React.FC = () => {
   const [WebcamActive, setIsWebcamActive] = useState(false);
   const [selfieURL, setSelfieURL] = useState<string | null>(null);
 
+  const [isbtnModalOpen, setIsBtnModalOpen] = useState(false);
+
+  // console.log("face");
+  // console.log(props.isbtnopen);
+  // console.log(props.id);
+
+  // console.log(props.id);
+  // if(props.id?.length == 5){
+  // }
+
+  //지금 버튼 통제에서 값을 넘겨주는거지 모달 자체에서는 먼가 하는게 없음 받기만 하는중
+
+  // 버튼을 통해서도 모달창을 이쪽을 먼저 열어서
+  // 카메라를 정지시키고, 
+  // 넘어가도록...
+
+  //아니면 버튼을 클릭하면 카메라 멈추도록 -> 시도
+
+  //숫자 받으면 모달창 열리도록 여기서도 통제하고 있어서 충돌 난듯
+
+  // 지금 하고 싶은거 -> 숫자 받는 모달창이 켜졌을때도 카메라를 껐다가 모달창 닫으면 다시 켜고 싶음.
+  // 숫자 5개 받고 출석 -> 모달창 제어 이런식임 지금은. 그래서 다른게 적용되지 않았던것 ;;
+  //확인 눌렀을때 이쪽 플레그 제어로 일단 수정해서 무지성으로 창 띄워보기 시도
+
+  // 일단 출석하면 캠이 꺼지게끔은 했음 -> O
+  // 확인 누르면 다시 캠이 켜지게 시도!
 
 
   const startWebcam = async () => {
@@ -76,9 +111,9 @@ const FaceRecognition: React.FC = () => {
       const canvas = canvasRefSelfie.current;
       const context = canvas.getContext("2d");
       if (context) {
-      context.clearRect(0, 0, canvas.width, canvas.height);
+        context.clearRect(0, 0, canvas.width, canvas.height);
+      }
     }
-   }
   };
 
   useEffect(() => {
@@ -164,7 +199,8 @@ const FaceRecognition: React.FC = () => {
         }
       }, 1000);
 
-      // Clean up interval when the component unmounts or webcam is stopped
+      // Clean up interval when the component unmounts or webcam is stopped]
+      //component unmonts(컴포넌트가 사라질때, 웹캠이 멈출때.)
       return () => clearInterval(intervalId);
     };
 
@@ -174,11 +210,13 @@ const FaceRecognition: React.FC = () => {
       faceapi.nets.faceLandmark68Net.loadFromUri("/models"),
     ]).then(() => startWebcam().then(setupFaceRecognition));
 
+    //useEffect안에서 실행되었던 코드가 clean-up되고 새로 무언가를 다시 그리고 싶을때 return을 사용
     // Clean up webcam when the component unmounts
     return () => {
       if (webcamActive.current) {
         stopWebcam();
       }
+
     };
   }, []);
 
@@ -199,6 +237,14 @@ const FaceRecognition: React.FC = () => {
     startWebcam(); //캠 시작하기
   };
 
+  
+  const handleClosebtnModal = () => {
+    // setIsModalOpen(); //모달창 닫기
+    props.setisbtnOpen(false);
+    deleteCaptureSelfie(); //셀피 지우기
+    startWebcam(); //캠 시작하기
+  };
+
   useEffect(() => {
     // Check if the detectedLabel has already been shown in a previous session
     //제일 처음 창이 켜질 때 shownLable 값과 detectedLabel 값을 다르게 해주기
@@ -206,11 +252,12 @@ const FaceRecognition: React.FC = () => {
       localStorage.setItem("shownLabel", "null");
     }
 
+
     const shownLabel = localStorage.getItem("shownLabel");
     if (shownLabel === detectedLabel) {
       setIsModalShownForLabel(true);
     } else { //이전에 감지한 내용과 다를때만 모달창이 열릴 수 있음.
-      setIsModalShownForLabel(false);
+      setIsModalShownForLabel(false); //모달창 열림.
       handleCaptureSelfie(); //셀피 찍기
       stopWebcam(); //캠 끄기
     }
@@ -218,12 +265,27 @@ const FaceRecognition: React.FC = () => {
   }, [detectedLabel]);
 
 
-  let img;
-  if (isloading) img = <img style={{ width: "80%", height: "80%", position: "absolute" }} src={img1}></img>
+  useEffect(() => {
+
+    if (props.isbtnopen) {
+      stopWebcam();
+    }
+  }, [props.isbtnopen]);
+
+
+
+
+
+
+
+  // let img;
+  // if (isloading) img = <img style={{ width: "80%", height: "80%", position: "absolute" }} src={img1}></img>
+
   // else if (!WebcamActive) img =  <canvas ref={canvasRefSelfie} style={{ margin: "0 auto", position: "absolute" }} />
 
   //문제2 : 그래서 얼굴인식 canvas도 카메라가 꺼진 뒤에도 남아있음.
   // -> 이건 투명화화면 되긴함.
+
 
 
   return (
@@ -241,21 +303,20 @@ const FaceRecognition: React.FC = () => {
       <canvas ref={canvasRef} style={{ margin: "0 auto", position: "absolute" }} />
 
 
-      <button
+      {/* <button
         onClick={handleStartWebcam}
         style={{ position: "absolute", bottom: "20px", left: "30%", transform: "translateX(-50%)", padding: "10px" }}
       >
         Start Webcam
       </button>
       <button
-        onClick={handleStopWebcam}
-        style={{ position: "absolute", bottom: "20px", left: "60%", transform: "translateX(-50%)", padding: "10px" }}
+         onClick={handleStopWebcam}
+        style={{ position: "absolute", bottom: "20px", left: "70%", transform: "translateX(-50%)", padding: "10px" }}
       >
         Stop Webcam
-      </button>
+      </button> */}
 
-      
-      <canvas className ="Selfie" ref={canvasRefSelfie} style={{ margin: "0 auto", position: "absolute"}} />
+      <canvas className="Selfie" ref={canvasRefSelfie} style={{ margin: "0 auto", position: "absolute" }} />
       {/*카메라가 꺼졌을 때 찍힌 셀피를 보여줌.*/}
 
       {/* <button
@@ -271,18 +332,28 @@ const FaceRecognition: React.FC = () => {
         Capture Selfie
       </button> */}
 
-      
-
       <ModalComponent
         isOpen={isModalOpen && !isModalShownForLabel} // Show the modal only if it's open and not shown for the current detected label
         detectedLabel={detectedLabel}
         selfieURL={selfieURL} // Pass the selfie URL here
-        onClose={handleCloseModal}
-      />
+        onClose={handleCloseModal} />
+
+
+  
+
+      <IonModal isOpen={props.isbtnopen}>
+        <Welcome
+        handleClosebtnModal = {handleClosebtnModal}
+        id={props.id}  
+        />
+      </IonModal>
+
 
     </>
   );
 };
+
+
 
 export default FaceRecognition;
 
