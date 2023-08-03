@@ -32,68 +32,7 @@ function Welcome(props: any) {
   const [inclass, setinclass] = useState('');
 
 
-  const get_userinfo = async () => {
-    let url = 'http://dev.wisevill.com/ur03/get_page_from_db.php';
-    if (props.detectedLabel == null) {
-      const options = {
-        url: url,
-        params: { id: props.id },
-        data: {}
-      }
-      const response = await CapacitorHttp.post(options);
-      setjsondata(JSON.parse(response.data));
-      return 0;
-    }
-    else {
-      const options = {
-        url: url,
-        params: { id: props.detectedLabel },
-        data: {}
-      }
-      const response = await CapacitorHttp.post(options);
-      setjsondata(JSON.parse(response.data));
-      return 0;
-    }
-  }
-
-  //가져오기 
-
-
-  //얼굴인식 -> 사진 가
-  //사진 
   
-  //버튼 입력으로 출/퇴 하는 상황
-  //프로필 사진 o -> 프로필 사진 보여주고
-  // x -> 기본 이미지 보여주고
-
-  //모달창 안에는 재인이가했느데
-  
-
-
-  function print_jsondata() {
-    if (jsondata == undefined) return 0;
-    else {
-      jsondata.forEach(element => {
-        console.log(element);
-      });
-      for (let i = 0; i < jsondata.length; i++) {
-        console.log(jsondata[i].id);
-        console.log(jsondata[i].name);
-        setidd(jsondata[i].name); //이름
-        setmile(jsondata[i].mile); //마일리지
-        setcome(jsondata[i].comeinm); //출석횟수
-        setproduct(jsondata[i].duetoproduct); //회원권 만료일
-        sethave(jsondata[i].haveproduct); //회원권 상품명
-        setlocker(jsondata[i].indivlockerinfo);
-        setduclass(jsondata[i].duetoclass);
-        setleft(jsondata[i].leftclasstime);
-        setinclass(jsondata[i].inclass);
-      }
-    }
-  }
-
-
-
 
 
   const currentTimer = () => {
@@ -226,25 +165,15 @@ function Welcome(props: any) {
   // print_jsondata();
 
 
-
-  useEffect(() => {
-
-    get_userinfo();
-    console.log(print_jsondata());
-    print_jsondata();
-
-  
-  }, []);
-
   let name;
 
   //이름값이 넘어오지 않으면 번호로 이름을 일단 대신
   //인식 -> 회원 아이디가 넘어옴 
-  if (props.detectedLabel == null) {
-    name = <p style={{ fontSize: '28.5px', color: '#FF6300', marginTop: '4.5%' }}>{idd}</p>
+  if (props.detectedName == null) {
+    name = <p style={{ fontSize: '28.5px', color: '#FF6300', marginTop: '4.5%' }}>{props.idd}</p>
   }
-  else if (props.detectedLabel) {
-    name = <p style={{ fontSize: '28.5px', color: '#FF6300', marginTop: '4.5%' }}>{idd}</p>
+  else if (props.detectedName) {
+    name = <p style={{ fontSize: '28.5px', color: '#FF6300', marginTop: '4.5%' }}>{props.detectedName}</p>
   }
 
   //1. 연결
@@ -270,6 +199,9 @@ function Welcome(props: any) {
   else if (props.onCancelButtonClick) {
     OkBtn = <IonButton size='large' expand='block' onClick={() => props.onCancelButtonClick()}>확인</IonButton>
   }
+
+  console.log(props.detectedName);
+  console.log(props.mile);
 
   return (
 
@@ -298,11 +230,11 @@ function Welcome(props: any) {
                 <div style={{ marginTop: '-6.5%', fontSize: '18px', color: '#B1AEAF' }}>{timer}</div>
                 <div style={{ fontSize: '18px', color: '#B1AEAF', display: 'flex' }}>
                   <p style={{ letterSpacing: '-0.5px' }}>보유 마일리지</p>
-                  <p style={{ marginLeft: '5%', fontWeight: '700' }}>{mile}점</p>
+                  <p style={{ marginLeft: '5%', fontWeight: '700' }}>{props.mile}점</p>
                 </div>
                 <div style={{ marginTop: '-9%', fontSize: '18px', color: '#B1AEAF', display: 'flex' }}>
                   <p style={{ letterSpacing: '-0.5px' }}>이달 출석횟수</p>
-                  <p style={{ marginLeft: '5%', fontWeight: '700' }}>{come}회</p>
+                  <p style={{ marginLeft: '5%', fontWeight: '700' }}>{props.come}회</p>
                 </div>
               </div>
             </IonCol>
@@ -426,7 +358,7 @@ function Welcome(props: any) {
                 <p style={{ fontWeight: '700', fontSize: '18px', color: '#848484', letterSpacing: '-0.5px' }}>수강권 상품권</p>
                 <div style={{ display: 'flex', marginLeft: '28%', marginTop: '-12.2%' }}>
                   <p style={{ fontSize: '18px', color: '#B1AEAF', fontWeight: '400' }}>
-                    {inclass}</p>
+                    {props.inclass}</p>
                 </div>
               </div>
 
