@@ -4,9 +4,16 @@ const config: CapacitorConfig = {
   appId: 'io.ionic.starter',
   appName: 'kiosk',
   webDir: 'dist',
+  bundledWebRuntime: false,
+  plugins: {
+    CapacitorHttp: {
+      enabled: true
+    },
+  },
   server: {
-    androidScheme: 'https'
+    androidScheme: 'http'
   }
+  
 };
 
 export default config;
