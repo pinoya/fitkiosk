@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { IonGrid, IonButtons, IonButton, IonContent, IonTitle, IonToolbar, IonRow, IonCol, IonModal, IonHeader } from '@ionic/react';
 import './allinone.css';
 import './welcome.css';
+import DefalutImg from "./DefalutImg.png" 
 import { CapacitorHttp } from '@capacitor/core';
 
 
@@ -185,9 +186,16 @@ function Welcome(props: any) {
   console.log(props.profile_img);
   //사진값이 넘어오지 않았을때 일단 대체 이미지로
   if (props.selfieURL == null) {
-    selfie = <img style={{ width: '230px', height: '180px', borderRadius: '10px' }}
+    if(props.profile_img !=null){ //프로필 이미지가 있을때
+      selfie = <img style={{ width: '230px', height: '180px', borderRadius: '10px' }}
       src= {props.profile_img}
       ></img>
+    }
+    else{ //프로필 이미지가 없을때
+      selfie = <img style={{ width: '230px', height: '180px', borderRadius: '10px' }}
+      src= {DefalutImg}
+      ></img>
+    }
   }
   else if (props.selfieURL) {
     selfie = <img style={{ width: '230px', height: '180px', borderRadius: '10px' }}

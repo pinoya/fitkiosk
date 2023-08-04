@@ -7,6 +7,7 @@ import './inputNum.css';
 import { useEffect, useRef, useState } from 'react';
 
 
+//딱 5자리 되거나 13자리 됐을때만 플레그값 고치는걸로 수정하면 좋을듯함.
 
 const input_num = (props: any) => {
   const [inputwhat, setinputwhat] = useState(false);
