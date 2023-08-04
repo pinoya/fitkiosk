@@ -126,7 +126,7 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
       const labels = ["33333", "11111", "44444", "22222"]; // 폴더 내에 있는 파일 이름
 
       //11111 : 이재인
-      //
+
       return Promise.all(
         labels.map(async (label) => {
           const descriptions = [];
@@ -160,6 +160,7 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
             .withFaceDescriptors();
 
           const resizedDetections = faceapi.resizeResults(detections, displaySize);
+
           canvas!.getContext("2d")!.clearRect(0, 0, canvas!.width, canvas!.height);
 
           const results = resizedDetections.map((d: any) => {
@@ -169,6 +170,7 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
           results.forEach(async (result: any, i: number) => {
             const box = resizedDetections[i].detection.box;
             let label = result.toString();
+
             if (result.distance > UNKNOWN_THRESHOLD) {
               label = UNKNOWN_LABEL;
             }
@@ -181,21 +183,21 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
             // context.fillStyle = "transparent";
             context.font = "20px Arial";
 
-            const landmarks = resizedDetections[i].landmarks;
-            const leftEye = landmarks.getLeftEye();
-            const rightEye = landmarks.getRightEye();
+            // const landmarks = resizedDetections[i].landmarks;
+            // const leftEye = landmarks.getLeftEye();
+            // const rightEye = landmarks.getRightEye();
 
-            // 좌/우 눈 중앙을 기준으로 박스 위치 조정
-            const boxCenterX = (leftEye[0].x + rightEye[3].x) / 2;
-            const boxCenterY = (leftEye[0].y + rightEye[3].y) / 2;
-            const textWidth = context.measureText(label).width;
-            const textHeight = parseInt(context.font); // Assuming font size is in px
+            // // 좌/우 눈 중앙을 기준으로 박스 위치 조정
+            // const boxCenterX = (leftEye[0].x + rightEye[3].x) / 2;
+            // const boxCenterY = (leftEye[0].y + rightEye[3].y) / 2;
+            // const textWidth = context.measureText(label).width;
+            // const textHeight = parseInt(context.font); // Assuming font size is in px
 
-            const x = boxCenterX - textWidth / 2;
-            const y = boxCenterY - box.height / 2 - textHeight; // Adjust the vertical position of the label above the face
+            // const x = boxCenterX - textWidth / 2;
+            // const y = boxCenterY - box.height / 2 - textHeight; // Adjust the vertical position of the label above the face
 
-            context.fillText(label, x, y + textHeight);
-            context.strokeRect(box.x, box.y, box.width, box.height);
+            // context.fillText(label, x, y + textHeight);
+            // context.strokeRect(box.x, box.y, box.width, box.height);
 
             if (result.distance > UNKNOWN_THRESHOLD) {
               setCount((prevCount) => prevCount + 1);
@@ -515,6 +517,8 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
 
 
       {/* <canvas className="Selfie" ref={canvasRefSelfie} style={{ margin: "0 auto", position: "absolute" }} /> */}
+
+
       {/*카메라가 꺼졌을 때 찍힌 셀피를 보여줌.*/}
 
       <IonModal isOpen={isModalOpen && !isModalShownForLabel && isgetlabel} backdropDismiss = {false}>
