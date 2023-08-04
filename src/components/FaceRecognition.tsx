@@ -44,8 +44,10 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
 
   const [isbtnModalOpen, setIsBtnModalOpen] = useState(false);
 
-
+  const [mid, setmid] = useState('');
   const [idd, setidd] = useState(''); //jsondata 이름
+  const [tel, settel] = useState('');
+  const [profileImg, setProfileImg] = useState('');
   const [mile, setmile] = useState('');
   const [come, setcome] = useState('');
   const [product, setproduct] = useState('');
@@ -301,7 +303,10 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
         console.log(JSON.parse(response.data)[i].id);
         console.log(JSON.parse(response.data)[i].name);
         console.log(JSON.parse(response.data)[i].mile);
+        setmid(JSON.parse(response.data)[i].id);
         setidd(JSON.parse(response.data)[i].name); //이름
+        settel(JSON.parse(response.data)[i].tel);
+        setProfileImg(JSON.parse(response.data)[i].profile_img);
         setmile(JSON.parse(response.data)[i].mile); //마일리지
         setcome(JSON.parse(response.data)[i].comeinm); //출석횟수
         setproduct(JSON.parse(response.data)[i].duetoproduct); //회원권 만료일
@@ -334,6 +339,8 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
         console.log(JSON.parse(response.data)[i].name);
         console.log(JSON.parse(response.data)[i].mile);
         setidd(JSON.parse(response.data)[i].name); //이름
+        settel(JSON.parse(response.data)[i].tel);
+        setProfileImg(JSON.parse(response.data)[i].profile_img);
         setmile(JSON.parse(response.data)[i].mile); //마일리지
         setcome(JSON.parse(response.data)[i].comeinm); //출석횟수
         setproduct(JSON.parse(response.data)[i].duetoproduct); //회원권 만료일
@@ -381,6 +388,8 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
       <ModalComponent
         detectedName={idd} //회원 id
         selfieURL={selfieURL} // Pass the selfie URL here // Show the modal only if it's open and not shown for the current detected label
+        mid = {mid}
+        tel ={tel}
         mile={mile}
         come={come}
         product={product}
@@ -399,6 +408,7 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
           handleClosebtnModal={handleClosebtnModal}
           id={props.id}
           idd={idd}
+          profile_img ={profileImg}
           mile={mile}
           come={come}
           product={product}

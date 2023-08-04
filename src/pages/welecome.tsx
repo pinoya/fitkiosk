@@ -182,13 +182,11 @@ function Welcome(props: any) {
   // 2. ui 2-1 사진 서버에  
   let selfie;
 
+  console.log(props.profile_img);
   //사진값이 넘어오지 않았을때 일단 대체 이미지로
   if (props.selfieURL == null) {
     selfie = <img style={{ width: '230px', height: '180px', borderRadius: '10px' }}
-      src=
-      {
-        props.img != null ? props.img : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9iL4bgiu-EHKCRgcUbE979g2G896JGyJeaw&usqp=CAU'
-      }
+      src= {props.profile_img}
       ></img>
   }
   else if (props.selfieURL) {
@@ -355,7 +353,7 @@ function Welcome(props: any) {
                 </div>
               </div>
 
-              <div className='btn'>
+              <div className='btnn'>
 
                 {OkBtn}
 

@@ -20,8 +20,8 @@ function Kiosk() {
     async function dismiss() {
         setisinOpen(false);
         setisoutOpen(false);
-        inmodal.current?.dismiss();
-        outmodal.current?.dismiss();
+        // inmodal.current?.dismiss();
+        // outmodal.current?.dismiss();
     }
 
     const [width, setWidth] = useState(window.innerWidth);
@@ -49,16 +49,7 @@ function Kiosk() {
     const [face, isface] = useState(false);
     const [jsondata, setjsondata] = useState([]);
 
-    //db
-    const [idd, setidd] = useState(''); //jsondata 이름
-    const [mile, setmile] = useState('');
-    const [come, setcome] = useState('');
-    const [product, setproduct] = useState('');
-    const [have, sethave] = useState('');
-    const [locker, setlocker] = useState(''); //락커
-    const [duclass, setduclass] = useState('');
-    const [left, setleft] = useState('');
-    const [inclass, setinclass] = useState('');
+  
 
     //데이터 가져오는 함수
     // const get_userinfo = async () => {

@@ -14,6 +14,8 @@ import Welcome from "../pages/welecome";
 type ModalComponentProps = {
   // isOpen: boolean;
   detectedName: string | null;
+  mid: string | null;
+  tel: string | null;
   selfieURL: string | null;
   mile: string | null;
   come: string | null;
@@ -31,6 +33,8 @@ type ModalComponentProps = {
 const ModalComponent: React.FC<ModalComponentProps> = ({
   // isOpen,
   detectedName,
+  mid,
+  tel,
   selfieURL,
   mile,
   come,
@@ -97,11 +101,11 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
                 <div className="modal_text">
                   <div className="Member_Number">
                     <div className="num_text">{'회원번호'}</div>
-                    <div className="real_num">{'20230315'}</div>
+                    <div className="real_num">{mid}</div>
                   </div>
                   <div className="Member_Number">
                     <div className="num_text">{'전화번호'}</div>
-                    <div className="real_num"> {'010-2143-5287'}</div>
+                    <div className="real_num"> {tel}</div>
                   </div>
                 </div>
                 <div className="modal_button">
