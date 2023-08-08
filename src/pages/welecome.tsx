@@ -206,7 +206,7 @@ function Welcome(props: any) {
 
   //얼굴 인식이 안 됐을 경우의 확인 버튼
   if (props.onCancelButtonClick == null) {
-    OkBtn = <IonButton size='large' expand='block' onClick={() => props.handleClosebtnModal()}>확인</IonButton>
+    OkBtn = <IonButton size='large' expand='block' onClick={() => props.onCancelButtonClick()}>확인</IonButton>
   } //얼굴 인식이 됐을 경우의 확인 버튼
   else if (props.onCancelButtonClick) {
     OkBtn = <IonButton size='large' expand='block' onClick={() => props.onCancelButtonClick()}>확인</IonButton>

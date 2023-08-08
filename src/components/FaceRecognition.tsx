@@ -6,6 +6,8 @@ import ModalComponent from "./ModalComponent";
 import Welcome from "../pages/welecome";
 import { IonCol, IonImg, IonModal } from "@ionic/react";
 import { CapacitorHttp } from "@capacitor/core";
+import Password from "../pages/password";
+
 
 import { UserPhoto, usePhotoGallery } from '../hooks/usePhotoGallery';
 
@@ -598,14 +600,25 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
         <p>다시 확인해주세요.</p>
       </IonModal>
 
+<<<<<<< HEAD
       
       {/* <IonModal isOpen={props.isbtnopen}> */}
       <IonModal isOpen={props.isbtnopen && isgetbtnlabel}>
         <Welcome
           handleClosebtnModal={handleClosebtnModal}
+=======
+
+      {/* <IonModal isOpen={props.isbtnopen && isgetbtnlabel}> */}
+      <IonModal isOpen={props.isbtnopen} >
+     
+      <Password 
+>>>>>>> d4aeff8adc3d4740b9fff504c34418278716954b
           id={props.id}
           idd={idd}
-          profile_img={profileImg}
+          selfieURL={profileImg}
+          mid={mid}
+          tel={tel}
+
           mile={mile}
           come={come}
           product={product}
@@ -614,13 +627,18 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
           duclass={duclass}
           left={left}
           inclass={inclass}
+          //userpwd={userpwd}
+          onClose={handleClosebtnModal}/> 
+          
+          </IonModal>
 
-        />
-      </IonModal>
 
 
+<<<<<<< HEAD
 
-
+=======
+    
+>>>>>>> d4aeff8adc3d4740b9fff504c34418278716954b
     </>
   );
 };
@@ -628,6 +646,7 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
 
 
 export default FaceRecognition;
+
 
 
 
