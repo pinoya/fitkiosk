@@ -54,7 +54,7 @@ ion-grid.window {
     ion-row.title {
         height: 320px;
     }
-    ion-modal{
+    ion-modal.baseModal{
         --width : 640px;
         --height : 710px;
         --border-radius: 10px;
@@ -67,7 +67,7 @@ ion-grid.window {
     ion-row.title {
         height: 155px;
     }
-    ion-modal{
+    ion-modal.baseModal{
         --width : 640px;
         --height : 710px;
         --border-radius: 10px;
@@ -75,6 +75,7 @@ ion-grid.window {
     
     }
 }
+
 
 ion-row.title ion-col {
     border: 0px;

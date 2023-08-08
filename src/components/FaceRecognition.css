@@ -1,0 +1,7 @@
+/*다시 입력해달라는 창*/
+ion-modal .failId {
+    --width: 100px;
+    --height: 100px;
+    --border-radius: 10px;
+    --background: #FFFFFF;
+}

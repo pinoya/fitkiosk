@@ -152,7 +152,7 @@ const Password: React.FC<ModalComponentProps> = ({
                 <div className="pw_body3">
                   <div className="pw_body3_first">
                     <p className="pw_body3_first_p">회원번호</p>
-                    <p className="pw_body3_first_p2">{id}</p>
+                    <p className="pw_body3_first_p2">{mid}</p>
                   </div>
 
                   <div className="pw_body3_second">

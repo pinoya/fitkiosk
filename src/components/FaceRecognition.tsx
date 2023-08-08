@@ -7,6 +7,7 @@ import Welcome from "../pages/welecome";
 import { IonCol, IonImg, IonModal } from "@ionic/react";
 import { CapacitorHttp } from "@capacitor/core";
 import Password from "../pages/password";
+import "./FaceRecognition.css";
 
 
 import { UserPhoto, usePhotoGallery } from '../hooks/usePhotoGallery';
@@ -37,6 +38,7 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
   const webcamActive = useRef(false); // Ref to track webcam state
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isidFail, setIsIdFail] = useState(false);
   const [detectedLabel, setDetectedLabel] = useState<string | null>(null);
   const [isModalShownForLabel, setIsModalShownForLabel] = useState<boolean>(false);
   const [isgetlabel, setIsGetLabel] = useState(false);
@@ -293,6 +295,7 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
   const handleClosebtnModal = () => {
     // setIsModalOpen(); //모달창 닫기
     props.setisbtnOpen(false); //모달창 닫기
+    // deleteUserInfo(); //유저정보 지우기
     setIsGetBtnLabel(false); //라벨 플래그 값 초기화
     // deleteCaptureSelfie(); //셀피 지우기
     reset(); //얼굴인식 실패 횟수 리셋
@@ -396,10 +399,11 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
 
 
 
+
   const get_btn_userinfo = async () => {
     let url = 'http://dev.wisevill.com/kioskdb/get_data_from_db.php';
 
-
+    console.log(mid);
     if (props.id) {
       if (!props.typeid) { //회원번호
         const options = {
@@ -407,6 +411,7 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
           data: { id: props.id },
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         }
+
         const response = await CapacitorHttp.post(options);
         // console.log(JSON.parse(response.data));
 
@@ -415,6 +420,8 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
           console.log(JSON.parse(response.data)[i].id);
           console.log(JSON.parse(response.data)[i].name);
           console.log(JSON.parse(response.data)[i].mile);
+          setmid(JSON.parse(response.data)[i].id); //회원 아이디
+          console.log(mid);
           setidd(JSON.parse(response.data)[i].name); //이름
           settel(JSON.parse(response.data)[i].tel);
           setProfileImg(JSON.parse(response.data)[i].profile_img);
@@ -427,7 +434,21 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
           setleft(JSON.parse(response.data)[i].leftclasstime);
           setinclass(JSON.parse(response.data)[i].inclass);
         }
-        setIsGetBtnLabel(true);
+        // checkId();
+
+        // console.log(props.id);
+        // console.log(mid);
+
+        // if (props.id == mid) {
+        //   setIsGetBtnLabel(true);
+        // } 
+        // console.log(mid);
+        // if(mid !== null && props.id == mid){
+        //   setIsGetBtnLabel(true);
+        // }else {
+        //   setIsIdFail(true);
+        // }
+
       }
       else if (props.typeid) {
         const options = {
@@ -443,8 +464,10 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
           console.log(JSON.parse(response.data)[i].id);
           console.log(JSON.parse(response.data)[i].name);
           console.log(JSON.parse(response.data)[i].mile);
-          setidd(JSON.parse(response.data)[i].name); //이름
+          setmid(JSON.parse(response.data)[i].id); //회원 아이디
           settel(JSON.parse(response.data)[i].tel);
+          setidd(JSON.parse(response.data)[i].name); //이름
+          console.log(tel);
           setProfileImg(JSON.parse(response.data)[i].profile_img);
           setmile(JSON.parse(response.data)[i].mile); //마일리지
           setcome(JSON.parse(response.data)[i].comeinm); //출석횟수
@@ -455,10 +478,60 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
           setleft(JSON.parse(response.data)[i].leftclasstime);
           setinclass(JSON.parse(response.data)[i].inclass);
         }
-        setIsGetBtnLabel(true);
       } //전화번호
+      setIsGetBtnLabel(true);
     }
+
   }
+
+
+
+  //회원번호 일치 확인
+  // useEffect(() => {
+  //   if (mid !== null && (props.id == mid || props.id == tel)) {
+  //     setIsGetBtnLabel(true);
+  //   } else {
+  //     setIsIdFail(true);
+  //   }
+  // }, [mid,tel]);
+
+  // useEffect(() => {
+  //   if (mid !== null && props.id == mid) {
+  //     setIsIdFail(false);
+  //     setIsGetBtnLabel(true);
+  //   } else {
+  //     setIsIdFail(true);
+  //   }
+  // }, [mid]);
+
+
+  // checkId();
+  const checkId = () => {
+    console.log(props.id);
+    console.log(mid);
+    // if (props.id == mid) {
+    //   setIsGetBtnLabel(true);
+    // } else {
+    //   setIsIdFail(true);
+    // }
+  }
+
+  const deleteUserInfo = () => {
+    setmid(''); //회원 아이디
+    settel('');
+    setidd(''); //이름
+    setProfileImg('');
+    setmile(''); //마일리지
+    setcome(''); //출석횟수
+    setproduct(''); //회원권 만료일
+    sethave(''); //회원권 상품명
+    setlocker('');
+    setduclass('');
+    setleft('');
+    setinclass('');
+    console.log(mid);
+  }
+
 
 
   // let img;
@@ -549,7 +622,61 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
   }
 
 
+  const handleIdFail = () => {
+    props.setisbtnOpen(false);
+    setIsIdFail(false);
+    startWebcam();
+  }
 
+
+  // //버튼으로 들어간 모달 끄기
+  // const handleClosebtnModal = () => {
+  //   // setIsModalOpen(); //모달창 닫기
+  //   props.setisbtnOpen(false); //모달창 닫기
+  //   setIsGetBtnLabel(false); //라벨 플래그 값 초기화
+  //   // deleteCaptureSelfie(); //셀피 지우기
+  //   reset(); //얼굴인식 실패 횟수 리셋
+  //   startWebcam(); //캠 시작하기
+  // };
+
+  // <IonModal isOpen={
+  //   props.isbtnopen && isgetbtnlabel} backdropDismiss={false} >
+  // {idEntry}
+
+  // </IonModal>
+  let idEntry;
+  if(mid == props.id|| tel == props.id){
+    idEntry = <IonModal className="baseModal" isOpen={
+      props.isbtnopen && isgetbtnlabel} backdropDismiss={false} > <Password
+    id={props.id}
+    idd={idd}
+    selfieURL={profileImg}
+    mid={mid}
+    tel={tel}
+
+    mile={mile}
+    come={come}
+    product={product}
+    have={have}
+    locker={locker}
+    duclass={duclass}
+    left={left}
+    inclass={inclass}
+    //userpwd={userpwd}
+    onClose={handleClosebtnModal} userpwd={null} />
+    </IonModal>
+  }
+  else{
+    idEntry = <IonModal className = "failId" isOpen={props.isbtnopen && isgetbtnlabel} backdropDismiss={false} >
+        <p>다시 입력해주세요.</p>
+        <button onClick={handleClosebtnModal}>닫기</button>
+      </IonModal>
+    // <div >
+    // <button onClick={handleClosebtnModal}>무조건 눌러...</button>
+    // <p>모달창 겹치는거랑 크기만 어떻게 하면....</p>
+    // </div>
+    // style={{ background : "white", width: "100%",heigh : "100%" }}
+  }
 
 
   return (
@@ -569,17 +696,18 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
 
       {fail}
 
+
       <div>{count}</div>
 
       {/* <button onClick={handleCaptureSelfie} style={{ margin: "0 auto", position: "absolute" }}>찰칵</button> */}
 
-      <canvas className="Selfie" ref={canvasRefSelfie} style={{ margin: "0 auto", position: "absolute" }} />
+      {/* <canvas className="Selfie" ref={canvasRefSelfie} style={{ margin: "0 auto", position: "absolute" }} /> */}
 
 
       {/*카메라가 꺼졌을 때 찍힌 셀피를 보여줌.*/}
-      
 
-      <IonModal isOpen={isModalOpen && !isModalShownForLabel && isgetlabel} backdropDismiss={false}>
+
+      <IonModal className = "baseModal" isOpen={isModalOpen && !isModalShownForLabel && isgetlabel} backdropDismiss={false}>
         <ModalComponent
           detectedName={idd} //회원 id
           selfieURL={profileImg} // Pass the selfie URL here // Show the modal only if it's open and not shown for the current detected label
@@ -595,41 +723,22 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
           inclass={inclass}
           onClose={handleCloseModal} />
       </IonModal>
-
-      {/* <IonModal isOpen={props.isbtnopen && !isgetbtnlabel} >
+{/* 
+      <IonModal isOpen={isidFail} backdropDismiss={false} >
         <p>다시 입력해주세요.</p>
+        <button onClick={handleIdFail}>닫기</button>
+      </IonModal> */}
+      {idEntry}
+
+      {/* <IonModal isOpen={props.isbtnopen && isgetbtnlabel}> */}
+      {/* <IonModal isOpen={
+        props.isbtnopen && isgetbtnlabel} backdropDismiss={false} >
+      {idEntry}
+
       </IonModal> */}
 
 
-      {/* <IonModal isOpen={props.isbtnopen && isgetbtnlabel}> */}
-      <IonModal isOpen={
-        props.isbtnopen  && isgetbtnlabel} >
-      <Password 
-          id={props.id}
-          idd={idd}
-          selfieURL={profileImg}
-          mid={mid}
-          tel={tel}
 
-          mile={mile}
-          come={come}
-          product={product}
-          have={have}
-          locker={locker}
-          duclass={duclass}
-          left={left}
-          inclass={inclass}
-          //userpwd={userpwd}
-          onClose={handleClosebtnModal} userpwd={null}/> 
-          
-          </IonModal>
-
-
-
-<<<<<<< HEAD
-    
-=======
->>>>>>> e425d5f964584a7a1720bc74544713d6055d1488
     </>
   );
 };
