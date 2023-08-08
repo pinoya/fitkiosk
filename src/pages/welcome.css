@@ -182,3 +182,45 @@
         margin-top: -1%;
     }
 
+
+.body5{
+    width : 600px;
+    height : 140px;
+    background-color: #313131;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-top: 17px;
+    margin-left: 0.3%; 
+}
+.body5_circle{
+    width : 65px;
+    height: 65px;
+    border-radius: 100px;
+    background-color: #FDEFE5;
+    margin-top: 4%;
+}
+.body5_p1{
+    margin-left: 14%;
+    margin-top: -16.8%;
+}
+.body5_p2{
+    margin-left: 14%;
+    margin-top: -4.8%;
+}
+.body5_left{
+    font-size: 18px;
+    color: #FF6300;
+    font-weight: 700;
+}
+.body5_left2{
+    font-size: 18px;
+    color: #b1aeaf;
+    margin-left: 0.8%;
+    font-weight: 400;
+}
+.btnn{
+    margin-left: 28%;
+    margin-right: 31%;
+    margin-top: 9%;
+}
+

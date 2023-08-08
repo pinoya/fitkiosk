@@ -1,12 +1,17 @@
 import { CapacitorConfig } from '@capacitor/cli';
-
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'kiosk',
+  appId: 'com.wisevill.wavver',
+  appName: 'lopi',
   webDir: 'dist',
+  bundledWebRuntime: false,
+  plugins: {
+    CapacitorHttp: {
+      enabled: true
+    },
+  },
   server: {
-    androidScheme: 'https'
+    androidScheme: 'http'
   }
+  
 };
-
 export default config;

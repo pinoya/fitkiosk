@@ -9,6 +9,7 @@ import { CapacitorHttp } from "@capacitor/core";
 import Password from "../pages/password";
 
 
+
 const UNKNOWN_LABEL = "Unknown";
 const UNKNOWN_THRESHOLD = 0.3;
 
@@ -550,6 +551,7 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
           selfieURL={profileImg}
           mid={mid}
           tel={tel}
+
           mile={mile}
           come={come}
           product={product}
@@ -558,13 +560,14 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
           duclass={duclass}
           left={left}
           inclass={inclass}
-          onClose={handleClosebtnModal} 
-          // userpwd={userpwd}
-        />
-      </IonModal>
+          //userpwd={userpwd}
+          onClose={handleClosebtnModal}/> 
+          
+          </IonModal>
 
 
 
+    
     </>
   );
 };

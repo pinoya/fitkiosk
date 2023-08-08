@@ -4,7 +4,7 @@ import { IonButton, IonCol, IonGrid, IonRow } from '@ionic/react';
 
 const InputBtn = (props: any) => {
     function btn_in() {
-        if(props.typeid == false) {
+        if(props.typeid == false) { //회원번호 typeid = {false}
             if (props.id.length != 5) {
                 console.log("id를 다시 확인해주세요.");
             } else {
@@ -13,7 +13,7 @@ const InputBtn = (props: any) => {
                 props.setisbtnOpen(true);
                 
             }    
-        } else {
+        } else { //전화번호 typeid = {ture}
             if (props.id.length != 13) {
                 console.log("id를 다시 확인해주세요.");
             } else {
