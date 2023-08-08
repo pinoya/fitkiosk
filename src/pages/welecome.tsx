@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { IonGrid, IonButtons, IonButton, IonContent, IonTitle, IonToolbar, IonRow, IonCol, IonModal, IonHeader } from '@ionic/react';
 import './allinone.css';
 import './welcome.css';
+import DefalutImg from "./DefalutImg.png" 
 import { CapacitorHttp } from '@capacitor/core';
 
 
@@ -182,14 +183,19 @@ function Welcome(props: any) {
   // 2. ui 2-1 사진 서버에  
   let selfie;
 
+  console.log(props.profile_img);
   //사진값이 넘어오지 않았을때 일단 대체 이미지로
   if (props.selfieURL == null) {
-    selfie = <img style={{ width: '230px', height: '180px', borderRadius: '10px' }}
-      src=
-      {
-        props.img != null ? props.img : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9iL4bgiu-EHKCRgcUbE979g2G896JGyJeaw&usqp=CAU'
-      }
+    if(props.profile_img !=null){ //프로필 이미지가 있을때
+      selfie = <img style={{ width: '230px', height: '180px', borderRadius: '10px' }}
+      src= {props.profile_img}
       ></img>
+    }
+    else{ //프로필 이미지가 없을때
+      selfie = <img style={{ width: '230px', height: '180px', borderRadius: '10px' }}
+      src= {DefalutImg}
+      ></img>
+    }
   }
   else if (props.selfieURL) {
     selfie = <img style={{ width: '230px', height: '180px', borderRadius: '10px' }}
@@ -200,7 +206,7 @@ function Welcome(props: any) {
 
   //얼굴 인식이 안 됐을 경우의 확인 버튼
   if (props.onCancelButtonClick == null) {
-    OkBtn = <IonButton size='large' expand='block' onClick={() => props.handleClosebtnModal()}>확인</IonButton>
+    OkBtn = <IonButton size='large' expand='block' onClick={() => props.onCancelButtonClick()}>확인</IonButton>
   } //얼굴 인식이 됐을 경우의 확인 버튼
   else if (props.onCancelButtonClick) {
     OkBtn = <IonButton size='large' expand='block' onClick={() => props.onCancelButtonClick()}>확인</IonButton>
@@ -355,7 +361,7 @@ function Welcome(props: any) {
                 </div>
               </div>
 
-              <div className='btn'>
+              <div className='btnn'>
 
                 {OkBtn}
 

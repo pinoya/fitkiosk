@@ -12,8 +12,10 @@ import Check from './check.svg';
 import Welcome from "../pages/welecome";
 
 type ModalComponentProps = {
-  isOpen: boolean;
+  // isOpen: boolean;
   detectedName: string | null;
+  mid: string | null;
+  tel: string | null;
   selfieURL: string | null;
   mile: string | null;
   come: string | null;
@@ -29,8 +31,10 @@ type ModalComponentProps = {
 };
 
 const ModalComponent: React.FC<ModalComponentProps> = ({
-  isOpen,
+  // isOpen,
   detectedName,
+  mid,
+  tel,
   selfieURL,
   mile,
   come,
@@ -65,19 +69,17 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
   };
 
 
-  
-
   return (
     <>
       {/* Original Modal style={modalStyles} */ }
       
-      <IonModal isOpen={isOpen} onRequestClose={onClose} contentLabel="Detected Label Modal" >
         <IonGrid>
           <IonRow>
             <IonCol>
               <img className="Check_logo" src={Check} />
               <div className="modal_text">
-                <h2 className="modal_h2">{`${detectedName}님`}</h2>
+                <h2 className="modal_h2"> {detectedName}{'님'}</h2>
+              
                 <h2 className="modal_h2">{`인증 완료되었습니다.`}</h2>
               </div>
             </IonCol>
@@ -99,11 +101,11 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
                 <div className="modal_text">
                   <div className="Member_Number">
                     <div className="num_text">{'회원번호'}</div>
-                    <div className="real_num">{'20230315'}</div>
+                    <div className="real_num">{mid}</div>
                   </div>
                   <div className="Member_Number">
                     <div className="num_text">{'전화번호'}</div>
-                    <div className="real_num"> {'010-2143-5287'}</div>
+                    <div className="real_num"> {tel}</div>
                   </div>
                 </div>
                 <div className="modal_button">
@@ -118,12 +120,12 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
             </IonCol>
           </IonRow>
         </IonGrid>
-      </IonModal>
 
       {/* New Modal */}
       {isNewModalOpen && (
-        <IonModal isOpen={true} onRequestClose={() => setIsNewModalOpen(false)} contentLabel="New Modal" style={modalStyles}>
+        <IonModal  backdropDismiss = {false} isOpen={true} onRequestClose={() => setIsNewModalOpen(false)} contentLabel="New Modal" style={modalStyles}>
           <Welcome
+          
             detectedName={detectedName}
             selfieURL={selfieURL}
             mile={mile}
@@ -150,6 +152,21 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
 };
 
 export default ModalComponent;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

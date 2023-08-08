@@ -1,176 +1,184 @@
-ion-button{
-    --background : #FF6300;
-
-}
-.head{ /*전체*/
-    display: flex;
-    margin-left: "0.3%";
-    margin-top: 3%;
-}
-.body2{ /*첫번째 오른쪽 박스*/
-    background-color: #313131;
-    width: 360px;
-    height : 180px;
-    border-radius: 10px;
-    padding-left: 26px;
-}
-.body2_name{ /*이름*/
-    font-size: 20px;
-    color : white;
-    font-weight: 700;
-    display: flex;
-}
-.body2_nim{ /*님*/
-    margin-top: 7.1%;
-    margin-left: 0.3%;
-}
-.body2_welcome{ /*환영합니다*/
-    font-size: 26px;
-    margin-top: 5.2%;
-    margin-left: 2.7%;
-}
-.body2_time{ /*시간*/
-    margin-top: -6%;
-    font-size: 18px;
-    color : #b1aeaf;
-}
-.body2_p1{ /*보유마일리지 줄*/
-    font-size: 18px;
-    font-weight: 400;
-    color : #b1aeaf;
-    display: flex;
-}
-.body2_p2{/*이달 출석횟수 줄*/
-    margin-top: -9%;
-    font-size: 18px;
-    color : #b1aeaf;
-    display: flex;
-}
-.body2_mil{ /*마일리지, 이달 출석횟수*/
-    letter-spacing: -0.3px;
-}
-.body2_score{/*숫자*/
-    margin-left: 5%;
-    font-weight: 700;
-    letter-spacing: 0.8px;
-}
 
 
-/*두번째 박스*/
-.body3{
-    width : 600px;
-    height : 100px;
-    background-color: #313131;
-    border-radius: 10px;
-    padding-left: 20px;
-    padding-top: 17px;
-    margin-left: 0.3%;
-}
-.body3_circle{
-    width : 65px;
-    height: 65px;
-    border-radius: 100px;
-    background-color: #FDEFE5;
-}
-.body3_p1{
-    margin-left: 14%;
-    margin-top: -13.8%;
-}
-.body3_p1_finish{
-    font-weight: 700;
-    font-size: 18px;
-    color : #848484;
-    letter-spacing: -0.3px;
-}
-.body3_p1_r{
-    display: flex;
-    margin-left: 28%;
-    margin-top: -12.2%;
-}
-.body3_p1_r_date{
-    font-size: 18px;
-    color : #b1aeaf;
-    font-weight: 400;
-}
-.dday{
-    width:70px;
-    height: 25px;
-    border-radius: 3px;
-    background-color: #FF6300;
-    color: white;
-    font-size: 18px;
-    text-align: center;
-    margin-left: 2%;
-}
-.body3_p2{
-    margin-left: 14%;
-    margin-top: -4.5%;
-}
-.body3_p2_product{
-    font-weight: 700;
-    font-size: 18px;
-    color: #848484;
-    letter-spacing: -0.3px;
-}
-.body3_p2_r{
-    display: flex;
-    margin-left: 28%;
-    margin-top: -12.2%;
-}
-.use{
-    background-color: #ddebf8;
-    width: 53px;
-    height: 19px;
-    border-radius: 3px;
-    font-size: 13px;
-    color: #232323;
-    text-align: center;
-    margin-top: 5.5%;
-}
-.body4_date{
-    font-size: 18px;
-    color: #b1aeaf;
-    margin-left: 2%;
-    font-weight: 400;
-}
+    ion-button{
+        --background : #FF6300;
+    
+    }
+    .head{ /*전체*/
+        display: flex;
+        margin-left: "0.3%";
+        margin-top: 3%;
+    }
+    .body2{ /*첫번째 오른쪽 박스*/
+        background-color: #313131;
+        width: 360px;
+        height : 180px;
+        border-radius: 10px;
+        padding-left: 26px;
+    }
+    .body2_name{ /*이름*/
+        font-size: 20px;
+        color : white;
+        font-weight: 700;
+        display: flex;
+    }
+    .body2_nim{ /*님*/
+        margin-top: 7.1%;
+        margin-left: 0.3%;
+    }
+    .body2_welcome{ /*환영합니다*/
+        font-size: 26px;
+        margin-top: 5.2%;
+        margin-left: 2.7%;
+    }
+    .body2_time{ /*시간*/
+        margin-top: -6%;
+        font-size: 18px;
+        color : #b1aeaf;
+    }
+    .body2_p1{ /*보유마일리지 줄*/
+        font-size: 18px;
+        font-weight: 400;
+        color : #b1aeaf;
+        display: flex;
+    }
+    .body2_p2{/*이달 출석횟수 줄*/
+        margin-top: -9%;
+        font-size: 18px;
+        color : #b1aeaf;
+        display: flex;
+    }
+    .body2_mil{ /*마일리지, 이달 출석횟수*/
+        letter-spacing: -0.3px;
+    }
+    .body2_score{/*숫자*/
+        margin-left: 5%;
+        font-weight: 700;
+        letter-spacing: 0.8px;
+    }
+    
+    
+    /*두번째 박스*/
+    .body3{
+        width : 600px;
+        height : 100px;
+        background-color: #313131;
+        border-radius: 10px;
+        padding-left: 20px;
+        padding-top: 17px;
+        margin-left: 0.3%;
+    }
+    .body3_circle{
+        width : 65px;
+        height: 65px;
+        border-radius: 100px;
+        background-color: #FDEFE5;
+    }
+    .body3_p1{
+        margin-left: 14%;
+        margin-top: -13.8%;
+    }
+    .body3_p1_finish{
+        font-weight: 700;
+        font-size: 18px;
+        color : #848484;
+        letter-spacing: -0.3px;
+    }
+    .body3_p1_r{
+        display: flex;
+        margin-left: 28%;
+        margin-top: -12.2%;
+    }
+    .body3_p1_r_date{
+        font-size: 18px;
+        color : #b1aeaf;
+        font-weight: 400;
+    }
+    .dday{
+        width:70px;
+        height: 25px;
+        border-radius: 3px;
+        background-color: #FF6300;
+        color: white;
+        font-size: 18px;
+        text-align: center;
+        margin-left: 2%;
+    }
+    .body3_p2{
+        margin-left: 14%;
+        margin-top: -4.5%;
+    }
+    .body3_p2_product{
+        font-weight: 700;
+        font-size: 18px;
+        color: #848484;
+        letter-spacing: -0.3px;
+    }
+    .body3_p2_r{
+        display: flex;
+        margin-left: 28%;
+        margin-top: -12.2%;
+    }
+    .use{
+        background-color: #ddebf8;
+        width: 53px;
+        height: 19px;
+        border-radius: 3px;
+        font-size: 13px;
+        color: #232323;
+        text-align: center;
+        margin-top: 5.5%;
+    }
+    .body4_date{
+        font-size: 18px;
+        color: #b1aeaf;
+        margin-left: 2%;
+        font-weight: 400;
+    }
+    
+    .body5{
+        width : 600px;
+        height : 140px;
+        background-color: #313131;
+        border-radius: 10px;
+        padding-left: 20px;
+        padding-top: 17px;
+        margin-left: 0.3%; 
+    }
+    .body5_circle{
+        width : 65px;
+        height: 65px;
+        border-radius: 100px;
+        background-color: #FDEFE5;
+        margin-top: 4%;
+    }
+    .body5_p1{
+        margin-left: 14%;
+        margin-top: -16.8%;
+    }
+    .body5_p2{
+        margin-left: 14%;
+        margin-top: -4.8%;
+    }
+    .body5_left{
+        font-size: 18px;
+        color: #FF6300;
+        font-weight: 700;
+    }
+    .body5_left2{
+        font-size: 18px;
+        color: #b1aeaf;
+        margin-left: 0.8%;
+        font-weight: 400;
+    }
+    .btnn{
+        margin-left: 14%;
+        margin-top: 3%;
+    }
+    .btnnn{
+        background-color: #232323;
+        width : 400px;
+        height : 100px;
+        margin-top: -1%;
+    }
 
-.body5{
-    width : 600px;
-    height : 140px;
-    background-color: #313131;
-    border-radius: 10px;
-    padding-left: 20px;
-    padding-top: 17px;
-    margin-left: 0.3%; 
-}
-.body5_circle{
-    width : 65px;
-    height: 65px;
-    border-radius: 100px;
-    background-color: #FDEFE5;
-    margin-top: 4%;
-}
-.body5_p1{
-    margin-left: 14%;
-    margin-top: -16.8%;
-}
-.body5_p2{
-    margin-left: 14%;
-    margin-top: -4.8%;
-}
-.body5_left{
-    font-size: 18px;
-    color: #FF6300;
-    font-weight: 700;
-}
-.body5_left2{
-    font-size: 18px;
-    color: #b1aeaf;
-    margin-left: 0.8%;
-    font-weight: 400;
-}
-.btn{
-    margin-left: 28%;
-    margin-right: 31%;
-    margin-top: 9%;
-}

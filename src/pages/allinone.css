@@ -54,12 +54,27 @@ ion-grid.window {
     ion-row.title {
         height: 320px;
     }
+    /*ion-modal{
+        --width : 640px;
+        --height : 710px;
+        --border-radius: 10px;
+        --background : #232323;
+    
+    }*/
 }
 
 @media (orientation: landscape) {
     ion-row.title {
         height: 155px;
     }
+    /*ion-modal {
+        --width : 1000px;
+        --height : 530px;
+        --border-radius: 10px;
+
+        --background : #232323;
+    
+    }*/
 }
 
 ion-row.title ion-col {
@@ -124,7 +139,7 @@ ion-col.face .Selfie{
 /*셀피 크기*/
 
 ion-col.btn {
-    width: 100%;
+    width: 300%;
     height: 140px;
     /* background-color: orange; */
     border: 0px;
@@ -132,10 +147,3 @@ ion-col.btn {
 }
 
 
-ion-modal {
-    --width : 640px;
-    --height : 710px;
-    --border-radius: 10px;
-    --background : #232323;
-
-}
