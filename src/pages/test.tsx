@@ -21,7 +21,7 @@ import { Capacitor } from '@capacitor/core';
 
 
 
-import { UserPhoto, getPhotoFilePath, usePhotoGallery } from '../hooks/usePhotoGallery';
+import { UserPhoto, usePhotoGallery } from '../hooks/usePhotoGallery';
 import { useState } from 'react';
 
 const Test: React.FC = () => {

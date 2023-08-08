@@ -1,10 +1,8 @@
 // src/components/FaceRecognition.tsx
 
 import React, { useEffect, useRef, useState } from "react";
+
 import * as faceapi from "face-api.js";
-import Welcome from "../pages/welecome";
-import { IonCol, IonGrid, IonImg, IonModal, IonRow } from "@ionic/react";
-import { CapacitorHttp } from "@capacitor/core";
 
 
 
@@ -21,6 +19,8 @@ const UNKNOWN_THRESHOLD = 0.3;
 
 
 const Test2: React.FC = () => {
+
+  
 
   const { deletePhoto, photos, takePhoto } = usePhotoGallery();
   const [photoToDelete, setPhotoToDelete] = useState<UserPhoto>();
@@ -63,7 +63,6 @@ const Test2: React.FC = () => {
 
 
 
-  
 
 
   const startWebcam = async () => {
@@ -100,6 +99,15 @@ const Test2: React.FC = () => {
       const labels = ["33333", "11111", "44444", "22222"]; // 폴더 내에 있는 파일 이름
 
       //11111 : 이재인
+
+      // {photos.map((photo) => (
+      //   const hi = photo.webviewPath;
+      // ))}
+
+
+      photos.forEach((photo) => {
+        const imageUrl = photo.webviewPath;
+      });
 
       return Promise.all(
         labels.map(async (label) => {

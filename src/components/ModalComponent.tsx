@@ -123,13 +123,9 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
 
       {/* New Modal */}
       {isNewModalOpen && (
-<<<<<<< HEAD
-        <IonModal isOpen={true} onRequestClose={() => setIsNewModalOpen(false)} contentLabel="New Modal" style={modalStyles}>
-=======
 
         <IonModal  backdropDismiss = {false} isOpen={true} onRequestClose={() => setIsNewModalOpen(false)} contentLabel="New Modal" style={modalStyles}>
 
->>>>>>> d4aeff8adc3d4740b9fff504c34418278716954b
           <Welcome
           
             detectedName={detectedName}

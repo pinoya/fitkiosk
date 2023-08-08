@@ -600,19 +600,11 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
         <p>다시 확인해주세요.</p>
       </IonModal>
 
-<<<<<<< HEAD
-      
-      {/* <IonModal isOpen={props.isbtnopen}> */}
-      <IonModal isOpen={props.isbtnopen && isgetbtnlabel}>
-        <Welcome
-          handleClosebtnModal={handleClosebtnModal}
-=======
 
       {/* <IonModal isOpen={props.isbtnopen && isgetbtnlabel}> */}
       <IonModal isOpen={props.isbtnopen} >
      
       <Password 
->>>>>>> d4aeff8adc3d4740b9fff504c34418278716954b
           id={props.id}
           idd={idd}
           selfieURL={profileImg}
@@ -628,17 +620,13 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
           left={left}
           inclass={inclass}
           //userpwd={userpwd}
-          onClose={handleClosebtnModal}/> 
+          onClose={handleClosebtnModal} userpwd={null}/> 
           
           </IonModal>
 
 
 
-<<<<<<< HEAD
-
-=======
     
->>>>>>> d4aeff8adc3d4740b9fff504c34418278716954b
     </>
   );
 };
