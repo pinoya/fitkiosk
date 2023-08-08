@@ -54,27 +54,26 @@ ion-grid.window {
     ion-row.title {
         height: 320px;
     }
-    /*ion-modal{
+    ion-modal{
         --width : 640px;
         --height : 710px;
         --border-radius: 10px;
         --background : #232323;
     
-    }*/
+    }
 }
 
 @media (orientation: landscape) {
     ion-row.title {
         height: 155px;
     }
-    /*ion-modal {
-        --width : 1000px;
-        --height : 530px;
+    ion-modal{
+        --width : 640px;
+        --height : 710px;
         --border-radius: 10px;
-
         --background : #232323;
     
-    }*/
+    }
 }
 
 ion-row.title ion-col {

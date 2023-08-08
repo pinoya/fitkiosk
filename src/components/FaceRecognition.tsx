@@ -335,13 +335,14 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
 
 
   const get_userinfo = async () => {
-    let url = 'http://dev.wisevill.com/ur03/get_page_from_db.php';
+    let url = 'http://dev.wisevill.com/kioskdb/get_data_from_db.php';
     console.log(detectedLabel);
     if (detectedLabel) {
       const options = {
         url: url,
-        params: { id: detectedLabel },
-        data: {}
+        data: { id: detectedLabel },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+
       }
       const response = await CapacitorHttp.post(options);
       setjsondata(JSON.parse(response.data));
@@ -396,15 +397,15 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
 
 
   const get_btn_userinfo = async () => {
-    let url = 'http://dev.wisevill.com/ur03/testget_page_from_db.php';
+    let url = 'http://dev.wisevill.com/kioskdb/get_data_from_db.php';
 
 
     if (props.id) {
       if (!props.typeid) { //회원번호
         const options = {
           url: url,
-          params: { id: props.id },
-          data: {}
+          data: { id: props.id },
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         }
         const response = await CapacitorHttp.post(options);
         // console.log(JSON.parse(response.data));
@@ -426,12 +427,13 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
           setleft(JSON.parse(response.data)[i].leftclasstime);
           setinclass(JSON.parse(response.data)[i].inclass);
         }
+        setIsGetBtnLabel(true);
       }
       else if (props.typeid) {
         const options = {
           url: url,
-          params: { tel: props.id },
-          data: {}
+          data: { tel: props.id },
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         }
         const response = await CapacitorHttp.post(options);
         console.log(JSON.parse(response.data));
@@ -453,10 +455,9 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
           setleft(JSON.parse(response.data)[i].leftclasstime);
           setinclass(JSON.parse(response.data)[i].inclass);
         }
-
+        setIsGetBtnLabel(true);
       } //전화번호
     }
-    setIsGetBtnLabel(true);
   }
 
 
@@ -595,15 +596,14 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
           onClose={handleCloseModal} />
       </IonModal>
 
-      {/* 아이디나 전화번호 잘못 입력했을 때.*/}
-      <IonModal isOpen={props.isbtnopen && !isgetbtnlabel}>
-        <p>다시 확인해주세요.</p>
-      </IonModal>
+      {/* <IonModal isOpen={props.isbtnopen && !isgetbtnlabel} >
+        <p>다시 입력해주세요.</p>
+      </IonModal> */}
 
 
       {/* <IonModal isOpen={props.isbtnopen && isgetbtnlabel}> */}
-      <IonModal isOpen={props.isbtnopen} >
-     
+      <IonModal isOpen={
+        props.isbtnopen  && isgetbtnlabel} >
       <Password 
           id={props.id}
           idd={idd}
@@ -626,7 +626,10 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
 
 
 
+<<<<<<< HEAD
     
+=======
+>>>>>>> e425d5f964584a7a1720bc74544713d6055d1488
     </>
   );
 };

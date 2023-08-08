@@ -37,7 +37,7 @@
     ion-row.title {
         height: 320px;
     }
-    ion-modal {
+    .welcome {
         --width : 640px;
         --height : 710px;
         --border-radius: 10px;
@@ -50,7 +50,7 @@
     ion-row.title {
         height: 155px;
     }
-    ion-modal {
+    .welcome {
         --width : 640px;
         --height : 710px;
         --border-radius: 10px;

@@ -43,7 +43,7 @@ const App: React.FC = () => (
         </Route>
 
         <Route exact path="/">
-          <Redirect to="/home" />
+          <Redirect to="/Main" />
         </Route>
 
         <Route exact path="/logo">

@@ -121,6 +121,7 @@ function Kiosk() {
                                 <IonGrid class="btn_and_face">
                                     <IonRow>
                                         <IonCol class="face">
+<<<<<<< HEAD
                                             {/* <FaceRecognition isbtnopen={isbtnOpen} setisbtnOpen={setisbtnOpen}
                                                 id={id} typeid={typeid} /> */}
 
@@ -128,6 +129,10 @@ function Kiosk() {
 
                                                 id={id} typeid={typeid}/>
 
+=======
+                                            <FaceRecognition isbtnopen={isbtnOpen} setisbtnOpen={setisbtnOpen}
+                                                id={id} typeid={typeid} />
+>>>>>>> e425d5f964584a7a1720bc74544713d6055d1488
                                         </IonCol>
                                     </IonRow>
                                     <IonRow>
