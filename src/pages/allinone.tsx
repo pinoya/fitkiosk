@@ -10,7 +10,7 @@ import { IonButton, IonCol, IonContent, IonGrid, IonModal, IonRow, IonTitle, Ion
 import FaceRecognition from "../components/FaceRecognition";
 import Buttons from '../components/inputBtn';
 import Welcome from './welecome';
-import Test from '../components/test';
+import Test from './test';
 import React, { useEffect, useRef, useState } from 'react';
 
 
@@ -49,11 +49,34 @@ function Kiosk() {
     const [face, isface] = useState(false);
     const [jsondata, setjsondata] = useState([]);
 
-  
+
+    const [isgalleryOpen, setGalleryOpen] = useState(false);
+
+    const openGalleryModal = () => {
+        setGalleryOpen(true);
+    };
+
+    const closeGalleryModal = () => {
+        setGalleryOpen(false);
+    };
+
+
+
+
+
 
     return (
         <>
             <IonContent>
+
+                <button onClick={openGalleryModal}>모달 열기</button>
+                <button onClick={closeGalleryModal}>모달 닫기</button>
+
+
+                <IonModal isOpen={isgalleryOpen}>
+                    <Test></Test>
+                    <button onClick={closeGalleryModal}>모달 닫기</button>
+                </IonModal>
                 {/* <IonModal backdropDismiss={false} isOpen={isinOpen} ref={inmodal}>
                     <Welcome idd={idd} mile={mile} come={come}
                         product={product} have={have} locker={locker}
@@ -98,10 +121,8 @@ function Kiosk() {
                                 <IonGrid class="btn_and_face">
                                     <IonRow>
                                         <IonCol class="face">
-
-                                            <FaceRecognition isbtnopen={isbtnOpen} setisbtnOpen={setisbtnOpen} className='face_modal'
-
-                                                id={id} typeid={typeid}/>
+                                            <FaceRecognition isbtnopen={isbtnOpen} setisbtnOpen={setisbtnOpen}
+                                                id={id} typeid={typeid} />
                                         </IonCol>
                                     </IonRow>
                                     <IonRow>
