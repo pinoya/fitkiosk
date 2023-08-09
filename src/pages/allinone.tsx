@@ -50,15 +50,15 @@ function Kiosk() {
     const [jsondata, setjsondata] = useState([]);
 
 
-    const [isgalleryOpen, setGalleryOpen] = useState(false);
+    // const [isgalleryOpen, setGalleryOpen] = useState(false);
 
-    const openGalleryModal = () => {
-        setGalleryOpen(true);
-    };
+    // const openGalleryModal = () => {
+    //     setGalleryOpen(true);
+    // };
 
-    const closeGalleryModal = () => {
-        setGalleryOpen(false);
-    };
+    // const closeGalleryModal = () => {
+    //     setGalleryOpen(false);
+    // };
 
 
 
@@ -69,14 +69,14 @@ function Kiosk() {
         <>
             <IonContent>
 
-                <button onClick={openGalleryModal}>모달 열기</button>
+                {/* <button onClick={openGalleryModal}>모달 열기</button>
                 <button onClick={closeGalleryModal}>모달 닫기</button>
 
 
                 <IonModal isOpen={isgalleryOpen}>
                     <Test></Test>
                     <button onClick={closeGalleryModal}>모달 닫기</button>
-                </IonModal>
+                </IonModal> */}
                 {/* <IonModal backdropDismiss={false} isOpen={isinOpen} ref={inmodal}>
                     <Welcome idd={idd} mile={mile} come={come}
                         product={product} have={have} locker={locker}

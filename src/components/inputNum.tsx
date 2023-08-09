@@ -28,6 +28,8 @@ const input_num = (props: any) => {
 
   const description = "만약 얼굴인식이 안되는 경우, \n본인의 회원번호(5자리) 혹은 휴대폰번호를 입력해주세요.";
 
+  // const alertIdFail = "\n다시 입력해주세요."
+
   const addtext = (e: any) => {
     if (inputwhat == false) {
       props.settypeid(false);
@@ -112,6 +114,7 @@ const input_num = (props: any) => {
             <div className="hr" />
             <div className="input_desc">
               {description}
+              {/* {idFail} */}
             </div>
           </IonRow>
 

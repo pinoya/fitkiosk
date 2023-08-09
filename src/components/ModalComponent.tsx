@@ -63,13 +63,15 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
 
   const handleConfirm = () => {
     setIsNewModalOpen(true);
+
   };
 
   const handleNewModalCancel = () => {
     setIsNewModalOpen(false);
     onClose();
   };
-
+  
+  // let url = "dev.wisevill.com/kioskdb/update_in.php";
 
   return (
     <>
@@ -126,7 +128,7 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
       {/* New Modal */}
       {isNewModalOpen && (
 
-        <IonModal  className="welcome" backdropDismiss = {false} isOpen={true} onRequestClose={() => setIsNewModalOpen(false)} contentLabel="New Modal" style={modalStyles}>
+        <IonModal className="welcome" backdropDismiss = {false} isOpen={true} onRequestClose={() => setIsNewModalOpen(false)} contentLabel="New Modal" style={modalStyles}>
 
           <Welcome
           

@@ -1,0 +1,25 @@
+/*다시 입력해달라는 창*/
+ion-modal .failId {
+    --width: 100px;
+    --height: 100px;
+    --border-radius: 10px;
+    --background: #FFFFFF;
+}
+
+/* .faceFail {
+    margin: "0 auto";
+    position: absolute;
+    width: 210px;
+    height: 55px;
+    left: 535px;
+    top: 662px;
+
+    background: rgba(90, 42, 11, 0.7);
+    border-radius: 5px;
+    
+
+} */
+
+/* .h1{
+    color:#FFFFFF;
+} */
