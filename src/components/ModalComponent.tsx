@@ -61,13 +61,15 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
 
   const handleConfirm = () => {
     setIsNewModalOpen(true);
+
   };
 
   const handleNewModalCancel = () => {
     setIsNewModalOpen(false);
     onClose();
   };
-
+  
+  // let url = "dev.wisevill.com/kioskdb/update_in.php";
 
   return (
     <>

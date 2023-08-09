@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import * as faceapi from "face-api.js";
 import ModalComponent from "./ModalComponent";
 import Welcome from "../pages/welecome";
-import { IonCol, IonImg, IonModal } from "@ionic/react";
+import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonImg, IonModal } from "@ionic/react";
 import { CapacitorHttp } from "@capacitor/core";
 import Password from "../pages/password";
 import "./FaceRecognition.css";
@@ -74,6 +74,7 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
   const [duclass, setduclass] = useState('');
   const [left, setleft] = useState('');
   const [inclass, setinclass] = useState('');
+  const [flag,setflag] = useState('');
 
 
 
@@ -359,13 +360,80 @@ const resetDetectedLabel = () => {
     console.log("리셋했습니다.");
     const currentTime = new Date().toLocaleTimeString();
     console.log(currentTime);
-  }, 30000); // 1000 = 1초 10000 =10초 30초로 지정해놓음.
+  }, 60000); // 1000 = 1초 10000 =10초 60초로 지정해놓음.
 }
 
 
+//
+//얼굴인식이 안됐거나, 얼굴인식 등록을 안한 사람 
 //출석버튼 -> 출석 플래그 확인 -> 출석 하지 않았을 경우에만 비밀번호 창을 열어줌.
 //비밀번호 성공 -> 출석(출석 플래그 올림 / 출석 시간(현재시간) db에 찍기)
 
+//근데 번호로 출석을 했는데 다시 인식이 되어서 퇴실이 될수도 있음.
+
+//얼굴인식 x -> 버튼 -> 얼굴인식 
+// 출석 플래그 1개
+// 0 0 
+// 출석 1 0 
+// 1 ->
+
+// 1
+// -> 0 
+// 0
+
+// 0 0
+
+// 1 <- 이 사람 출석한 사람.
+// 근데 또 1이면 0으로 인식할 거 아님... ;;
+
+// 0 0
+
+// 1 0
+// 0 1
+
+//출석 -> 퇴실 
+
+
+// 얼굴인식으로만 생각
+// 얼굴인식 출석 -> 출석 플래그
+// 얼굴인식 퇴실 -> 퇴실 플래그
+
+// 버튼을 추가
+// 버튼으로 출석 -> 출석 플래그 (이때 얼굴 인식이 되어버릴수도 있음.)
+// 1번
+
+
+
+// 한번 인식된 사람 30초간 다시 인식 안되는 상태
+
+// 딱 한번 인식될때만 제어해주면 됨.
+// 출석시간 받아와서 5분 이하면 튕기기.
+
+
+// 출석 11시 25분 -> 0
+
+// 0 일때 출석시간 확인 5분 지났을때만 -> 1
+
+// 퇴실 11시 35분 -> 1
+
+// 1 일때 퇴실 시간 확인 5분 지났을때만 -> 0
+
+// 5분 뒤에 인식
+// 사람 -> 5분 뒤에 인식 .
+
+
+// db에 
+
+
+
+// 1 1 
+
+// 얼굴인식이 안됐거나, 얼굴인식 등록을 안한 사람 
+//출석버튼 -> 출석 플래그 확인(0) -> 출석 하지 않았을 경우에만 비밀번호 창을 열어줌.
+//비밀번호 성공 -> 출석(출석 플래그 올림 / 출석 시간(현재시간) db에 찍기)
+
+//퇴실버튼 -> 출석 플래그 확인(1) -> 출석 하지 않았을 경우에만 비밀번호 창을 열어줌.
+//비밀번호 성공 -> 출석(출석 플래그 올림 / 출석 시간(현재시간) db에 찍기)
 
 // 얼굴인식 확인 창의 출석(출석플래그 올림/ 출석시간(현재시간) db에 찍기) -> 확인창.  
 // 얼굴인식 확인 창의 퇴실(퇴실플래그 올림/ 퇴실시간(현재시간) db에 찍기) -> 확인창.  
@@ -473,7 +541,7 @@ const resetDetectedLabel = () => {
 
 
 
-
+//출석 플래그가 O -> 출석 시간 -> ㄱ
 
   //얼굴인식 유저 정보 가져오는 함수.
   const get_userinfo = async () => {
@@ -505,6 +573,8 @@ const resetDetectedLabel = () => {
         setduclass(JSON.parse(response.data)[i].duetoclass);
         setleft(JSON.parse(response.data)[i].leftclasstime);
         setinclass(JSON.parse(response.data)[i].inclass);
+        setflag(JSON.parse(response.data)[i].flag);
+
       }
     }
     setIsGetLabel(true);
@@ -552,6 +622,7 @@ const resetDetectedLabel = () => {
           setduclass(JSON.parse(response.data)[i].duetoclass);
           setleft(JSON.parse(response.data)[i].leftclasstime);
           setinclass(JSON.parse(response.data)[i].inclass);
+          setflag(JSON.parse(response.data)[i].flag);
         }
         // checkId();
 
@@ -596,6 +667,7 @@ const resetDetectedLabel = () => {
           setduclass(JSON.parse(response.data)[i].duetoclass);
           setleft(JSON.parse(response.data)[i].leftclasstime);
           setinclass(JSON.parse(response.data)[i].inclass);
+          setflag(JSON.parse(response.data)[i].flag);
         }
       } //전화번호
       setIsGetBtnLabel(true);
@@ -675,11 +747,30 @@ const resetDetectedLabel = () => {
 
   let fail;
 
+
+  // <IonCard>
+  // <IonCardHeader>
+  //   <IonCardTitle>Card Title</IonCardTitle>
+  //   <IonCardSubtitle>Card Subtitle</IonCardSubtitle>
+  // </IonCardHeader>
+  
+
   if (isUnknown && count < failCount) {
-    fail = <h1 style={{ margin: "0 auto", position: "absolute" }} > 다시 시도해주세요.</h1>
+    // fail = <div className="faceFail"><h1  style={{ margin: "0 auto", position: "absolute" }}> 다시 시도해주세요.</h1></div>
+    fail =  
+    <IonCard>
+    <IonCardHeader>
+      <IonCardTitle>다시 시도해주세요.</IonCardTitle>
+    </IonCardHeader>
+    </IonCard>
   }
   else if (isUnknown && count == failCount) {
-    fail = <h1 style={{ margin: "0 auto", position: "absolute" }} > 얼굴인식 실패. 회원번호나 휴대폰 번호를 이용해주십시오.</h1>
+    fail = 
+    <IonCard>
+    <IonCardHeader>
+      <IonCardTitle>얼굴인식 실패. <br></br>회원번호나 휴대폰 번호를 이용해주십시오.</IonCardTitle>
+    </IonCardHeader>
+    </IonCard>
   }
 
 
@@ -705,8 +796,31 @@ const resetDetectedLabel = () => {
   // {idEntry}
 
   // </IonModal>
+
+  //
+
+// let faceEntry;
+// if(flag == '0'){
+//      faceEntry = <IonModal className = "baseModal" isOpen={isModalOpen && !isModalShownForLabel && isgetlabel} backdropDismiss={false}>
+//         <ModalComponent
+//           detectedName={idd} //회원 id
+//           selfieURL={profileImg} // Pass the selfie URL here // Show the modal only if it's open and not shown for the current detected label
+//           mid={mid}
+//           tel={tel}
+//           mile={mile}
+//           come={come}
+//           product={product}
+//           have={have}
+//           locker={locker}
+//           duclass={duclass}
+//           left={left}
+//           inclass={inclass}
+//           onClose={handleCloseModal} />
+//       </IonModal>
+// }
+
   let idEntry;
-  if (mid == props.id || tel == props.id) {
+  if ((mid == props.id || tel == props.id) && flag == '0') {
     idEntry = <IonModal className="baseModal" isOpen={
       props.isbtnopen && isgetbtnlabel} backdropDismiss={false} > <Password
         id={props.id}
@@ -714,7 +828,6 @@ const resetDetectedLabel = () => {
         selfieURL={profileImg}
         mid={mid}
         tel={tel}
-
         mile={mile}
         come={come}
         product={product}
@@ -728,6 +841,7 @@ const resetDetectedLabel = () => {
     </IonModal>
   }
   else {
+// -> 실패 -> 다시 입력해주세요. 일단 좀 더 생각
     idEntry = <IonModal className="failId" isOpen={props.isbtnopen && isgetbtnlabel} backdropDismiss={false} >
       <p>다시 입력해주세요.</p>
       <button onClick={handleClosebtnModal}>닫기</button>
@@ -739,17 +853,6 @@ const resetDetectedLabel = () => {
     // style={{ background : "white", width: "100%",heigh : "100%" }}
   }
 
-  const [nowTime, setNowTime] = useState(Date.now())
-  const Time = () => {
-    setNowTime(Date.now())
-    console.log(nowTime);
-  }
-
-  // const Control = () =>{
-  //   setIsControl(true);
-  //   console.log("클릭됐어요");
-
-  // }
 
   return (
     <>
@@ -780,8 +883,10 @@ const resetDetectedLabel = () => {
 
       {/*카메라가 꺼졌을 때 찍힌 셀피를 보여줌.*/}
 
+      {/* {faceEntry} */}
 
       {/* <IonModal className = "baseModal" isOpen={isModalOpen && !isModalShownForLabel && isgetlabel} backdropDismiss={false}> */}
+
       <IonModal className = "baseModal" isOpen={isModalOpen && !isModalShownForLabel && isgetlabel} backdropDismiss={false}>
         <ModalComponent
           detectedName={idd} //회원 id
@@ -798,6 +903,7 @@ const resetDetectedLabel = () => {
           inclass={inclass}
           onClose={handleCloseModal} />
       </IonModal>
+
       {/* 
       <IonModal isOpen={isidFail} backdropDismiss={false} >
         <p>다시 입력해주세요.</p>

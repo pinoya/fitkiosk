@@ -1,4 +1,3 @@
-
 div.background-image-img {
     position: absolute;
     background-image: url(./testimg.jpg);
@@ -50,16 +49,31 @@ ion-grid.window {
     /* background-color: blue; */
 }
 
+.faceFail {
+    margin: "0 auto";
+    position: absolute;
+    width: 210px;
+    height: 55px;
+    left: 535px;
+    top: 662px;
+
+    background: rgba(90, 42, 11, 0.7);
+    border-radius: 5px;
+    color: #FFFFFF;
+
+}
+
 @media (orientation: portrait) {
     ion-row.title {
         height: 320px;
     }
-    ion-modal.baseModal{
-        --width : 640px;
-        --height : 710px;
+
+    ion-modal.baseModal {
+        --width: 640px;
+        --height: 710px;
         --border-radius: 10px;
-        --background : #232323;
-    
+        --background: #232323;
+
     }
 }
 
@@ -67,12 +81,13 @@ ion-grid.window {
     ion-row.title {
         height: 155px;
     }
-    ion-modal.baseModal{
-        --width : 640px;
-        --height : 710px;
+
+    ion-modal.baseModal {
+        --width: 640px;
+        --height: 710px;
         --border-radius: 10px;
-        --background : #232323;
-    
+        --background: #232323;
+
     }
 }
 
@@ -132,10 +147,11 @@ ion-col.face video {
     /* position: absolute; */
 }
 
-ion-col.face .Selfie{
+ion-col.face .Selfie {
     width: 100%;
     height: 100%;
 }
+
 /*셀피 크기*/
 
 ion-col.btn {
@@ -147,3 +163,17 @@ ion-col.btn {
 }
 
 
+ion-card {
+    --background: #FFFFFF;
+    --color: black;
+    opacity: 0.5;
+    /* 80% 불투명도 */
+}
+
+ion-card-title {
+    --color: #black;
+}
+
+ion-card-subtitle {
+    --color: #d1fff8;
+}
