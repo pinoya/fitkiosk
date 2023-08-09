@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import './password.css';
 import './allinone.css';
 import Welcome from '../pages/welecome';
+import { CapacitorHttp } from "@capacitor/core";
 
 type ModalComponentProps = {
   id: string | null;
@@ -21,8 +22,8 @@ type ModalComponentProps = {
   duclass: string | null;
   left: string | null;
   inclass: string | null;
-
-  userpwd: string | null;
+  recentTime : string | null;
+  userpassword: string | null;
   onClose: () => void;
 
 
@@ -42,11 +43,13 @@ const Password: React.FC<ModalComponentProps> = ({
   duclass,
   left,
   inclass,
-  userpwd,
+  userpassword,
+  recentTime,
   onClose,
 }) => {
 
   const [inputwhat, setinputwhat] = useState('비밀번호를 입력하세요.'); //어떤 숫자 쳤는지
+  
   const addtext = (value) => {
     if (inputwhat === '비밀번호를 입력하세요.') {
       setinputwhat(value); // 첫번째 수로 바뀜
@@ -77,21 +80,19 @@ const Password: React.FC<ModalComponentProps> = ({
 
 
 
+  const inner_pw = document.getElementById("inner_pw");
   const handleConfirm = () => {
-    // if (userpwd === inputwhat) {
-    //   console.log('패스워드 일치!');
-    //   setIsNewModalOpen(true);
-    // } else {
-    //   console.log('패스워드 불일치!');
-    // }
-
-    setIsNewModalOpen(true);
-
-    /*setTimeout(() => {
-      setIsNewModalOpen(false);
-      onClose();
-      
-    }, 5000);*/
+    if (userpassword === inputwhat) {
+      updateFlagTime();
+      console.log('패스워드 일치!');
+      setIsNewModalOpen(true);
+     } 
+     else{
+      inner_pw.innerText = `비밀번호를 잘못 입력했습니다.
+      입력하신 내용을 다시 확인해주세요.`;
+      console.log('패스워드 불일치!');
+      setIsNewModalOpen(false); 
+     }
 
   };
 
@@ -101,6 +102,46 @@ const Password: React.FC<ModalComponentProps> = ({
     onClose();
 
   }
+  const [timer, setTimer] = useState('');
+  const currentTimer = async () => {
+    
+    var now = new Date();
+    const hours = now.getHours();
+    const minutes = String(now.getMinutes()).padStart(2, "0");
+    const seconds = String(now.getSeconds()).padStart(2, "0");
+    const years = now.getFullYear();
+    const months = String(now.getMonth() + 1).padStart(2,"0");
+    const days = String(now.getDate()).padStart(2,"0");
+
+    const timerValue = `${years}-${months}-${days} ${hours}:${minutes}:${seconds}`;
+    setTimer(timerValue);
+  };
+
+
+  const updateFlagTime = async () => {
+    let url = 'http://dev.wisevill.com/kioskdb/update_in.php';
+    const options = {
+      url: url,
+      data: {
+        id: id,
+        time: timer,
+      },
+    };
+    const response = await CapacitorHttp.post(options);
+    console.log(response);
+  };
+
+
+  const startTimer = () => {
+    currentTimer();
+
+  };
+
+  useEffect(() => {
+    startTimer();
+ 
+  }, []);
+  
 
   return (
     <>
@@ -164,6 +205,7 @@ const Password: React.FC<ModalComponentProps> = ({
                     <p className="pw_body3_box_input">{inputwhat}</p>
 
                   </div>
+                  <p id='inner_pw' style={{color:'#ff6300', fontSize:'12px'}}></p>
 
                   <div className="pw_body3_last">
                     <div className="pw_body3_last_div1">
@@ -171,12 +213,13 @@ const Password: React.FC<ModalComponentProps> = ({
                         출석
                       </button>
                     </div>
-
+                  
                     <div className="pw_body3_last_div2">
                       <button onClick={onClose} className="pw_body3_last_button2">취소</button>
                     </div>
                   </div>
                 </div>
+
               </IonCol>
             </IonRow>
           </IonRow>
@@ -197,6 +240,7 @@ const Password: React.FC<ModalComponentProps> = ({
             duclass={duclass}
             left={left}
             inclass={inclass}
+            recentTime={recentTime}
             onRequestClose={() => setIsNewModalOpen(false)}
             onCancelButtonClick={handleNewModalCancel} // Pass the function here
           />

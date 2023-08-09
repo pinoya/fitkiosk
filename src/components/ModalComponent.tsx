@@ -25,6 +25,7 @@ type ModalComponentProps = {
   duclass: string | null;
   left: string | null;
   inclass: string | null;
+  recentTime : string | null;
   onClose: () => void;
 
   
@@ -44,6 +45,7 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
   duclass,
   left,
   inclass,
+  recentTime,
   onClose,
 }) => {
   const [isNewModalOpen, setIsNewModalOpen] = useState(false);
@@ -138,6 +140,7 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
             duclass={duclass}
             left={left}
             inclass={inclass}
+            recentTime={recentTime}
             onRequestClose={() => setIsNewModalOpen(false)}
             onCancelButtonClick={handleNewModalCancel} // Pass the function here
           />

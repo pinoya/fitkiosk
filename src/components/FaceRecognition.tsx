@@ -64,6 +64,8 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
   const [duclass, setduclass] = useState('');
   const [left, setleft] = useState('');
   const [inclass, setinclass] = useState('');
+  const [recentTime, setrecentTime] = useState('');
+  const [userpassword, setuserpassword] = useState('');
 
 
 
@@ -308,6 +310,9 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
       localStorage.setItem("shownLabel", "null");
     }
 
+    //detectedLabel = 회원번호
+    //
+    console.log(detectedLabel);
 
     const shownLabel = localStorage.getItem("shownLabel");
     if (shownLabel === detectedLabel) {
@@ -334,14 +339,14 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
   }, [props.isbtnopen]);
 
 
-  const get_userinfo = async () => {
+  const get_userinfo = async () => {  
     let url = 'http://dev.wisevill.com/kioskdb/get_data_from_db.php';
     console.log(detectedLabel);
     if (detectedLabel) {
       const options = {
         url: url,
-        data: { id: detectedLabel },
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        data: { id: detectedLabel},
+
 
       }
       const response = await CapacitorHttp.post(options);
@@ -351,6 +356,8 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
         console.log(JSON.parse(response.data)[i].id);
         console.log(JSON.parse(response.data)[i].name);
         console.log(JSON.parse(response.data)[i].mile);
+        console.log(JSON.parse(response.data)[i].recentTime);
+        console.log(JSON.parse(response.data)[i].pw);
         setmid(JSON.parse(response.data)[i].id);
         setidd(JSON.parse(response.data)[i].name); //이름
         settel(JSON.parse(response.data)[i].tel);
@@ -363,6 +370,8 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
         setduclass(JSON.parse(response.data)[i].duetoclass);
         setleft(JSON.parse(response.data)[i].leftclasstime);
         setinclass(JSON.parse(response.data)[i].inclass);
+        setrecentTime(JSON.parse(response.data)[i].recentTime);
+        setuserpassword(JSON.parse(response.data)[i].pw);
       }
     }
     setIsGetLabel(true);
@@ -405,7 +414,7 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
         const options = {
           url: url,
           data: { id: props.id },
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+
         }
         const response = await CapacitorHttp.post(options);
         // console.log(JSON.parse(response.data));
@@ -415,6 +424,9 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
           console.log(JSON.parse(response.data)[i].id);
           console.log(JSON.parse(response.data)[i].name);
           console.log(JSON.parse(response.data)[i].mile);
+          console.log(JSON.parse(response.data)[i].recentTime);
+          console.log(JSON.parse(response.data)[i].pw);
+          setmid(JSON.parse(response.data)[i].id);
           setidd(JSON.parse(response.data)[i].name); //이름
           settel(JSON.parse(response.data)[i].tel);
           setProfileImg(JSON.parse(response.data)[i].profile_img);
@@ -426,6 +438,8 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
           setduclass(JSON.parse(response.data)[i].duetoclass);
           setleft(JSON.parse(response.data)[i].leftclasstime);
           setinclass(JSON.parse(response.data)[i].inclass);
+          setrecentTime(JSON.parse(response.data)[i].recentTime);
+          setuserpassword(JSON.parse(response.data)[i].pw);
         }
         setIsGetBtnLabel(true);
       }
@@ -433,7 +447,6 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
         const options = {
           url: url,
           data: { tel: props.id },
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         }
         const response = await CapacitorHttp.post(options);
         console.log(JSON.parse(response.data));
@@ -443,6 +456,7 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
           console.log(JSON.parse(response.data)[i].id);
           console.log(JSON.parse(response.data)[i].name);
           console.log(JSON.parse(response.data)[i].mile);
+          setmid(JSON.parse(response.data)[i].id);
           setidd(JSON.parse(response.data)[i].name); //이름
           settel(JSON.parse(response.data)[i].tel);
           setProfileImg(JSON.parse(response.data)[i].profile_img);
@@ -454,6 +468,8 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
           setduclass(JSON.parse(response.data)[i].duetoclass);
           setleft(JSON.parse(response.data)[i].leftclasstime);
           setinclass(JSON.parse(response.data)[i].inclass);
+          setrecentTime(JSON.parse(response.data)[i].recentTime);
+          setuserpassword(JSON.parse(response.data)[i].pw);
         }
         setIsGetBtnLabel(true);
       } //전화번호
@@ -593,6 +609,7 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
           duclass={duclass}
           left={left}
           inclass={inclass}
+          recentTime={recentTime}
           onClose={handleCloseModal} />
       </IonModal>
 
@@ -602,27 +619,59 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
 
 
       {/* <IonModal isOpen={props.isbtnopen && isgetbtnlabel}> */}
-      <IonModal isOpen={
-        props.isbtnopen  && isgetbtnlabel} >
-      <Password 
-          id={props.id}
-          idd={idd}
-          selfieURL={profileImg}
-          mid={mid}
-          tel={tel}
-
-          mile={mile}
-          come={come}
-          product={product}
-          have={have}
-          locker={locker}
-          duclass={duclass}
-          left={left}
-          inclass={inclass}
-          //userpwd={userpwd}
-          onClose={handleClosebtnModal} userpwd={null}/> 
-          
-          </IonModal>
+      <IonModal isOpen={props.isbtnopen && isgetbtnlabel}>
+                          <Password 
+                            id={props.id}
+                            idd={idd}
+                            selfieURL={profileImg}
+                            mid={mid}
+                            tel={tel}
+                            mile={mile}
+                            come={come}
+                            product={product}
+                            have={have}
+                            locker={locker}
+                            duclass={duclass}
+                            left={left}
+                            inclass={inclass}
+                            onClose={handleClosebtnModal}
+                            userpassword={userpassword}
+                            recentTime={recentTime}
+                          /> 
+                        </IonModal>
+                  {/*}  {
+                      mid.includes(props.id)
+                      ? (
+                        <IonModal isOpen={props.isbtnopen && isgetbtnlabel}>
+                          <Password 
+                            id={props.id}
+                            idd={idd}
+                            selfieURL={profileImg}
+                            mid={mid}
+                            tel={tel}
+                            mile={mile}
+                            come={come}
+                            product={product}
+                            have={have}
+                            locker={locker}
+                            duclass={duclass}
+                            left={left}
+                            inclass={inclass}
+                            onClose={handleClosebtnModal}
+                            userpwd={null}
+                          /> 
+                        </IonModal>
+                      ) : (
+                        setTimeout(() => {
+                          <IonModal isOpen={props.isbtnopen && isgetbtnlabel}>
+                          <p>plz try again</p>
+                        </IonModal>
+                        }, 5000)
+                      )
+                    }*/}
+                    
+                       
+      
 
 
 

@@ -22,7 +22,7 @@ function Welcome(props: any) {
 
   const [jsondata, setjsondata] = useState([]);
 
-  const [idd, setidd] = useState(''); //jsondata 이름
+  const [mid, setmid] = useState(''); //jsondata 이름
   const [mile, setmile] = useState('');
   const [come, setcome] = useState('');
   const [product, setproduct] = useState('');
@@ -32,19 +32,21 @@ function Welcome(props: any) {
   const [left, setleft] = useState('');
   const [inclass, setinclass] = useState('');
   const [img, setimg] = useState('');
+  const [recentTime, setrecentTime]=useState('');
+  
 
 
 
 
-
-  const currentTimer = () => {
+  const currentTimer = async () => {
+    
     var now = new Date();
     const hours = now.getHours();
     const minutes = String(now.getMinutes()).padStart(2, "0");
     const seconds = String(now.getSeconds()).padStart(2, "0");
     const years = now.getFullYear();
-    const months = now.getMonth() + 1;
-    const days = now.getDate();
+    const months = String(now.getMonth() + 1).padStart(2,"0");
+    const days = String(now.getDate()).padStart(2,"0");
 
     //요일 저장
     const week = ['일', '월', '화', '수', '목', '금', '토']
@@ -52,8 +54,12 @@ function Welcome(props: any) {
     //now.getDay()==0은 일요일 week[0]은 배열에 저장해둔 일요일
     let dayofweeks = week[now.getDay()];
 
-    setTimer(`${years}년 ${months}월 ${days}일(${dayofweeks}) ${hours}:${minutes}:${seconds}`);
+    const timerValue = `${years}-${months}-${days} ${hours}:${minutes}:${seconds}`;
+    setTimer(timerValue);
 
+    
+
+    
     // //디데이1 - 회원권 만료일
     var dday = new Date((props.product).substring(0,4), (props.product).substring(5,7)-1, (props.product).substring(8,10)); 
 
@@ -111,57 +117,33 @@ function Welcome(props: any) {
 
    setDdday3(`D-${result3}`);
 
-   
-    //로컬스토리지
-    /*  const time = [
-      {
-        id : '22223', //임의로
-        hour : hours,
-        minute : minutes
-      },
-      
-    ];
+   const url = 'http://dev.wisevill.com/kioskdb/get_data_from_db.php';
 
-    const matchedTime = time.find((item) => item.id === props.id); //아이디값 비교
-    if (matchedTime) {
-      // 객체를 json 문자열로 변환
-      const timeString = JSON.stringify(time);
-      // setitem(로컬 스토리지에 저장)
-      window.localStorage.setItem('times', timeString);
-      console.log(timeString);
-    }
-    else { 
-      const newTimeEntry = {
-        id: props.id,
-        hour: hours,
-        minute: minutes,
-      };
 
-      const timesString = window.localStorage.getItem('times');
-      let existingTimes = timesString ? JSON.parse(timesString) : []; 
-      console.log(existingTimes);
-      existingTimes.push(newTimeEntry);
+  
 
-      // 로컬스토리지 업데이트
-      window.localStorage.setItem('times', JSON.stringify(existingTimes));
-    }
-    if(window.localStorage.length>=200){
-      window.localStorage.clear();
-    }*/
   };
+   
+ 
+
+
+
+  
   const startTimer = () => {
     currentTimer();
+
     //currentLocal();
   };
 
   useEffect(() => {
     startTimer();
+ 
   }, []);
 
   // console.log(props.onRequestClose);
   console.log(props.onCancelButtonClick);
 
-  useEffect// get_userinfo();
+  //useEffect// get_userinfo();
   // print_jsondata();
 
 
@@ -237,7 +219,8 @@ function Welcome(props: any) {
 
                 </div>
 
-                <div className='body2_time'>{timer}</div>
+                <div className='body2_time'>입장시간:{props.recentTime}<br/>
+                퇴장시간 : {timer}</div>
                 <div className='body2_p1'>
                   <p className='body2_mil'>보유 마일리지</p>
                   <p className='body2_score'>
@@ -356,7 +339,7 @@ function Welcome(props: any) {
                 <p className='body3_p1_finish'>수강권 상품권</p>
                 <div className='body3_p1_r'>
                   <p className='body3_p1_r_date' style={{marginTop:'5%'}}>
-
+                  
                     {props.inclass}</p>
                 </div>
               </div>
@@ -366,8 +349,8 @@ function Welcome(props: any) {
                 {OkBtn}
 
               </div>
-
-            </div>
+              
+          </div>
 
 
           </IonCol>
