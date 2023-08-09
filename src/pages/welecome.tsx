@@ -159,7 +159,7 @@ function Welcome(props: any) {
   }, []);
 
   // console.log(props.onRequestClose);
-  console.log(props.onCancelButtonClick);
+  // console.log(props.onCancelButtonClick);
 
   useEffect// get_userinfo();
   // print_jsondata();
@@ -183,7 +183,7 @@ function Welcome(props: any) {
   // 2. ui 2-1 사진 서버에  
   let selfie;
 
-  console.log(props.profile_img);
+  // console.log(props.profile_img);
   //사진값이 넘어오지 않았을때 일단 대체 이미지로
   if (props.selfieURL == null) {
     if(props.profile_img !=null){ //프로필 이미지가 있을때
@@ -212,8 +212,8 @@ function Welcome(props: any) {
     OkBtn = <IonButton size='large' expand='block' onClick={() => props.onCancelButtonClick()}>확인</IonButton>
   }
 
-  console.log(props.detectedName);
-  console.log(props.mile);
+  // console.log(props.detectedName);
+  // console.log(props.mile);
 
   return (
 
