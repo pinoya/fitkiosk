@@ -42,7 +42,7 @@ function Kiosk() {
     const [isinOpen, setisinOpen] = useState(false);
     const [isbtnOpen, setisbtnOpen] = useState(false);
     const [isbtnClose, setisbtnClose] = useState(false);
-    const [isoutOpen, setisoutOpen] = useState(false);
+    const [isbtnoutOpen, setisBtnoutOpen] = useState(false);
     const [id, setid] = useState('123');
     const [typeid, settypeid] = useState(false);
     const [pw, setpw] = useState('pw');
@@ -121,7 +121,7 @@ function Kiosk() {
                                 <IonGrid class="btn_and_face">
                                     <IonRow>
                                         <IonCol class="face">
-                                            <FaceRecognition isbtnopen={isbtnOpen} setisbtnOpen={setisbtnOpen}
+                                            <FaceRecognition isbtnopen={isbtnOpen} setisbtnOpen={setisbtnOpen} isbtnoutOpen={isbtnoutOpen} setisbtnoutOpen={setisBtnoutOpen}
                                                 id={id} typeid={typeid} />
                                         </IonCol>
                                     </IonRow>
@@ -129,7 +129,7 @@ function Kiosk() {
                                         <IonCol class="btn">
                                             {/* <Buttons id={id} pw={pw} face={face} setisinOpen={setisinOpen} setisoutOpen={setisoutOpen} typeid={typeid} /> */}
                                             <Buttons id={id} pw={pw} face={face}
-                                                setisbtnOpen={setisbtnOpen} setisoutOpen={setisoutOpen} typeid={typeid} />
+                                                setisbtnOpen={setisbtnOpen} setisbtnoutOpen={setisBtnoutOpen} typeid={typeid} />
                                         </IonCol>
 
 

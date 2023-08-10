@@ -33,7 +33,7 @@ function Welcome(props: any) {
   const [inclass, setinclass] = useState('');
   const [img, setimg] = useState('');
   const [recentTime, setrecentTime]=useState('');
-  
+
 
 
 
@@ -59,7 +59,7 @@ function Welcome(props: any) {
 
     
 
-    
+
     // //디데이1 - 회원권 만료일
     var dday = new Date((props.product).substring(0,4), (props.product).substring(5,7)-1, (props.product).substring(8,10)); 
 
@@ -118,13 +118,13 @@ function Welcome(props: any) {
    setDdday3(`D-${result3}`);
 
    const url = 'http://dev.wisevill.com/kioskdb/get_data_from_db.php';
-
-
-  
-
-  };
    
- 
+      
+
+
+      };
+
+
 
 
 
@@ -197,6 +197,31 @@ function Welcome(props: any) {
   // console.log(props.detectedName);
   // console.log(props.mile);
 
+  
+  let hiBye;
+
+  if(props.flag == '0'){
+    hiBye = <p className='body2_welcome'>환영합니다.</p>
+
+  }
+  else if(props.flag == '1'){
+    hiBye = <p className='body2_welcome'>안녕히가십시오.</p>
+    
+  }
+
+  let time;
+
+  if(props.flag == '0'){
+    time =  <div className='body2_time'>입장시간:{timer}<br/>
+    </div>
+
+  }
+  else if(props.flag == '1'){
+    time =   <div className='body2_time'>입장시간:{props.recentTime}<br/>
+    퇴장시간 : {timer}</div>
+    
+  }
+
   return (
 
     <>
@@ -215,12 +240,11 @@ function Welcome(props: any) {
                 <div className='body2_name'>
                   {name}
                   <p className='body2_nim'>님,</p>
-                  <p className='body2_welcome'>환영합니다.</p>
+                  {hiBye}
 
                 </div>
 
-                <div className='body2_time'>입장시간:{props.recentTime}<br/>
-                퇴장시간 : {timer}</div>
+                {time}
                 <div className='body2_p1'>
                   <p className='body2_mil'>보유 마일리지</p>
                   <p className='body2_score'>
@@ -339,7 +363,7 @@ function Welcome(props: any) {
                 <p className='body3_p1_finish'>수강권 상품권</p>
                 <div className='body3_p1_r'>
                   <p className='body3_p1_r_date' style={{marginTop:'5%'}}>
-                  
+
                     {props.inclass}</p>
                 </div>
               </div>
@@ -349,8 +373,8 @@ function Welcome(props: any) {
                 {OkBtn}
 
               </div>
-              
-          </div>
+
+            </div>
 
 
           </IonCol>

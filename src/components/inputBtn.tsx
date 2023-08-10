@@ -29,14 +29,14 @@ const InputBtn = (props: any) => {
                 console.log("id를 다시 확인해주세요.");
             } else {
                 console.log(props.id + "님 퇴장 하셨습니다.");
-                props.setisoutOpen(true);
+                props.setisbtnoutOpen(true);
             }    
         } else {
             if (props.id.length != 13) {
                 console.log("id를 다시 확인해주세요.");
             } else {
                 console.log(props.id + "님 퇴장 하셨습니다.");
-                props.setisoutOpen(true);
+                props.setisbtnoutOpen(true);
             }    
         }    
     }

@@ -22,8 +22,9 @@ type ModalComponentProps = {
   duclass: string | null;
   left: string | null;
   inclass: string | null;
-  recentTime : string | null;
+  recentTime: string | null;
   userpassword: string | null;
+  flag: string | null;
   onClose: () => void;
 
 
@@ -45,12 +46,13 @@ const Password: React.FC<ModalComponentProps> = ({
   inclass,
   userpassword,
   recentTime,
+  flag,
   onClose,
 }) => {
 
   const [inputwhat, setinputwhat] = useState('비밀번호를 입력하세요.'); //어떤 숫자 쳤는지
-  
-  const addtext = (value) => {
+
+  const addtext = (value: any) => {
     if (inputwhat === '비밀번호를 입력하세요.') {
       setinputwhat(value); // 첫번째 수로 바뀜
     } else {
@@ -80,55 +82,20 @@ const Password: React.FC<ModalComponentProps> = ({
 
 
 
-  const inner_pw = document.getElementById("inner_pw");
-  const handleConfirm = () => {
-    if (userpassword === inputwhat) {
-      updateFlagTime();
-      console.log('패스워드 일치!');
-      setIsNewModalOpen(true);
-     } 
-     else{
-      inner_pw.innerText = `비밀번호를 잘못 입력했습니다.
-      입력하신 내용을 다시 확인해주세요.`;
-      console.log('패스워드 불일치!');
-      setIsNewModalOpen(false); 
-     }
-
-  };
-
-  const handleNewModalCancel = () => {
-
-    setIsNewModalOpen(false);
-    onClose();
-
-  }
   const [timer, setTimer] = useState('');
+
   const currentTimer = async () => {
-    
+
     var now = new Date();
     const hours = now.getHours();
     const minutes = String(now.getMinutes()).padStart(2, "0");
     const seconds = String(now.getSeconds()).padStart(2, "0");
     const years = now.getFullYear();
-    const months = String(now.getMonth() + 1).padStart(2,"0");
-    const days = String(now.getDate()).padStart(2,"0");
+    const months = String(now.getMonth() + 1).padStart(2, "0");
+    const days = String(now.getDate()).padStart(2, "0");
 
     const timerValue = `${years}-${months}-${days} ${hours}:${minutes}:${seconds}`;
     setTimer(timerValue);
-  };
-
-
-  const updateFlagTime = async () => {
-    let url = 'http://dev.wisevill.com/kioskdb/update_in.php';
-    const options = {
-      url: url,
-      data: {
-        id: id,
-        time: timer,
-      },
-    };
-    const response = await CapacitorHttp.post(options);
-    console.log(response);
   };
 
 
@@ -139,96 +106,183 @@ const Password: React.FC<ModalComponentProps> = ({
 
   useEffect(() => {
     startTimer();
- 
+
   }, []);
-  
+
+  const inner_pw = document.getElementById("inner_pw");
+
+  const handleConfirm = () => {
+    if (userpassword === inputwhat) {
+      updateFlagTime();
+      console.log('패스워드 일치!');
+      setIsNewModalOpen(true);
+    }
+    else {
+      if (inner_pw) {
+        inner_pw.innerText = `비밀번호를 잘못 입력했습니다.
+      입력하신 내용을 다시 확인해주세요.`;
+        console.log('패스워드 불일치!');
+        setIsNewModalOpen(false);
+      }
+    }
+  };
+
+
+  const updateFlagTime = async () => {
+    let url = 'http://dev.wisevill.com/kioskdb/update_in.php';
+    const options = {
+      url: url,
+      data: {
+        id: mid,
+        time: timer,
+      },
+    };
+    const response = await CapacitorHttp.post(options);
+    console.log(response);
+  };
+
+
+  const handleExitbutton = () => {
+    if (userpassword === inputwhat) {
+      updateOutFlagTime();
+      console.log('패스워드 일치!');
+      setIsNewModalOpen(true);
+    }
+    else {
+      if (inner_pw) {
+        inner_pw.innerText = `비밀번호를 잘못 입력했습니다.
+      입력하신 내용을 다시 확인해주세요.`;
+        console.log('패스워드 불일치!');
+        setIsNewModalOpen(false);
+      }
+    }
+  };
+
+
+
+  const updateOutFlagTime = async () => {
+    let url = 'http://dev.wisevill.com/kioskdb/update_out.php';
+    const options = {
+      url: url,
+      data: {
+        id: mid,
+        time: timer,
+      },
+    };
+    const response = await CapacitorHttp.post(options);
+    console.log(response);
+  };
+
+  const handleNewModalCancel = () => {
+
+    setIsNewModalOpen(false);
+    onClose();
+
+  }
+
+
+  let InOutbutton;
+
+  if (flag == '0') {
+    InOutbutton = <button onClick={handleConfirm} className="pw_body3_last_button1">
+    출석
+  </button>
+  }
+  else if (flag == '1') {
+    InOutbutton = <button onClick={handleExitbutton} className="pw_body3_last_button1">
+      퇴실
+    </button>
+  }
 
   return (
     <>
       {/* <IonModal isOpen={isopen}  > */}
-        <IonGrid>
-          <IonRow class="input_padd">
-            <IonRow class="input_roww">
-              <IonCol class="input_boxx">
-                <IonButton class="input_btnn" onClick={() => addtext("1")}>1</IonButton>
-                <IonButton class="input_btnn" onClick={() => addtext("2")}>2</IonButton>
-                <IonButton class="input_btnn" onClick={() => addtext("3")}>3</IonButton>
+      <IonGrid>
+        <IonRow class="input_padd">
+          <IonRow class="input_roww">
+            <IonCol class="input_boxx">
+              <IonButton class="input_btnn" onClick={() => addtext("1")}>1</IonButton>
+              <IonButton class="input_btnn" onClick={() => addtext("2")}>2</IonButton>
+              <IonButton class="input_btnn" onClick={() => addtext("3")}>3</IonButton>
 
 
 
-              </IonCol>
-            </IonRow>
+            </IonCol>
+          </IonRow>
 
 
-            <IonRow class="input_roww">
-              <IonCol class="input_boxx">
-                <IonButton class="input_btnn" onClick={() => addtext("4")}>4</IonButton>
-                <IonButton class="input_btnn" onClick={() => addtext("5")}>5</IonButton>
-                <IonButton class="input_btnn" onClick={() => addtext("6")}>6</IonButton>
-              </IonCol>
-
-            </IonRow>
-            <IonRow class="input_roww">
-              <IonCol class="input_boxx">
-                <IonButton class="input_btnn" onClick={() => addtext("7")}>7</IonButton>
-                <IonButton class="input_btnn" onClick={() => addtext("8")}>8</IonButton>
-                <IonButton class="input_btnn" onClick={() => addtext("9")}>9</IonButton>
-              </IonCol>
-
-            </IonRow>
-
-            <IonRow class="input_roww">
-              <IonCol class="input_boxx">
-                <IonButton class="input_btnn" style={{ fontSize: '26px' }} onClick={resettext}>취소</IonButton>
-                <IonButton class="input_btnn" onClick={() => addtext("0")}>0</IonButton>
-                <IonButton class="input_btnn" onClick={deletetext}>X</IonButton>
-              </IonCol>
-
-            </IonRow>
+          <IonRow class="input_roww">
+            <IonCol class="input_boxx">
+              <IonButton class="input_btnn" onClick={() => addtext("4")}>4</IonButton>
+              <IonButton class="input_btnn" onClick={() => addtext("5")}>5</IonButton>
+              <IonButton class="input_btnn" onClick={() => addtext("6")}>6</IonButton>
+            </IonCol>
 
           </IonRow>
-          <IonRow>
-            <IonRow className="pw_body">
-              <IonCol className="pw_body2">
-                <div className="pw_body3">
-                  <div className="pw_body3_first">
-                    <p className="pw_body3_first_p">회원번호</p>
-                    <p className="pw_body3_first_p2">{mid}</p>
-                  </div>
+          <IonRow class="input_roww">
+            <IonCol class="input_boxx">
+              <IonButton class="input_btnn" onClick={() => addtext("7")}>7</IonButton>
+              <IonButton class="input_btnn" onClick={() => addtext("8")}>8</IonButton>
+              <IonButton class="input_btnn" onClick={() => addtext("9")}>9</IonButton>
+            </IonCol>
 
-                  <div className="pw_body3_second">
-                    <p className="pw_body3_second_p">{idd}</p>
-                    <p className="pw_body3_second_p2">님, 출석 비밀번호를 입력해 주세요.</p>
-                  </div>
+          </IonRow>
 
-                  <div className="pw_body3_box">
-                    <p className="pw_body3_box_input">{inputwhat}</p>
+          <IonRow class="input_roww">
+            <IonCol class="input_boxx">
+              <IonButton class="input_btnn" style={{ fontSize: '26px' }} onClick={resettext}>취소</IonButton>
+              <IonButton class="input_btnn" onClick={() => addtext("0")}>0</IonButton>
+              <IonButton class="input_btnn" onClick={deletetext}>X</IonButton>
+            </IonCol>
 
-                  </div>
-                  <p id='inner_pw' style={{color:'#ff6300', fontSize:'12px'}}></p>
+          </IonRow>
 
-                  <div className="pw_body3_last">
-                    <div className="pw_body3_last_div1">
-                      <button onClick={handleConfirm} className="pw_body3_last_button1">
-                        출석
-                      </button>
-                    </div>
-                  
-                    <div className="pw_body3_last_div2">
-                      <button onClick={onClose} className="pw_body3_last_button2">취소</button>
-                    </div>
-                  </div>
+        </IonRow>
+        <IonRow>
+          <IonRow className="pw_body">
+            <IonCol className="pw_body2">
+              <div className="pw_body3">
+                <div className="pw_body3_first">
+                  <p className="pw_body3_first_p">회원번호</p>
+                  <p className="pw_body3_first_p2">{mid}</p>
                 </div>
 
-              </IonCol>
-            </IonRow>
+                <div className="pw_body3_second">
+                  <p className="pw_body3_second_p">{idd}</p>
+                  <p className="pw_body3_second_p2">님, 비밀번호를 입력해 주세요.</p>
+                </div>
+
+                <div className="pw_body3_box">
+                  <p className="pw_body3_box_input">{inputwhat}</p>
+
+                </div>
+                <p id='inner_pw' style={{ color: '#ff6300', fontSize: '12px' }}></p>
+                
+
+
+                <div className="pw_body3_last">
+                  <div className="pw_body3_last_div1">
+                    {/* <button onClick={handleConfirm} className="pw_body3_last_button1">
+                      퇴실
+                    </button> */}
+                    {InOutbutton}
+                  </div>
+
+                  <div className="pw_body3_last_div2">
+                    <button onClick={onClose} className="pw_body3_last_button2">취소</button>
+                  </div>
+                </div>
+              </div>
+
+            </IonCol>
           </IonRow>
-        </IonGrid>
+        </IonRow>
+      </IonGrid>
       {/* </IonModal> */}
 
       {/* New Modal */}
       {isNewModalOpen && (
-        <IonModal className="welcome" backdropDismiss = {false} isOpen={true} onRequestClose={() => setIsNewModalOpen(false)} contentLabel="New Modal" style={modalStyles}>
+        <IonModal className="welcome" backdropDismiss={false} isOpen={true} onRequestClose={() => setIsNewModalOpen(false)} contentLabel="New Modal" style={modalStyles}>
           <Welcome
             idd={idd}
             selfieURL={selfieURL}
@@ -241,6 +295,7 @@ const Password: React.FC<ModalComponentProps> = ({
             left={left}
             inclass={inclass}
             recentTime={recentTime}
+            flag = {flag}
             onRequestClose={() => setIsNewModalOpen(false)}
             onCancelButtonClick={handleNewModalCancel} // Pass the function here
           />

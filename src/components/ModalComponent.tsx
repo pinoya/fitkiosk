@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import './ModalComponent.css';
 import {
@@ -10,6 +10,7 @@ import {
 
 import Check from './check.svg';
 import Welcome from "../pages/welecome";
+import { CapacitorHttp } from "@capacitor/core";
 
 type ModalComponentProps = {
   // isOpen: boolean;
@@ -26,6 +27,7 @@ type ModalComponentProps = {
   left: string | null;
   inclass: string | null;
   recentTime : string | null;
+  flag : string | null;
   onClose: () => void;
 
   
@@ -46,6 +48,7 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
   left,
   inclass,
   recentTime,
+  flag,
   onClose,
 }) => {
   const [isNewModalOpen, setIsNewModalOpen] = useState(false);
@@ -61,9 +64,68 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
   };
 
 
-  const handleConfirm = () => {
-    setIsNewModalOpen(true);
+  const [timer, setTimer] = useState('');
+  
+  const currentTimer = async () => {
+    
+    var now = new Date();
+    const hours = now.getHours();
+    const minutes = String(now.getMinutes()).padStart(2, "0");
+    const seconds = String(now.getSeconds()).padStart(2, "0");
+    const years = now.getFullYear();
+    const months = String(now.getMonth() + 1).padStart(2,"0");
+    const days = String(now.getDate()).padStart(2,"0");
 
+    const timerValue = `${years}-${months}-${days} ${hours}:${minutes}:${seconds}`;
+    setTimer(timerValue);
+  };
+
+  const startTimer = () => {
+    currentTimer();
+
+  };
+
+  useEffect(() => {
+    startTimer();
+    console.log("실행횟수?");
+  }, []);
+
+
+  const handleEnterbutton = () => {
+    setIsNewModalOpen(true);
+    updateFlagTime(); 
+  };
+
+  const updateFlagTime = async () => {
+    let url = 'http://dev.wisevill.com/kioskdb/update_in.php';
+    const options = {
+      url: url,
+      data: {
+        id: mid,
+        time: timer,
+      },
+    };
+    const response = await CapacitorHttp.post(options);
+    console.log(response);
+  };
+  
+  const handleExitbutton = () => {
+    setIsNewModalOpen(true);
+    updateOutFlagTime(); 
+  };
+
+
+  const updateOutFlagTime = async () => {
+    let url = 'http://dev.wisevill.com/kioskdb/update_out.php';
+    const options = {
+      url: url,
+      data: {
+        id: mid,
+        time: timer,
+      },
+    };
+    const response = await CapacitorHttp.post(options);
+    console.log(response);
   };
 
   const handleNewModalCancel = () => {
@@ -71,7 +133,19 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
     onClose();
   };
   
-  // let url = "dev.wisevill.com/kioskdb/update_in.php";
+
+  let InOutbutton;
+  
+  if(flag == '0'){
+    InOutbutton = <button className="btn_attandance" onClick={handleEnterbutton}>
+    출석
+  </button>
+  }
+  else if(flag == '1'){
+    InOutbutton = <button className="btn_attandance" onClick={handleExitbutton}>
+    퇴실
+  </button>
+  }
 
   return (
     <>
@@ -113,9 +187,7 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
                   </div>
                 </div>
                 <div className="modal_button">
-                  <button className="btn_attandance" onClick={handleConfirm}>
-                    출석
-                  </button>
+                  {InOutbutton}
                   <button className="btn_cancel" onClick={onClose}>
                     취소
                   </button>
@@ -143,6 +215,7 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
             left={left}
             inclass={inclass}
             recentTime={recentTime}
+            flag = {flag}
             onRequestClose={() => setIsNewModalOpen(false)}
             onCancelButtonClick={handleNewModalCancel} // Pass the function here
           />
