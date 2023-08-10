@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 
-import { IonCol, IonGrid, IonRow, IonContent, IonHeader, IonToolbar, IonTitle } from '@ionic/react';
-
+import { IonCol, IonGrid, IonRow, IonContent, IonHeader, IonToolbar, IonTitle, IonButton } from '@ionic/react';
+import { CapacitorHttp } from '@capacitor/core';
 import Home from './Home';
 
 
-function Announcement() {
+const Announcement = (props:any) => {
  /*체육관 코드 번호, 비밀번호*/ 
   const [width, setWidth] = useState(window.innerWidth);
   const [Height, setHeight] = useState(window.innerHeight);
+  const [content, setcontent] = useState("");
   /*브라우저 크기 조절 */ 
   const handleResize = () => {
     setWidth(window.innerWidth);
@@ -19,7 +20,20 @@ function Announcement() {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [props.code]);
+
+  const get_content = async () => {
+        let url = 'http://dev.wisevill.com/kioskdb/get_gym_announcement.php';
+        const options = {
+            url: url,
+            data: { code: props.code },
+            headers: { "Content-type": "application/json" }
+        }
+        const response = await CapacitorHttp.post(options);
+        const data = JSON.parse(response.data);
+        setcontent(data[0].content);
+        return 0;
+    }
 
   return (
     <>
@@ -44,9 +58,12 @@ function Announcement() {
                         marginLeft:'-1%'
                    
                    }}>
-                     ∙ 여름시즌 다이어트 프로그램 안내
-                    <br></br>
-                     ∙ 이번달 회원 등록시 운동복 무료 이용권 증정
+                    <IonButton onClick={get_content}></IonButton>
+                    {content == ""?(
+                      <p>공지사항이 없습니다.</p>
+                    ):(
+                      <div>{content}</div>
+                    )}
                    </div>
                   </IonCol>
             </IonRow>
