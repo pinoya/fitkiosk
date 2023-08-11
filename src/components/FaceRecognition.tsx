@@ -74,7 +74,6 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
   const [userpassword, setuserpassword] = useState('');
   const [flag, setflag] = useState('');
 
-  const gymLabel = props.code;
 
   const startWebcam = async () => {
     try {
@@ -138,12 +137,11 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
   //     }
   //   }
   // };
-  // useEffect(() => {
 
 
 
+  const gymLabel = props.code;
 
-  // }, []);
 
   const get_memberid = async (): Promise<number[]> => {
     // const gymLabel2 = props.code;

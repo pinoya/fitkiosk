@@ -91,7 +91,7 @@ console.log(code);
                         {window.innerWidth <= window.innerHeight ? (
                             <IonRow class="announcement">
                                 <IonCol class="announcement">
-                                    <Announcement />
+                                    {code && (<Announcement/>)}
                                 </IonCol>
                             </IonRow>) : (
                             <div />

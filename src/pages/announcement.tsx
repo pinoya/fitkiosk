@@ -20,7 +20,7 @@ const Announcement = (props:any) => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [props.code]);
+  }, []);
 
   const get_content = async () => {
         let url = 'http://dev.wisevill.com/kioskdb/get_gym_announcement.php';

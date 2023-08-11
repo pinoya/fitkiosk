@@ -39,14 +39,18 @@ const Logo = (props: any) => {
 
 
     if (data[0] != null) {
-      setname(data[0].name);
       console.log("실행됩니다.");
       await Preferences.set({
         key: 'code',
         value: data[0].code,
       });
+      await Preferences.set({
+        key: 'name',
+        value: data[0].name,
+      });
       props.setcode(code);
-      checkCode(); //나중에는 지워도 됨 일단 확인하기 위함.
+      setname(data[0].name);
+      checkCode(); //지우면 안됨....
       setIsModalOpen(false);
     }
     else{
@@ -59,10 +63,18 @@ const Logo = (props: any) => {
   //패스워드
 
   const checkCode = async () => {
-    const { value } = await Preferences.get({ key: 'code' });
-    console.log(`Hello ${value}!`);
-    if (value) {
-      props.setcode(value);
+    // const storedCode = await Preferences.get({ key: 'code' });
+    // console.log(`Hello ${storedCode}!`);
+    // const storedName = await Preferences.get({ key: 'name' });
+
+    const storedCodeResult = await Preferences.get({ key: 'code' });
+    const storedNameResult = await Preferences.get({ key: 'name' });
+    console.log(`Hello ${storedCodeResult}!`);
+    const storedCode = storedCodeResult.value;
+    const storedName = storedNameResult.value;
+    if (storedCode && storedName) {
+      props.setcode(storedCode);
+      setname(storedName);
     }
     else {
       setIsModalOpen(true);
