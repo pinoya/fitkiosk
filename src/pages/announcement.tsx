@@ -16,6 +16,7 @@ const Announcement = (props:any) => {
   };
 
   useEffect(() => {
+    get_content();
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
@@ -31,6 +32,7 @@ const Announcement = (props:any) => {
         }
         const response = await CapacitorHttp.post(options);
         const data = JSON.parse(response.data);
+        console.log(response);
         setcontent(data[0].content);
         return 0;
     }
@@ -58,7 +60,7 @@ const Announcement = (props:any) => {
                         marginLeft:'-1%'
                    
                    }}>
-                    <IonButton onClick={get_content}></IonButton>
+                    {/* <IonButton onClick={get_content}></IonButton> */}
                     {content == ""?(
                       <p>공지사항이 없습니다.</p>
                     ):(

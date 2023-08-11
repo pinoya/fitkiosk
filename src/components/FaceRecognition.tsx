@@ -376,8 +376,6 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
     }
 
 
-
-
   }, [detectedLabel]);
 
 

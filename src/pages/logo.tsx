@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 
-import { IonCol, IonGrid, IonRow, IonContent, IonHeader, IonToolbar, IonTitle, IonModal, IonButton } from '@ionic/react';
+import { IonCol, IonGrid, IonRow, IonContent, IonHeader, IonToolbar, IonTitle, IonModal, IonButton, IonIcon } from '@ionic/react';
 import { CapacitorHttp } from '@capacitor/core';
 import { Preferences } from '@capacitor/preferences';
+import { settingsSharp } from 'ionicons/icons';
 
 import Test from './test.svg';
 import Home from './Home';
+// import './logo.css';
 
 const Logo = (props: any) => {
   const [width, setWidth] = useState(window.innerWidth);
@@ -22,7 +24,7 @@ const Logo = (props: any) => {
   const [inputpw, setInputPw] = useState("");
   // const [pw, setpw] = useState("123456");
 
-  
+
   const setPreference = async () => {
 
     console.log(gymcode);
@@ -53,7 +55,7 @@ const Logo = (props: any) => {
       checkCode(); //지우면 안됨....
       setIsModalOpen(false);
     }
-    else{
+    else {
       alert('체육관 코드나 비밀번호가 틀렸습니다.');
     }
 
@@ -92,7 +94,7 @@ const Logo = (props: any) => {
   }, []);
 
   const CloseGymCode = async () => {
-    if (gymcode.length >= 6 && inputpw.length >=1) {
+    if (gymcode.length >= 6 && inputpw.length >= 1) {
       await setPreference();
     }
     else {
@@ -108,19 +110,41 @@ const Logo = (props: any) => {
     setInputPw(e.target.value);
   }
 
+  const ChangeGymCode = async () => {
+    if(props.code == null){
+      setIsModalOpen(true)
+    }
+  }
+
 
 
   return (
     <>
+
+
+{/* 체육관 이름 설정   */}
+      {/* <IonButton onClick={() => { setIsModalOpen(true) }}></IonButton> */}
+
+      <button style={{
+             float : 'right',
+             backgroundColor: 'transparent',
+              }} onClick={() => { ChangeGymCode }}><IonIcon icon={settingsSharp} size="large"></IonIcon></button>
+      
+      
       <IonModal isOpen={isModalOpen} backdropDismiss={false}>
         <p>체육관 코드</p>
         <input type='text' onChange={handleChange} />
         <p>비밀번호</p>
         <input type='text' onChange={handlePassWord} />
-        <IonButton onClick={CloseGymCode}></IonButton>
+        <div style= {{textAlign: 'center',}}>
+        <IonButton onClick={CloseGymCode}>확인</IonButton>
+        {/* <IonButton>취소</IonButton> */}
+        </div>
       </IonModal>
 
-      <IonButton onClick={() => { setIsModalOpen(true) }}></IonButton>
+
+
+
       {window.innerWidth <= window.innerHeight ? (
         <IonGrid style={{ border: '0px' }}>
           <IonRow style={{ border: '0px' }}>

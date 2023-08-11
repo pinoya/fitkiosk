@@ -1,3 +1,6 @@
+
+
+
 div.background-image-img {
     position: absolute;
     background-image: url(./testimg.jpg);
@@ -40,6 +43,7 @@ div.background-image-init {
 div.content {
     z-index: 10;
 }
+
 
 ion-grid.window {
     position: absolute;
@@ -99,12 +103,14 @@ ion-row.title ion-col {
 ion-row.announcement {
     height: 300px;
     border: 0px;
+    
 }
 
 ion-col.announcement {
     margin: 0px auto;
     padding: 5px 5px;
     border: 0px;
+   
 }
 
 ion-row.bottom_side {
