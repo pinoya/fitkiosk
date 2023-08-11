@@ -14,9 +14,9 @@ export function usePhotoGallery() {
   const [photos, setPhotos] = useState<UserPhoto[]>([]);
 
   useEffect(() => {
-    
+
     const loadSaved = async () => {
-      const { value } = await Preferences.get({key: PHOTO_STORAGE });
+      const { value } = await Preferences.get({ key: PHOTO_STORAGE });
 
       const photosInPreferences = (value ? JSON.parse(value) : []) as UserPhoto[];
       // If running on the web...
@@ -44,8 +44,8 @@ export function usePhotoGallery() {
       source: CameraSource.Camera,
       quality: 10
     });
-    
-    
+
+
     const fileName = new Date().getTime() + '.jpg';
 
     // const fileName = '22222' + '.jpg';
@@ -59,8 +59,33 @@ export function usePhotoGallery() {
 
     const newPhotos = [savedFileImage, ...photos];
     setPhotos(newPhotos);
-    Preferences.set({key: PHOTO_STORAGE,value: JSON.stringify(newPhotos)});
+    Preferences.set({ key: PHOTO_STORAGE, value: JSON.stringify(newPhotos) });
   };
+
+
+  // const axios = require('axios');
+
+  // const uploadImageToServer = async (imagePath) => {
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append('image', fs.createReadStream(imagePath));
+
+  //     const response = await axios.post('http://localhost:3000/upload', formData, {
+  //       headers: {
+  //         'Content-Type': 'multipart/form-data'
+  //       }
+  //     });
+
+  //     console.log(response.data.message);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
+  // // takePhoto 함수에서 이미지 저장 후 업로드 코드 추가
+  // const savedFileImage = await savePicture(photo, fileName);
+  // await uploadImageToServer(savedFileImage.path);
+
 
   const savePicture = async (photo: Photo, fileName: string): Promise<UserPhoto> => {
     let base64Data: string;
@@ -79,8 +104,8 @@ export function usePhotoGallery() {
       directory: Directory.Data
     });
 
-    
-    
+
+
 
     if (isPlatform('hybrid')) {
       // Display the new image by rewriting the 'file://' path to HTTP
@@ -90,7 +115,7 @@ export function usePhotoGallery() {
         webviewPath: Capacitor.convertFileSrc(savedFile.uri),
       };
     }
-    
+
     else {
       // Use webPath to display the new image instead of base64 since it's
       // already loaded into memory
@@ -109,7 +134,7 @@ export function usePhotoGallery() {
     const newPhotos = photos.filter(p => p.filepath !== photo.filepath);
 
     // Update photos array cache by overwriting the existing photo array
-    Preferences.set({key: PHOTO_STORAGE, value: JSON.stringify(newPhotos) });
+    Preferences.set({ key: PHOTO_STORAGE, value: JSON.stringify(newPhotos) });
 
     // delete photo file from filesystem
     const filename = photo.filepath.substr(photo.filepath.lastIndexOf('/') + 1);

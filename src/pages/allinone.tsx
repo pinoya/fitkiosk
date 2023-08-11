@@ -17,12 +17,6 @@ import React, { useEffect, useRef, useState } from 'react';
 function Kiosk() {
     const inmodal = useRef();
     const outmodal = useRef();
-    async function dismiss() {
-        setisinOpen(false);
-        setisoutOpen(false);
-        // inmodal.current?.dismiss();
-        // outmodal.current?.dismiss();
-    }
 
     const [width, setWidth] = useState(window.innerWidth);
     const [Height, setHeight] = useState(window.innerHeight);
@@ -48,21 +42,12 @@ function Kiosk() {
     const [pw, setpw] = useState('pw');
     const [face, isface] = useState(false);
     const [jsondata, setjsondata] = useState([]);
-
-
-    // const [isgalleryOpen, setGalleryOpen] = useState(false);
-
-    // const openGalleryModal = () => {
-    //     setGalleryOpen(true);
-    // };
-
-    // const closeGalleryModal = () => {
-    //     setGalleryOpen(false);
-    // };
+    const [code, setcode] = useState("");
 
 
 
-
+console.log("메인");
+console.log(code);
 
 
     return (
@@ -100,7 +85,7 @@ function Kiosk() {
                     <IonGrid class="window">
                         <IonRow class="title">
                             <IonCol>
-                                <Logo />
+                                <Logo code = {code} setcode = {setcode}/>
                             </IonCol>
                         </IonRow>
                         {window.innerWidth <= window.innerHeight ? (
@@ -121,8 +106,8 @@ function Kiosk() {
                                 <IonGrid class="btn_and_face">
                                     <IonRow>
                                         <IonCol class="face">
-                                            <FaceRecognition isbtnopen={isbtnOpen} setisbtnOpen={setisbtnOpen} isbtnoutOpen={isbtnoutOpen} setisbtnoutOpen={setisBtnoutOpen}
-                                                id={id} typeid={typeid} />
+                                        {code && (<FaceRecognition isbtnopen={isbtnOpen} setisbtnOpen={setisbtnOpen} isbtnoutOpen={isbtnoutOpen} setisbtnoutOpen={setisBtnoutOpen}
+                                                id={id} typeid={typeid} code = {code} />)}
                                         </IonCol>
                                     </IonRow>
                                     <IonRow>

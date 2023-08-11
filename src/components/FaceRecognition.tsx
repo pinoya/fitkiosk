@@ -24,6 +24,7 @@ interface FaceRecognitionProps {
   setisbtnoutOpen(arg0: boolean): unknown;
   id: string | null;
   typeid: boolean;
+  code: string | null;
 }
 
 // interface LabelTime {
@@ -31,8 +32,6 @@ interface FaceRecognitionProps {
 //   time: string;
 // }
 
-
-//Unknown이 몇번 이상 떴을때만 화면에 텍스트 출력되도록 수정
 
 
 const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
@@ -137,6 +136,42 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
   //     }
   //   }
   // };
+  // useEffect(() => {
+
+
+
+
+  // }, []);
+
+  const get_memberid = async (): Promise<number[]> => {
+    const gymLabel2 = props.code;
+    // props.code;
+    console.log(props.code);
+
+    let url = 'http://dev.wisevill.com/kioskdb/take_user_image.php';
+    console.log(gymLabel2);
+    if (gymLabel2) {
+      const options = {
+        url: url,
+        data: { code: gymLabel2 },
+        headers: { 'Content-Type': 'application/json' }
+      }
+      const response = await CapacitorHttp.post(options);
+      console.log(response);
+      const responseData = JSON.parse(response.data);
+
+      const idArray = responseData.map((item: { id: number; }) => item.id);
+
+      console.log(idArray);
+
+      return idArray;
+      // for (let i = 0; i < JSON.parse(response.data).length; i++) {
+      //   console.log(JSON.parse(response.data)[i].id);
+      // }
+    }
+    throw new Error("No data available");
+  }
+
 
 
 
@@ -144,30 +179,29 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
 
   useEffect(() => {
     const getLabeledFaceDescriptions = async () => {
-      const gymLabel = "gym"; // 설정한 체육관이 사용하는 폴더명 받아오기
+      // const gymLabel = "AAAAAA"; // 설정한 체육관이 사용하는 폴더명 받아오기
+      const gymLabel = props.code;
+      // console.log(props.code);
+      const idArray = await get_memberid();
       //폴더명
-      const labels = ["33333", "11111", "44444", "22222"]; // 폴더 내에 있는 파일 이름
-//폴더
-//파일들 ...
-
-//서버 폴더
-// 폴더 밑에 이미지들 
-// 이미지들의 이름을 배열
-
-// 한번 불러와서 이미지
-
-
-      //11111 : 이재인
+      // const labels = ["33333", "11111", "44444", "22222"]; // 폴더 내에 있는 파일 이름
 
       return Promise.all(
-        labels.map(async (label) => {
+        idArray.map(async (label) => {
           const descriptions = [];
-          const imgUrl = `./labels/${gymLabel}/${label}.jpg`;
-       
-          // const imgUrl = `dev.wisevill.com/media/labels/${gymLabel}/${label}.jpg`;
+          // const imgUrl = `./labels/${gymLabel}/${label}.jpg`;
+
+          const imgUrl = `http://dev.wisevill.com/media/labels/${gymLabel}/${label}.jpg`;
+          console.log(imgUrl);
           const img = await faceapi.fetchImage(imgUrl);
+
+
+
           const detections = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor();
           descriptions.push(detections.descriptor);
+
+
+
           // console.log(detections.descriptor);
           return new faceapi.LabeledFaceDescriptors(label, descriptions);
         })
@@ -218,8 +252,8 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
               if (BeforeLabel == null || DetectedLabel === BeforeLabel) {
                 handleRepeatCount();
                 console.log("카운트 +1");
-              } 
-              
+              }
+
               // else {
               //   ResetRepeatCount();
               // }
@@ -302,7 +336,7 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
   const handleRepeatCount = () => {
     if (repeatedLabelCount < 5) {
       setRepeatedLabelCount(prevCount => prevCount + 1);
-    } else{
+    } else {
       setRepeatedLabelCount(0);
     }
   }
@@ -366,12 +400,6 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
     // 1000 = 1초 10000 =10초 60초로 지정해놓음.
   }
 
-
-
-
-
-
-
   // 1 1 
 
   // 얼굴인식이 안됐거나, 얼굴인식 등록을 안한 사람 
@@ -390,8 +418,6 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
 
   // 30초 뒤에 초기화
   // 같은 사람 인식되게 
-
-
 
 
   const handleCloseModal = () => {
@@ -446,7 +472,6 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
         url: url,
         data: { id: detectedLabel },
         headers: { 'Content-Type': 'application/json' }
-
       }
       const response = await CapacitorHttp.post(options);
 
@@ -529,7 +554,7 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
     }
   }
 
- 
+
   let faceEntry;
   faceEntry = <IonModal className="baseModal" isOpen={isModalOpen && !isModalShownForLabel && isgetlabel && isTimeout} backdropDismiss={false}>
     <ModalComponent
