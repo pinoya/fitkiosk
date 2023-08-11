@@ -186,6 +186,8 @@ function Welcome(props: any) {
 
   let OkBtn;
 
+
+
   //얼굴 인식이 안 됐을 경우의 확인 버튼
   if (props.onCancelButtonClick == null) {
     OkBtn = <IonButton size='large' expand='block' onClick={() => props.onCancelButtonClick()}>확인</IonButton>
@@ -219,7 +221,6 @@ function Welcome(props: any) {
   else if(props.flag == '1'){
     time =   <div className='body2_time'>입장시간:{props.recentTime}<br/>
     퇴장시간 : {timer}</div>
-    
   }
 
   return (

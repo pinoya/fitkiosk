@@ -129,8 +129,8 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
   };
 
   const handleNewModalCancel = () => {
-    setIsNewModalOpen(false);
     onClose();
+    setIsNewModalOpen(false);
   };
   
 

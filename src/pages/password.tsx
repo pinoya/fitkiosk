@@ -116,6 +116,9 @@ const Password: React.FC<ModalComponentProps> = ({
       updateFlagTime();
       console.log('패스워드 일치!');
       setIsNewModalOpen(true);
+      // setTimeout(() => {
+      //   handleNewModalCancel();
+      // }, 10000);
     }
     else {
       if (inner_pw) {
@@ -141,12 +144,18 @@ const Password: React.FC<ModalComponentProps> = ({
     console.log(response);
   };
 
+  const [iswelcomeOpen, setIsWelcomeOpen] = useState(false);
 
   const handleExitbutton = () => {
     if (userpassword === inputwhat) {
       updateOutFlagTime();
       console.log('패스워드 일치!');
       setIsNewModalOpen(true);
+      // setTimeout(() => {
+      //   handleNewModalCancel();
+      // }, 10000);
+
+
     }
     else {
       if (inner_pw) {
@@ -175,8 +184,8 @@ const Password: React.FC<ModalComponentProps> = ({
 
   const handleNewModalCancel = () => {
 
-    setIsNewModalOpen(false);
     onClose();
+    setIsNewModalOpen(false);
 
   }
 
@@ -185,8 +194,8 @@ const Password: React.FC<ModalComponentProps> = ({
 
   if (flag == '0') {
     InOutbutton = <button onClick={handleConfirm} className="pw_body3_last_button1">
-    출석
-  </button>
+      출석
+    </button>
   }
   else if (flag == '1') {
     InOutbutton = <button onClick={handleExitbutton} className="pw_body3_last_button1">
@@ -257,7 +266,7 @@ const Password: React.FC<ModalComponentProps> = ({
 
                 </div>
                 <p id='inner_pw' style={{ color: '#ff6300', fontSize: '12px' }}></p>
-                
+
 
 
                 <div className="pw_body3_last">
@@ -295,7 +304,9 @@ const Password: React.FC<ModalComponentProps> = ({
             left={left}
             inclass={inclass}
             recentTime={recentTime}
-            flag = {flag}
+            flag={flag}
+            iswelcomeOpen={iswelcomeOpen}
+            setIsWelcomeOpen={setIsWelcomeOpen}
             onRequestClose={() => setIsNewModalOpen(false)}
             onCancelButtonClick={handleNewModalCancel} // Pass the function here
           />

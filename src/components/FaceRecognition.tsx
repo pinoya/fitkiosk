@@ -14,7 +14,7 @@ import { UserPhoto, usePhotoGallery } from '../hooks/usePhotoGallery';
 
 
 const UNKNOWN_LABEL = "Unknown";
-const UNKNOWN_THRESHOLD = 0.3;
+const UNKNOWN_THRESHOLD = 0.5;
 
 
 interface FaceRecognitionProps {
@@ -139,13 +139,23 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
   // };
 
 
-  const [labelSet, setLabelSet] = useState<Set<string>>(new Set());
+
+  const [repeatedLabelCount, setRepeatedLabelCount] = useState(0);
 
   useEffect(() => {
     const getLabeledFaceDescriptions = async () => {
       const gymLabel = "gym"; // 설정한 체육관이 사용하는 폴더명 받아오기
       //폴더명
       const labels = ["33333", "11111", "44444", "22222"]; // 폴더 내에 있는 파일 이름
+//폴더
+//파일들 ...
+
+//서버 폴더
+// 폴더 밑에 이미지들 
+// 이미지들의 이름을 배열
+
+// 한번 불러와서 이미지
+
 
       //11111 : 이재인
 
@@ -153,6 +163,8 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
         labels.map(async (label) => {
           const descriptions = [];
           const imgUrl = `./labels/${gymLabel}/${label}.jpg`;
+       
+          // const imgUrl = `dev.wisevill.com/media/labels/${gymLabel}/${label}.jpg`;
           const img = await faceapi.fetchImage(imgUrl);
           const detections = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor();
           descriptions.push(detections.descriptor);
@@ -201,24 +213,20 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
             }
 
             if (result.distance <= UNKNOWN_THRESHOLD) {
-              // setDetectedLabel(label.split(" ")[0]); // Extract the label without confidence score
-              // console.log(detectedLabel);
-              const detectedLabel = label.split(" ")[0];
-
-              setDetectedLabel(detectedLabel); // setDetectedLabel 함수는 사용자 정의되어 있다고 가정
-              // addLabelWithDupCheck(detectedLabel);
-
-              // if (!labelArray.some(item => item.label === detectedLabel)) {
-              //   const currentTime = new Date().toLocaleTimeString(); // 현재 시간을 가져옴
-              //   setLabelArray(prevArray => [...prevArray, { label: detectedLabel, time: currentTime }]);
+              const DetectedLabel = label.split(" ")[0];
+              setDetectedLabel(DetectedLabel);
+              if (BeforeLabel == null || DetectedLabel === BeforeLabel) {
+                handleRepeatCount();
+                console.log("카운트 +1");
+              } 
+              
+              // else {
+              //   ResetRepeatCount();
               // }
+
               setIsModalOpen(true);
-              // console.log(labelArray);
             }
-            // else {
-            //   label = UNKNOWN_LABEL;
-            //   setIsUnknown(true);
-            // }
+
 
             const context = canvas!.getContext("2d")!;
             context.lineWidth = 2;
@@ -250,7 +258,7 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
 
           });
         }
-      }, 1000);
+      }, 5000);
 
       // Clean up interval when the component unmounts or webcam is stopped]
       //component unmonts(컴포넌트가 사라질때, 웹캠이 멈출때.)
@@ -275,6 +283,39 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
     };
   }, []);
 
+  useEffect(() => {
+    console.log("현재 카운트");
+    console.log(repeatedLabelCount);
+    if (repeatedLabelCount == 5) {
+      setDetectedLabel("특정값");
+      setBeforeLabel("특정값");
+      setrecentTime("특정시간");
+      console.log("리셋했습니다.");
+
+      const currentTime = new Date().toLocaleTimeString();
+      console.log(currentTime);
+      setRepeatedLabelCount(0);
+    }
+  }, [repeatedLabelCount]);
+
+
+  const handleRepeatCount = () => {
+    if (repeatedLabelCount < 5) {
+      setRepeatedLabelCount(prevCount => prevCount + 1);
+    } else{
+      setRepeatedLabelCount(0);
+    }
+  }
+
+  const ResetRepeatCount = () => {
+    console.log("값이 다르므로 카운트를 리셋합니다.");
+    setRepeatedLabelCount(0);
+  }
+
+
+
+
+
 
   useEffect(() => {
     // Check if the detectedLabel has already been shown in a previous session
@@ -297,120 +338,37 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
       setIsModalShownForLabel(false); //모달창 열림.
       setIsTimeout(false);
       get_userinfo(); //정보와 라벨 얻기...
-      // handleCaptureSelfie(); //셀피 찍기
       console.log("이전 라벨값과 현재 라벨값이 다릅니다. 실행합니다.");
     }
 
 
+
+
   }, [detectedLabel]);
 
-  //db 출석 플래그 제어
 
-  // 배열 타임스탬프 
 
-  // db에 시간
 
-  // 22222 -> db 검색 -> 출석 플래그 확인 
-  //                  -> 과거 나간 시간 - 현재 시간 > 5분 이상 - > 출석.
+  const resetLabelAndTime = () => {
 
-  //이전에 탐색한 사람 그거를 뺀다고 치자.
-  //
-
-  //감지는 계속 되고 있는데, 
-  //이전에 인식한 라벨과 같은 경우가 아닌 경우에만 창 열리도록 했음.
-
-  // 인식 계속 되고 있음.
-
-  // 출석을 확인을 할려면 -> db 접속
-  // 인식 계속 되고 있으니까
-  // 계속 출석
-  // 출석 확인하면 연산들어갈거고 
-  // db 접속.
-
-  // 일단은.
-
-  //만약 출석 플래그를 먼저 가져오면,
-  // 출석 플래그를 가져오고, 계산을 하고 이런 과정이 무한 반복돼서 계속해서 db에 접근하게됨.
-
-  // 1. 해결책 -> 카메라를 5초 뒤에 켠다.  -> 그래도 연산은 피할 수 없음.
-
-  // 2. 해결책 -> 배열에 시간 값을 저장하고, 5분의 이상의 딜레이가 있을 경우에만 모달을 열고, 유저데이터를 가져온다.
-  // -> 데이터에 접근을 덜 할 수 있음.
-
-  // 22222 / 시간 
-
-  // 22222 / 시간 
-
-  // 5분 이상 
-
-  //유저 데이터
-
-  const resetDetectedLabel = () => {
     setTimeout(() => {
-      // setDetectedLabel("리셋합니다.");
-      // localStorage.setItem("shownLabel", "리셋합니다.");
-      setDetectedLabel("특정값");
-      setBeforeLabel("특정값");
-      console.log("리셋했습니다.");
-      const currentTime = new Date().toLocaleTimeString();
-      console.log(currentTime);
-    }, 10000); // 1000 = 1초 10000 =10초 60초로 지정해놓음.
+      if (BeforeLabel == null || BeforeLabel == detectedLabel) {
+        setDetectedLabel("특정값");
+        setBeforeLabel("특정값");
+        console.log("리셋했습니다.");
+
+        // setrecentTime("초기화"); 
+        // console.log("인식시간을 초기화했습니다.");//일단 인식 시간 초기화
+        const currentTime = new Date().toLocaleTimeString();
+        console.log(currentTime);
+      }
+    }, 10000);
+    // 1000 = 1초 10000 =10초 60초로 지정해놓음.
   }
 
-  // setTimeout(() => {
-  //   // setDetectedLabel("리셋합니다.");
-  //   // localStorage.setItem("shownLabel", "리셋합니다.");
-  //   setDetectedLabel("특정값");
-  //   setBeforeLabel("특정값");
-  //   console.log("리셋했습니다.");
-  //   const currentTime = new Date().toLocaleTimeString();
-  //   console.log(currentTime);
-  // }, 10000); 
-
-
-  //모달창 닫았을때만 인식됨.
-
-  // 
-
-  //
-  //얼굴인식이 안됐거나, 얼굴인식 등록을 안한 사람 
-  //출석버튼 -> 출석 플래그 확인 -> 출석 하지 않았을 경우에만 비밀번호 창을 열어줌.
-  //비밀번호 성공 -> 출석(출석 플래그 올림 / 출석 시간(현재시간) db에 찍기)
-
-  //근데 번호로 출석을 했는데 다시 인식이 되어서 퇴실이 될수도 있음.
-
-  //출석 -> 퇴실 
-
-
-  // 얼굴인식으로만 생각
-  // 얼굴인식 출석 -> 출석 플래그
-  // 얼굴인식 퇴실 -> 퇴실 플래그
-
-  // 버튼을 추가
-  // 버튼으로 출석 -> 출석 플래그 (이때 얼굴 인식이 되어버릴수도 있음.)
-  // 1번
 
 
 
-  // 한번 인식된 사람 30초간 다시 인식 안되는 상태
-
-  // 딱 한번 인식될때만 제어해주면 됨.
-  // 출석시간 받아와서 5분 이하면 튕기기.
-
-
-  // 출석 11시 25분 -> 0
-
-  // 0 일때 출석시간 확인 5분 지났을때만 -> 1
-
-  // 퇴실 11시 35분 -> 1
-
-  // 1 일때 퇴실 시간 확인 5분 지났을때만 -> 0
-
-  // 5분 뒤에 인식
-  // 사람 -> 5분 뒤에 인식 .
-
-
-  // db에 
 
 
 
@@ -434,33 +392,29 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
   // 같은 사람 인식되게 
 
 
-  //얼굴 인식 모달 끄기
+
+
   const handleCloseModal = () => {
     setIsModalOpen(false); //모달창 닫기
     setIsModalShownForLabel(true); //모달창 닫기 (shownLabel === detectedLabel 다고 지정해놓기)
-    // Store the detected label in localStorage to prevent showing the modal again for the same label
-    // localStorage.setItem("shownLabel", detectedLabel ?? "");
     setBeforeLabel(detectedLabel);
     setIsTimeout(false);
-    // deleteCaptureSelfie(); //셀피 지우기
     setIsGetLabel(false); //라벨 플래그 초기화
     reset(); //얼굴인식 실패 횟수 리셋
     startWebcam(); //캠 시작하기
     const currentTime = new Date().toLocaleTimeString();
     console.log("모달이 닫혔습니다.");
     console.log(currentTime);
-    resetDetectedLabel();
   };
+
+
 
 
   //버튼으로 들어간 모달 끄기
   const handleClosebtnModal = () => {
-    // setIsModalOpen(); //모달창 닫기
     props.setisbtnOpen(false); //모달창 닫기
     props.setisbtnoutOpen(false); //모달창 닫기
-    // deleteUserInfo(); //유저정보 지우기
     setIsGetBtnLabel(false); //라벨 플래그 값 초기화
-    // deleteCaptureSelfie(); //셀피 지우기
     reset(); //얼굴인식 실패 횟수 리셋
     startWebcam(); //캠 시작하기
   };
@@ -530,35 +484,52 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
     countTime();
   }, [recentTime]);
 
+
+
+
   const countTime = () => {
-    console.log(recentTime);
-    const now: Date = new Date();
-    console.log("현재시각");
-    console.log(now);
 
-    const initialDate = new Date(recentTime);
-    console.log(initialDate);
-    console.log("가져온 시간");
-    console.log(initialDate);
 
-    const timeDifference = now.getTime() - initialDate.getTime();
-    const timeDifferenceInSeconds = Math.floor(timeDifference / 1000); // 밀리초를 초로 변환
-    const diffMinutes = Math.floor(timeDifferenceInSeconds / 60); // 초를 분으로 변환
-    const remainingSeconds = timeDifferenceInSeconds % 60; // 초 단위에서 남은 초 계산
+    if (recentTime != "특정시간") {
+      console.log(recentTime);
+      const now: Date = new Date();
+      console.log("현재시각");
+      console.log(now);
 
-    console.log(`시간 차이: ${diffMinutes} 분 ${remainingSeconds} 초`);
+      const initialDate = new Date(recentTime);
+      console.log(initialDate);
+      console.log("가져온 시간");
+      console.log(initialDate);
 
-    console.log(timeDifference);
+      const timeDifference = now.getTime() - initialDate.getTime();
+      const timeDifferenceInSeconds = Math.floor(timeDifference / 1000); // 밀리초를 초로 변환
+      const diffMinutes = Math.floor(timeDifferenceInSeconds / 60); // 초를 분으로 변환
+      const remainingSeconds = timeDifferenceInSeconds % 60; // 초 단위에서 남은 초 계산
 
-    if(diffMinutes > 1){
-      setIsTimeout(true);
-      stopWebcam(); //캠 끄기      
+      console.log(`시간 차이: ${diffMinutes} 분 ${remainingSeconds} 초`);
+
+      console.log(timeDifference);
+
+      if (diffMinutes >= 1) {
+        setIsTimeout(true);
+        stopWebcam(); //캠 끄기
+        //시간 계산하는 함수 // 5분 이상일 경우
+        // 플래그 true 
+        //stopwebcam();
+      } else if (diffMinutes < 1) {
+        setIsModalOpen(false); //모달창 닫기
+        setIsModalShownForLabel(true); //모달창 닫기 (shownLabel === detectedLabel 다고 지정해놓기)
+        setBeforeLabel(detectedLabel);
+        setIsTimeout(false);
+        setIsGetLabel(false); //라벨 플래그 초기화
+        const currentTime = new Date().toLocaleTimeString();
+        console.log("정해놓은 시간 이전입니다....");
+        console.log(currentTime);
+      }
     }
-    //시간 계산하는 함수 // 5분 이상일 경우
-    // 플래그 true 
-    //stopwebcam();
   }
 
+ 
   let faceEntry;
   faceEntry = <IonModal className="baseModal" isOpen={isModalOpen && !isModalShownForLabel && isgetlabel && isTimeout} backdropDismiss={false}>
     <ModalComponent
@@ -575,11 +546,9 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
       left={left}
       inclass={inclass}
       recentTime={recentTime}
-      flag = {flag}
+      flag={flag}
       onClose={handleCloseModal} />
   </IonModal>
-  // } else if (flag == '1')
-
 
   //버튼일때 유저 정보 가져오는  함수
   useEffect(() => {
@@ -588,11 +557,11 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
       stopWebcam();
       get_btn_userinfo(); //버튼일때 유저 정보 가져오기
     }
-    if(props.isbtnoutOpen){
+    if (props.isbtnoutOpen) {
       stopWebcam();
       get_btn_userinfo();
     }
-  }, [props.isbtnopen,props.isbtnoutOpen]);
+  }, [props.isbtnopen, props.isbtnoutOpen]);
 
 
   //일단 모달로 해서 닫기하면 일단은 문제없음.
@@ -676,50 +645,52 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
 
   let idEntry;
 
-  if(props.isbtnopen){
-  //출석 안 된 상태
-  if ((mid == props.id && flag == '0' || tel == props.id && flag == '0')) {
-    idEntry = <IonModal className="baseModal" isOpen={
-      props.isbtnopen && isgetbtnlabel} backdropDismiss={false} > <Password
-        id={props.id}
-        idd={idd}
-        selfieURL={profileImg}
-        mid={mid}
-        tel={tel}
-        mile={mile}
-        come={come}
-        product={product}
-        have={have}
-        locker={locker}
-        duclass={duclass}
-        left={left}
-        inclass={inclass}
-        userpassword={userpassword}
-        recentTime={recentTime}
-        flag = {flag}
-        //userpwd={userpwd}
-        onClose={handleClosebtnModal} />
-    </IonModal>
-    //출석 된 상태
+  if (props.isbtnopen) {
+    //출석 안 된 상태
+    if ((mid == props.id && flag == '0' || tel == props.id && flag == '0')) {
+      idEntry = <IonModal className="baseModal" isOpen={
+        props.isbtnopen && isgetbtnlabel} backdropDismiss={false} > <Password
+          id={props.id}
+          idd={idd}
+          selfieURL={profileImg}
+          mid={mid}
+          tel={tel}
+          mile={mile}
+          come={come}
+          product={product}
+          have={have}
+          locker={locker}
+          duclass={duclass}
+          left={left}
+          inclass={inclass}
+          userpassword={userpassword}
+          recentTime={recentTime}
+          flag={flag}
+          //userpwd={userpwd}
+          onClose={handleClosebtnModal} />
+      </IonModal>
+      //출석 된 상태
+    }
+    else if ((mid == props.id && flag == '1' || tel == props.id && flag == '1')) {
+      idEntry = <IonModal className="failId" isOpen={props.isbtnopen && isgetbtnlabel} backdropDismiss={false} >
+        <p>이미 입장 하셨습니다.</p>
+        <button onClick={handleClosebtnModal}>닫기</button>
+      </IonModal>
+    }
+    else {
+      // -> 실패 -> 다시 입력해주세요. 일단 좀 더 생각
+      idEntry = <IonModal className="failId" isOpen={props.isbtnopen && isgetbtnlabel} backdropDismiss={false} >
+        <p>다시 입력해주세요.</p>
+        <button onClick={handleClosebtnModal}>닫기</button>
+      </IonModal>
+    }
   }
-  else if ((mid == props.id && flag == '1' || tel == props.id && flag == '1')) {
-    idEntry = <IonModal className="failId" isOpen={props.isbtnopen && isgetbtnlabel} backdropDismiss={false} >
-      <p>이미 입장한 사람입니다.</p>
-      <button onClick={handleClosebtnModal}>닫기</button>
-    </IonModal>
-  }
-  else {
-    // -> 실패 -> 다시 입력해주세요. 일단 좀 더 생각
-    idEntry = <IonModal className="failId" isOpen={props.isbtnopen && isgetbtnlabel} backdropDismiss={false} >
-      <p>다시 입력해주세요.</p>
-      <button onClick={handleClosebtnModal}>닫기</button>
-    </IonModal>
-  }
-}
+
+
 
   // let idExit;
 
-  if(props.isbtnoutOpen){
+  if (props.isbtnoutOpen) {
     //출석 안 된 상태
     if ((mid == props.id && flag == '1' || tel == props.id && flag == '1')) {
       idEntry = <IonModal className="baseModal" isOpen={
@@ -739,7 +710,7 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
           inclass={inclass}
           userpassword={userpassword}
           recentTime={recentTime}
-          flag = {flag}
+          flag={flag}
           //userpwd={userpwd}
           onClose={handleClosebtnModal} />
       </IonModal>
