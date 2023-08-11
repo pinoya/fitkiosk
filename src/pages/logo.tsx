@@ -19,25 +19,25 @@ const Logo = (props: any) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [code, setcode] = useState("");
   const [gymcode, setGymcode] = useState("");
-  const [pw, setpw] = useState("123456");
+  const [inputpw, setInputPw] = useState("");
+  // const [pw, setpw] = useState("123456");
 
+  
   const setPreference = async () => {
-
-    if (gymcode === null) {
-      return; // 또는 다른 처리 방식을 선택할 수 있습니다.
-    }
 
     console.log(gymcode);
     let url = 'http://dev.wisevill.com/kioskdb/check_gym.php';
     const options = {
       url: url,
-      data: { code: gymcode, pw: pw },
+      data: { code: gymcode, pw: inputpw },
       headers: { "Content-type": "application/json" }
     }
     const response = await CapacitorHttp.post(options);
     const data = JSON.parse(response.data);
     console.log(data);
-    
+
+
+
     if (data[0] != null) {
       setname(data[0].name);
       console.log("실행됩니다.");
@@ -45,26 +45,32 @@ const Logo = (props: any) => {
         key: 'code',
         value: data[0].code,
       });
+      props.setcode(code);
+      checkCode(); //나중에는 지워도 됨 일단 확인하기 위함.
+      setIsModalOpen(false);
     }
-    props.setcode(code);
-    checkCode(); //나중에는 지워도 됨 일단 확인하기 위함.
+    else{
+      alert('체육관 코드나 비밀번호가 틀렸습니다.');
+    }
 
   };
 
+  //입력된 값 X -> 모달창 띄워놓기
+  //패스워드
 
-
-  
-  
   const checkCode = async () => {
     const { value } = await Preferences.get({ key: 'code' });
     console.log(`Hello ${value}!`);
-    if(value){
-      props.setcode(value); 
+    if (value) {
+      props.setcode(value);
+    }
+    else {
+      setIsModalOpen(true);
     }
   };
 
 
- useEffect(() => {
+  useEffect(() => {
     // 여기서 초기에 한 번 값을 가져오는 부분을 추가할 수 있습니다.
     checkCode();
     window.addEventListener("resize", handleResize);
@@ -73,23 +79,35 @@ const Logo = (props: any) => {
     };
   }, []);
 
-  const CloseGymCode = () => {
-    setPreference();
-    setIsModalOpen(false);
+  const CloseGymCode = async () => {
+    if (gymcode.length >= 6 && inputpw.length >=1) {
+      await setPreference();
+    }
+    else {
+      alert('다시 입력해주세요');
+    }
   }
 
   const handleChange = (e: any) => {
     setGymcode(e.target.value);
   }
 
-  
+  const handlePassWord = (e: any) => {
+    setInputPw(e.target.value);
+  }
+
+
 
   return (
     <>
-      <IonModal isOpen={isModalOpen} onDidDismiss={() => setIsModalOpen(false)}>
+      <IonModal isOpen={isModalOpen} backdropDismiss={false}>
+        <p>체육관 코드</p>
         <input type='text' onChange={handleChange} />
+        <p>비밀번호</p>
+        <input type='text' onChange={handlePassWord} />
         <IonButton onClick={CloseGymCode}></IonButton>
       </IonModal>
+
       <IonButton onClick={() => { setIsModalOpen(true) }}></IonButton>
       {window.innerWidth <= window.innerHeight ? (
         <IonGrid style={{ border: '0px' }}>

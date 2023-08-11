@@ -25,6 +25,7 @@ type ModalComponentProps = {
   recentTime: string | null;
   userpassword: string | null;
   flag: string | null;
+  gymcode: string | null;
   onClose: () => void;
 
 
@@ -47,6 +48,7 @@ const Password: React.FC<ModalComponentProps> = ({
   userpassword,
   recentTime,
   flag,
+  gymcode,
   onClose,
 }) => {
 
@@ -130,6 +132,11 @@ const Password: React.FC<ModalComponentProps> = ({
     }
   };
 
+  //이미지 서버에 올려야되는데
+
+  //
+
+  //이미지 이름 -> 회원번호 
 
   const updateFlagTime = async () => {
     let url = 'http://dev.wisevill.com/kioskdb/update_in.php';
@@ -137,6 +144,7 @@ const Password: React.FC<ModalComponentProps> = ({
       url: url,
       data: {
         id: mid,
+        code : gymcode,
         time: timer,
       },
     };
@@ -175,6 +183,7 @@ const Password: React.FC<ModalComponentProps> = ({
       url: url,
       data: {
         id: mid,
+        code : gymcode,
         time: timer,
       },
     };

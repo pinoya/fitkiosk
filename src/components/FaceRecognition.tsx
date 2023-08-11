@@ -74,6 +74,8 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
   const [userpassword, setuserpassword] = useState('');
   const [flag, setflag] = useState('');
 
+  const gymLabel = props.code;
+
   const startWebcam = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
@@ -144,16 +146,16 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
   // }, []);
 
   const get_memberid = async (): Promise<number[]> => {
-    const gymLabel2 = props.code;
+    // const gymLabel2 = props.code;
     // props.code;
     console.log(props.code);
 
     let url = 'http://dev.wisevill.com/kioskdb/take_user_image.php';
-    console.log(gymLabel2);
-    if (gymLabel2) {
+    console.log(gymLabel);
+    if (gymLabel) {
       const options = {
         url: url,
-        data: { code: gymLabel2 },
+        data: { code: gymLabel},
         headers: { 'Content-Type': 'application/json' }
       }
       const response = await CapacitorHttp.post(options);
@@ -180,7 +182,7 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
   useEffect(() => {
     const getLabeledFaceDescriptions = async () => {
       // const gymLabel = "AAAAAA"; // 설정한 체육관이 사용하는 폴더명 받아오기
-      const gymLabel = props.code;
+      // const gymLabel = props.code;
       // console.log(props.code);
       const idArray = await get_memberid();
       //폴더명
@@ -470,7 +472,7 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
     if (detectedLabel) {
       const options = {
         url: url,
-        data: { id: detectedLabel },
+        data: { id: detectedLabel, code: gymLabel },
         headers: { 'Content-Type': 'application/json' }
       }
       const response = await CapacitorHttp.post(options);
@@ -556,6 +558,7 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
 
 
   let faceEntry;
+
   faceEntry = <IonModal className="baseModal" isOpen={isModalOpen && !isModalShownForLabel && isgetlabel && isTimeout} backdropDismiss={false}>
     <ModalComponent
       detectedName={idd} //회원 id
@@ -572,6 +575,7 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
       inclass={inclass}
       recentTime={recentTime}
       flag={flag}
+      gymcode ={gymLabel}
       onClose={handleCloseModal} />
   </IonModal>
 
@@ -599,7 +603,7 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
       if (!props.typeid) { //회원번호
         const options = {
           url: url,
-          data: { id: props.id },
+          data: { id: props.id, code: gymLabel },
           headers: { 'Content-Type': 'application/json' }
         }
 
@@ -632,7 +636,7 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
       else if (props.typeid) {
         const options = {
           url: url,
-          data: { tel: props.id },
+          data: { tel: props.id, code: gymLabel},
           headers: { 'Content-Type': 'application/json' }
         }
         const response = await CapacitorHttp.post(options);
@@ -691,6 +695,7 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
           userpassword={userpassword}
           recentTime={recentTime}
           flag={flag}
+          gymcode ={gymLabel}
           //userpwd={userpwd}
           onClose={handleClosebtnModal} />
       </IonModal>
@@ -736,6 +741,7 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
           userpassword={userpassword}
           recentTime={recentTime}
           flag={flag}
+          gymcode ={gymLabel}
           //userpwd={userpwd}
           onClose={handleClosebtnModal} />
       </IonModal>

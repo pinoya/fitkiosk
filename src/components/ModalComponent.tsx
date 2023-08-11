@@ -28,6 +28,7 @@ type ModalComponentProps = {
   inclass: string | null;
   recentTime : string | null;
   flag : string | null;
+  gymcode: string | null;
   onClose: () => void;
 
   
@@ -49,6 +50,7 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
   inclass,
   recentTime,
   flag,
+  gymcode,
   onClose,
 }) => {
   const [isNewModalOpen, setIsNewModalOpen] = useState(false);
@@ -102,6 +104,7 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
       url: url,
       data: {
         id: mid,
+        code : gymcode,
         time: timer,
       },
     };
@@ -121,6 +124,7 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
       url: url,
       data: {
         id: mid,
+        code : gymcode,
         time: timer,
       },
     };
