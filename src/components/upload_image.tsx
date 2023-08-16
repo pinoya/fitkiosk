@@ -7,15 +7,16 @@ const Image = () => {
   const [tel, settel] = useState<String | null>(null);
   const [pw, setpw] = useState<String | null>(null);
   const [name, setname] = useState<String | null>(null);
+  const [code, setcode] = useState<String | null>(null);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const onFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = event.target.files?.[0];
-    if (selectedFile) {
-      upload(selectedFile);
-    }
-  };
+  // const onFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const selectedFile = event.target.files?.[0];
+  //   if (selectedFile) {
+  //     //   upload(selectedFile);
+  //   }
+  // };
 
   function idChange(e: any) {
     setid(e.target.value);
@@ -33,48 +34,55 @@ const Image = () => {
     setname(e.target.value);
   }
 
-  const upload = async (file: any) => {
+  function codeChange(e: any) {
+    setcode(e.target.value);
+  }
+
+  const upload = async () => {
     // if(id!.length)
     const formData = new FormData();
-    formData.append('file', file);
+    const photo = await takePhoto();
+    console.log(photo);
+    // formData.append('file', photo);
 
-    const reader = new FileReader();
+    // const reader = new FileReader();
 
-    reader.onload = async (event) => {
-      const imageData = event.target!.result; // 이미지 데이터
-      const base64ImageData = imageData!.split(',')[1]; // Base64 데이터 부분
+    const base64ImageData = photo; // Base64 데이터 부분
+    // reader.onload = async (event) => {
+    //   const imageData = event.target!.result; // 이미지 데이터
 
-      try {
-        const response = await fetch('http://dev.wisevill.com/media/upload_image.php', {
-          method: 'POST',
-          body: JSON.stringify({ image: base64ImageData, id: id, tel: tel, pw: pw, name: name, code: "AAAAAA" }),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
 
-        if (response.ok) {
-          // const responseData = await response.json();
-          console.log('Upload successful:', response);
-        } else {
-          console.error('Upload failed:', response.statusText);
-        }
-      } catch (error) {
-        console.error('Error:', error);
+    try {
+      const response = await fetch('http://dev.wisevill.com/media/upload_image.php', {
+        method: 'POST',
+        body: JSON.stringify({ image: base64ImageData, id: id, tel: tel, pw: pw, name: name, code: code }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        // const responseData = await response.json();
+        console.log('Upload successful:', response);
+      } else {
+        console.error('Upload failed:', response.statusText);
       }
-    };
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    // };
 
-    reader.readAsDataURL(file); // 파일을 Data URL 형식으로 읽기
+    // reader.readAsDataURL(file); // 파일을 Data URL 형식으로 읽기
   };
 
 
   const takePhoto = async () => {
     const photo = await Camera.getPhoto({
-      resultType: CameraResultType.Uri,
+      resultType: CameraResultType.Base64,
       source: CameraSource.Camera,
       quality: 100
     });
-    console.log(photo.base64String);
+    return photo.base64String;
   }
 
 
@@ -94,10 +102,13 @@ const Image = () => {
           <input placeholder='이름' onChange={nameChange}></input>
         </IonItem>
         <IonItem>
-          <input type="file" ref={fileInputRef} onChange={onFileChange} />
+          <input placeholder='체육관 코드(AAAAAA)' onChange={codeChange}></input>
         </IonItem>
+        {/* <IonItem>
+          <input type="file" ref={fileInputRef} onChange={onFileChange} />
+        </IonItem> */}
         <IonItem>
-          <IonButton onClick={takePhoto}/>
+          <IonButton onClick={upload} />
         </IonItem>
       </IonList>
     </>
