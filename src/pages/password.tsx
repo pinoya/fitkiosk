@@ -124,8 +124,7 @@ const Password: React.FC<ModalComponentProps> = ({
     }
     else {
       if (inner_pw) {
-        inner_pw.innerText = `비밀번호를 잘못 입력했습니다.
-      입력하신 내용을 다시 확인해주세요.`;
+        inner_pw.innerText = `비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.`;
         console.log('패스워드 불일치!');
         setIsNewModalOpen(false);
       }
@@ -144,7 +143,7 @@ const Password: React.FC<ModalComponentProps> = ({
       url: url,
       data: {
         id: mid,
-        code : gymcode,
+        code: gymcode,
         time: timer,
       },
     };
@@ -167,8 +166,7 @@ const Password: React.FC<ModalComponentProps> = ({
     }
     else {
       if (inner_pw) {
-        inner_pw.innerText = `비밀번호를 잘못 입력했습니다.
-      입력하신 내용을 다시 확인해주세요.`;
+        inner_pw.innerText = `비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.`;
         console.log('패스워드 불일치!');
         setIsNewModalOpen(false);
       }
@@ -183,7 +181,7 @@ const Password: React.FC<ModalComponentProps> = ({
       url: url,
       data: {
         id: mid,
-        code : gymcode,
+        code: gymcode,
         time: timer,
       },
     };
@@ -214,88 +212,98 @@ const Password: React.FC<ModalComponentProps> = ({
 
   return (
     <>
-      {/* <IonModal isOpen={isopen}  > */}
-      <IonGrid>
-        <IonRow class="input_padd">
-          <IonRow class="input_roww">
-            <IonCol class="input_boxx">
-              <IonButton class="input_btnn" onClick={() => addtext("1")}>1</IonButton>
-              <IonButton class="input_btnn" onClick={() => addtext("2")}>2</IonButton>
-              <IonButton class="input_btnn" onClick={() => addtext("3")}>3</IonButton>
+      <div className="box-wrap">
+        <div className="first-box">
+           <IonGrid>
+          <IonRow>
+            <IonRow className="pw_body">
+              <IonCol className="pw_body2">
+                <div className="pw_body3">
+                  <div className="pw_body3_first">
+                    <p className="pw_body3_first_p">회원번호</p>
+                    <p className="pw_body3_first_p2">{mid}</p>
+                  </div>
+
+                  <div className="pw_body3_second">
+                    <p className="pw_body3_second_p">{idd}</p>
+                    <p className="pw_body3_second_p2">님, 비밀번호를 입력해 주세요.</p>
+                  </div>
+
+                  <div className="pw_body3_box">
+                    <p className="pw_body3_box_input">{inputwhat}</p>
+
+                  </div>
+                  <p id='inner_pw'></p>
 
 
 
-            </IonCol>
-          </IonRow>
-
-
-          <IonRow class="input_roww">
-            <IonCol class="input_boxx">
-              <IonButton class="input_btnn" onClick={() => addtext("4")}>4</IonButton>
-              <IonButton class="input_btnn" onClick={() => addtext("5")}>5</IonButton>
-              <IonButton class="input_btnn" onClick={() => addtext("6")}>6</IonButton>
-            </IonCol>
-
-          </IonRow>
-          <IonRow class="input_roww">
-            <IonCol class="input_boxx">
-              <IonButton class="input_btnn" onClick={() => addtext("7")}>7</IonButton>
-              <IonButton class="input_btnn" onClick={() => addtext("8")}>8</IonButton>
-              <IonButton class="input_btnn" onClick={() => addtext("9")}>9</IonButton>
-            </IonCol>
-
-          </IonRow>
-
-          <IonRow class="input_roww">
-            <IonCol class="input_boxx">
-              <IonButton class="input_btnn" style={{ fontSize: '26px' }} onClick={resettext}>취소</IonButton>
-              <IonButton class="input_btnn" onClick={() => addtext("0")}>0</IonButton>
-              <IonButton class="input_btnn" onClick={deletetext}>X</IonButton>
-            </IonCol>
-
-          </IonRow>
-
-        </IonRow>
-        <IonRow>
-          <IonRow className="pw_body">
-            <IonCol className="pw_body2">
-              <div className="pw_body3">
-                <div className="pw_body3_first">
-                  <p className="pw_body3_first_p">회원번호</p>
-                  <p className="pw_body3_first_p2">{mid}</p>
-                </div>
-
-                <div className="pw_body3_second">
-                  <p className="pw_body3_second_p">{idd}</p>
-                  <p className="pw_body3_second_p2">님, 비밀번호를 입력해 주세요.</p>
-                </div>
-
-                <div className="pw_body3_box">
-                  <p className="pw_body3_box_input">{inputwhat}</p>
-
-                </div>
-                <p id='inner_pw' style={{ color: '#ff6300', fontSize: '12px' }}></p>
-
-
-
-                <div className="pw_body3_last">
-                  <div className="pw_body3_last_div1">
-                    {/* <button onClick={handleConfirm} className="pw_body3_last_button1">
+                  <div className="pw_body3_last">
+                    <div className="pw_body3_last_div1">
+                      {/* <button onClick={handleConfirm} className="pw_body3_last_button1">
                       퇴실
                     </button> */}
-                    {InOutbutton}
-                  </div>
+                      {InOutbutton}
+                    </div>
 
-                  <div className="pw_body3_last_div2">
-                    <button onClick={onClose} className="pw_body3_last_button2">취소</button>
+                    <div className="pw_body3_last_div2">
+                      <button onClick={onClose} className="pw_body3_last_button2">취소</button>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-            </IonCol>
+              </IonCol>
+            </IonRow>
           </IonRow>
-        </IonRow>
-      </IonGrid>
+        </IonGrid>
+        </div>
+        <div className="second-box">  
+        <IonGrid>
+          <IonRow class="input_padd">
+            <IonRow class="input_roww">
+              <IonCol class="input_boxx">
+                <IonButton class="input_btnn" onClick={() => addtext("1")}>1</IonButton>
+                <IonButton class="input_btnn" onClick={() => addtext("2")}>2</IonButton>
+                <IonButton class="input_btnn" onClick={() => addtext("3")}>3</IonButton>
+
+
+
+              </IonCol>
+            </IonRow>
+
+
+            <IonRow class="input_roww">
+              <IonCol class="input_boxx">
+                <IonButton class="input_btnn" onClick={() => addtext("4")}>4</IonButton>
+                <IonButton class="input_btnn" onClick={() => addtext("5")}>5</IonButton>
+                <IonButton class="input_btnn" onClick={() => addtext("6")}>6</IonButton>
+              </IonCol>
+
+            </IonRow>
+            <IonRow class="input_roww">
+              <IonCol class="input_boxx">
+                <IonButton class="input_btnn" onClick={() => addtext("7")}>7</IonButton>
+                <IonButton class="input_btnn" onClick={() => addtext("8")}>8</IonButton>
+                <IonButton class="input_btnn" onClick={() => addtext("9")}>9</IonButton>
+              </IonCol>
+
+            </IonRow>
+
+            <IonRow class="input_roww">
+              <IonCol class="input_boxx">
+                <IonButton class="input_btnn" style={{ fontSize: '26px' }} onClick={resettext}>취소</IonButton>
+                <IonButton class="input_btnn" onClick={() => addtext("0")}>0</IonButton>
+                <IonButton class="input_btnn" onClick={deletetext}>X</IonButton>
+              </IonCol>
+
+            </IonRow>
+
+          </IonRow>
+        </IonGrid></div>
+        {/* <div class="yellow-box"></div> */}
+      </div>
+
+
+
       {/* </IonModal> */}
 
       {/* New Modal */}

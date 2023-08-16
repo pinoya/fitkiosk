@@ -1,37 +1,5 @@
 
 
-.Check_logo {
-    margin: auto;
-    display: block;
-    width: 47.05px;
-    height: 57.35px;
-    left: 12.93px;
-    top: 8.36px;
-}
-
-
-.modal_text {
-    text-align: center;
-}
-
-.modal_h2 {
-    font-family: 'Noto Sans KR';
-    font-style: normal;
-    font-weight: 700;
-    color: #FFFFFF;
-    /* font-size: 30px;
-    line-height: 40px; */
-}
-
-
-.btn_block {
-    width: 100%;
-    height: 100%;
-    left: calc(50% - 600px/2);
-    background: #313131;
-    border-radius: 10px;
-    z-index: 1;
-}
 
 @media (orientation: portrait) {
     ion-row.title {
@@ -60,63 +28,7 @@
 }
 
 
-.modal_button {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    /* This sets the spacing between the buttons */
 
-    .btn_attandance {
-        display: inline-block;
-        width: 40%;
-        height: 50px;
-        margin-left: 40px;
-        margin-bottom: 20px;
-        background: #FF6300;
-        border-radius: 5px;
-        color: #FFFFFF;
-
-        font-weight: 700;
-        font-size: 15px;
-
-    }
-
-    .btn_cancel {
-        width: 40%;
-        height: 50px;
-        margin-right: 40px;
-        margin-bottom: 20px;
-
-        background: #A8B1CE;
-        border-radius: 5px;
-        color: #FFFFFF;
-
-        font-weight: 700;
-        font-size: 15px;
-
-    }
-
-}
-
-.Member_Number {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    font-weight: 700;
-}
-
-.num_text {
-    color: #848484;
-    font-weight: 700;
-    font-size: 21px;
-}
-
-.real_num {
-    color: #FFFFFF;
-    font-size: 22.5px;
-}
 
 .welcome{
     width:640px;
