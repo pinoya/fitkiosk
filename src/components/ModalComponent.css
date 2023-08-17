@@ -19,10 +19,10 @@
         height: 155px;
     }
     .welcome {
-        --width : 640px;
-        --height : 710px;
+        --width: 1070px;
+        --height: 530px;
         --border-radius: 10px;
-        --background : #232323;
+        --background: #232323;
     
     }
 }
@@ -30,9 +30,9 @@
 
 
 
-.welcome{
+/* .welcome{
     width:640px;
     height:710px;
     margin:auto;
     
-}
+} */

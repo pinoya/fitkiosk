@@ -1,101 +1,162 @@
+@media (orientation: portrait) {
 
-
-    ion-button{
-        --background : #FF6300;
-    
+    .one-box {
+      
+        width: 100%;
+        margin-top: 2%;
+        margin-left: 2%;
+        /* background-color: #293462; */
     }
-    .head{ /*전체*/
+
+    .two-box {
+        position: relative;
+        z-index: 1; /* 위에 쌓임 */
+        margin-top: -31.1%;
+        margin-left: 2%;
+        /* background-color: #F24C4C; */
+        width: 50%;
+    }
+    .three-box{
+        margin-top: -5%;
+    }
+
+    .profile2 {
+        width: 230px;
+        height: 180px;
+    }
+
+    .profile2 img {
+        max-width: 100%; /* 이미지 너비가 컨테이너 너비를 넘지 않도록 */
+        width: 100%; /* 이미지의 가로 크기를 컨테이너에 맞게 설정 */
+        height: 180px;
+        /* display: block;  */
+        border-radius: 10px;
+      }
+
+    ion-button {
+        --background: #FF6300;
+
+    }
+
+    .head {
+        /*전체*/
         display: flex;
         margin-left: "0.3%";
         margin-top: 3%;
     }
-    .body2{ /*첫번째 오른쪽 박스*/
+
+    .body2 {
+        /*첫번째 오른쪽 박스*/
         background-color: #313131;
         width: 360px;
-        height : 180px;
+        height: 180px;
         border-radius: 10px;
         padding-left: 26px;
+        margin-left: 80%;
     }
-    .body2_name{ /*이름*/
+
+    .body2_name {
+        /*이름*/
         font-size: 20px;
-        color : white;
+        color: white;
         font-weight: 700;
         display: flex;
     }
-    .body2_nim{ /*님*/
+
+    .body2_nim {
+        /*님*/
         margin-top: 7.1%;
         margin-left: 0.3%;
     }
-    .body2_welcome{ /*환영합니다*/
+
+    .body2_welcome {
+        /*환영합니다*/
         font-size: 26px;
         margin-top: 5.2%;
         margin-left: 2.7%;
     }
-    .body2_time{ /*시간*/
+
+    .body2_time {
+        /*시간*/
         margin-top: -6%;
         font-size: 18px;
-        color : #b1aeaf;
+        color: #b1aeaf;
     }
-    .body2_p1{ /*보유마일리지 줄*/
+
+    .body2_p1 {
+        /*보유마일리지 줄*/
         font-size: 18px;
         font-weight: 400;
-        color : #b1aeaf;
+        color: #b1aeaf;
         display: flex;
+        margin-top: -3%;
     }
-    .body2_p2{/*이달 출석횟수 줄*/
+
+    .body2_p2 {
+        /*이달 출석횟수 줄*/
         margin-top: -9%;
         font-size: 18px;
-        color : #b1aeaf;
+        color: #b1aeaf;
         display: flex;
     }
-    .body2_mil{ /*마일리지, 이달 출석횟수*/
+
+    .body2_mil {
+        /*마일리지, 이달 출석횟수*/
         letter-spacing: -0.3px;
     }
-    .body2_score{/*숫자*/
+
+    .body2_score {
+        /*숫자*/
         margin-left: 5%;
         font-weight: 700;
         letter-spacing: 0.8px;
     }
-    
-    
+
+
     /*두번째 박스*/
-    .body3{
-        width : 600px;
-        height : 100px;
+    .body3 {
+        width: 600px;
+        height: 100px;
         background-color: #313131;
         border-radius: 10px;
         padding-left: 20px;
         padding-top: 17px;
         margin-left: 0.3%;
     }
-    .body3_circle{
-        width : 65px;
+
+    .body3_circle {
+        width: 65px;
         height: 65px;
         border-radius: 100px;
         background-color: #FDEFE5;
     }
-    .body3_p1{
+
+    .body3_p1 {
         margin-left: 14%;
         margin-top: -13.8%;
     }
-    .body3_p1_finish{
+
+    .body3_p1_finish {
         font-weight: 700;
         font-size: 18px;
-        color : #848484;
+        color: #848484;
         letter-spacing: -0.3px;
     }
-    .body3_p1_r{
+
+    .body3_p1_r {
         display: flex;
         margin-left: 28%;
         margin-top: -12.2%;
     }
-    .body3_p1_r_date{
+
+    .body3_p1_r_date {
         font-size: 18px;
-        color : #b1aeaf;
+        color: #b1aeaf;
         font-weight: 400;
     }
-    .dday{
-        width:70px;
+
+    .dday {
+        width: 70px;
         height: 25px;
         border-radius: 3px;
         background-color: #FF6300;
@@ -104,22 +165,26 @@
         text-align: center;
         margin-left: 2%;
     }
-    .body3_p2{
+
+    .body3_p2 {
         margin-left: 14%;
         margin-top: -4.5%;
     }
-    .body3_p2_product{
+
+    .body3_p2_product {
         font-weight: 700;
         font-size: 18px;
         color: #848484;
         letter-spacing: -0.3px;
     }
-    .body3_p2_r{
+
+    .body3_p2_r {
         display: flex;
         margin-left: 28%;
         margin-top: -12.2%;
     }
-    .use{
+
+    .use {
         background-color: #ddebf8;
         width: 53px;
         height: 19px;
@@ -129,98 +194,540 @@
         text-align: center;
         margin-top: 5.5%;
     }
-    .body4_date{
+
+    .body4_date {
         font-size: 18px;
         color: #b1aeaf;
         margin-left: 2%;
         font-weight: 400;
     }
-    
-    .body5{
-        width : 600px;
-        height : 140px;
+
+    .body5 {
+        width: 600px;
+        height: 140px;
         background-color: #313131;
         border-radius: 10px;
         padding-left: 20px;
         padding-top: 17px;
-        margin-left: 0.3%; 
+        margin-left: 0.3%;
     }
-    .body5_circle{
-        width : 65px;
+
+    .body5_circle {
+        width: 65px;
         height: 65px;
         border-radius: 100px;
         background-color: #FDEFE5;
         margin-top: 4%;
     }
-    .body5_p1{
+
+    .body5_p1 {
         margin-left: 14%;
         margin-top: -16.8%;
     }
-    .body5_p2{
+
+    .body5_p2 {
         margin-left: 14%;
         margin-top: -4.8%;
     }
-    .body5_left{
+
+    .body5_left {
         font-size: 18px;
         color: #FF6300;
         font-weight: 700;
     }
-    .body5_left2{
+
+    .body5_left2 {
         font-size: 18px;
         color: #b1aeaf;
         margin-left: 0.8%;
         font-weight: 400;
     }
-    .btnn{
+
+    .btnn {
         margin-left: 14%;
         margin-top: 3%;
     }
-    .btnnn{
+
+    .btnnn {
         background-color: #232323;
-        width : 400px;
-        height : 100px;
+        width: 400px;
+        height: 100px;
         margin-top: -1%;
     }
 
 
-.body5{
-    width : 600px;
-    height : 140px;
-    background-color: #313131;
-    border-radius: 10px;
-    padding-left: 20px;
-    padding-top: 17px;
-    margin-left: 0.3%; 
-}
-.body5_circle{
-    width : 65px;
-    height: 65px;
-    border-radius: 100px;
-    background-color: #FDEFE5;
-    margin-top: 4%;
-}
-.body5_p1{
-    margin-left: 14%;
-    margin-top: -16.8%;
-}
-.body5_p2{
-    margin-left: 14%;
-    margin-top: -4.8%;
-}
-.body5_left{
-    font-size: 18px;
-    color: #FF6300;
-    font-weight: 700;
-}
-.body5_left2{
-    font-size: 18px;
-    color: #b1aeaf;
-    margin-left: 0.8%;
-    font-weight: 400;
-}
-.btnn{
-    margin-left: 28%;
-    margin-right: 31%;
-    margin-top: 9%;
+    .body5 {
+        width: 600px;
+        height: 140px;
+        background-color: #313131;
+        border-radius: 10px;
+        padding-left: 20px;
+        padding-top: 17px;
+        margin-left: 0.3%;
+    }
+
+    .body5_circle {
+        width: 65px;
+        height: 65px;
+        border-radius: 100px;
+        background-color: #FDEFE5;
+        margin-top: 4%;
+    }
+
+    .body5_p1 {
+        margin-left: 14%;
+        margin-top: -16.8%;
+    }
+
+    .body5_p2 {
+        margin-left: 14%;
+        margin-top: -4.8%;
+    }
+
+    .body5_left {
+        font-size: 18px;
+        color: #FF6300;
+        font-weight: 700;
+    }
+
+    .body5_left2 {
+        font-size: 18px;
+        color: #b1aeaf;
+        margin-left: 0.8%;
+        font-weight: 400;
+    }
+
+    .btnn {
+        margin-left: 28%;
+        margin-right: 31%;
+        margin-top: 9%;
+    }
+
 }
 
+@media (orientation: landscape) {
+
+    /* ion-modal.welcome {
+        --width: 1070px;
+        --height: 530px;
+        --border-radius: 10px;
+        --background: #232323;
+
+    } */
+
+    /* .red-box {
+        margin-top: -18.2%;
+        margin-left: 0.8%;
+        width: 50%;
+        order: -1;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+    }
+
+    .blue-box,
+    .yellow-box {
+        margin-left: 50%;
+    } */
+
+    .one-box {
+        /* position: relative; */
+        z-index: 1; /* 위에 쌓임 */
+        width: 100%;
+        height: 64.5%;
+        margin-top: 0.8%;
+        margin-left: 1.2%;
+        margin-bottom: 0.2%;
+        
+        /* background-color: #293462; */
+        /* overflow: hidden; */
+    }
+
+    .two-box {
+        /* position: relative; */
+        z-index: 1; /* 위에 쌓임 */
+        width: 100%;
+        margin-left: 43.5%;
+        margin-top: -37%;
+        /* background-color: #F24C4C; */
+    }
+
+    .three-box {
+        position: relative; /* 위치 지정을 위해 필요 */
+        z-index: 2; /* 아래에 쌓임 */
+        width: 100%;
+        display: inline-block;
+        margin-top: -11%;
+
+        
+        /* background-color: #F7D716; */
+    }
+
+    .profile2 {
+        width: 430px;
+        height: 435px;
+    }
+
+    .profile2 img {
+        width: 430px;
+        max-width: 100%; /* 이미지 너비가 컨테이너 너비를 넘지 않도록 */
+        height: 435px; /* 가로 비율에 따라 세로 비율 자동 조정 */
+        border-radius: 10px;
+      }
+
+    ion-button {
+        --background: #FF6300;
+
+    }
+
+    .head {
+        /*전체*/
+        display: flex;
+        margin-left: "0.3%";
+        margin-top: 3%;
+    }
+
+    
+    .body2_background-block {
+        position: fixed;
+        margin-top: 0.6%;
+        margin-left: 0.1%;
+        width: 54%;
+        height: 22%;
+
+        background-color: #313131;
+        /* 배경색 지정 */
+        z-index: -1;
+        /* 내용보다 뒤에 표시 */
+        border-radius: 10px;
+    }
+
+    .body2 {
+        /*첫번째 오른쪽 박스*/
+
+        /* background-color: #313131; */
+        width: 600px;
+        height: 90%;
+        /* height : 180px; */
+        border-radius: 10px;
+        padding-left: 8%;
+        margin-top: -1%;
+    }
+
+    .body2_name {
+        /*이름*/
+        margin-top: 0%;
+        font-size: 20px;
+        color: white;
+        font-weight: 700;
+        display: flex;
+    }
+
+    .body2_nim {
+        /*님*/
+        margin-top: 6%;
+        margin-left: 0.3%;
+    }
+
+    .body2_welcome {
+        /*환영합니다*/
+        font-size: 26px;
+        margin-top: 5.2%;
+        margin-left: 2.7%;
+    }
+
+    .body2_time {
+        /*시간*/
+        margin-left: 0%;
+        margin-top: -9%;
+        font-size: 18px;
+        color: #b1aeaf;
+    }
+
+    .row3 {
+        display: flex;
+        flex-direction: row;
+        
+    }
+
+    .row2{
+        margin-top:-7.2%;
+        margin-left: 8%;
+        display: inline-block;
+        white-space: nowrap;
+    }
+   
+    .body2_p1 {
+        /*보유마일리지 줄*/
+        margin-top: 0%;
+        margin-left: 0%;
+        font-size: 17px;
+        font-weight: 400;
+        color: #b1aeaf;
+        display: flex;
+    }
+
+    .body2_p2 {
+        /*이달 출석횟수 줄*/
+        margin-top: -19.5%;
+        font-size: 17px;
+        color: #b1aeaf;
+        display: flex;
+    }
+
+    .body2_mil {
+        /*마일리지, 이달 출석횟수*/
+        letter-spacing: -0.3px;
+    }
+
+    .body2_score {
+        /*숫자*/
+        margin-left: 6%;
+        font-weight: 700;
+        letter-spacing: 0.8px;
+    }
+
+
+
+    .background-block2{
+        position: fixed;
+        margin-top: -0.3%;
+        margin-left: 0.1%;
+        width: 54%;
+        height: 18%;
+
+        background-color: #313131;
+        /* 배경색 지정 */
+        z-index: -1;
+        /* 내용보다 뒤에 표시 */
+        border-radius: 10px;
+
+    }
+    
+    .box3{
+        margin-top: -1%;
+    }
+
+    /*두번째 박스*/
+    .body3 {
+        width: 600px;
+        height: 100px;
+        /* background-color: #313131; */
+        border-radius: 10px;
+        padding-left: 20px;
+        padding-top: 17px;
+        margin-left: 0.3%;
+        margin-top: -1%;
+    }
+
+    .body3_circle {
+        width: 65px;
+        height: 65px;
+        border-radius: 100px;
+        background-color: #FDEFE5;
+    }
+
+    .body3_p1 {
+        margin-left: 14%;
+        margin-top: -13.8%;
+    }
+
+    .body3_p1_finish {
+        font-weight: 700;
+        font-size: 18px;
+        color: #848484;
+        letter-spacing: -0.3px;
+    }
+
+    .body3_p1_r {
+        display: flex;
+        margin-left: 28%;
+        margin-top: -12.2%;
+    }
+
+    .body3_p1_r_date {
+        font-size: 18px;
+        color: #b1aeaf;
+        font-weight: 400;
+    }
+
+    .dday {
+        width: 70px;
+        height: 25px;
+        border-radius: 3px;
+        background-color: #FF6300;
+        color: white;
+        font-size: 18px;
+        text-align: center;
+        margin-left: 2%;
+    }
+
+    .background-block3{
+        position: fixed;
+        margin-top: -0.3%;
+        margin-left: 0.1%;
+        width: 54%;
+        height: 18%;
+
+        background-color: #313131;
+        /* 배경색 지정 */
+        z-index: -1;
+        /* 내용보다 뒤에 표시 */
+        border-radius: 10px;
+
+    }
+
+    .background-block4{
+        position: fixed;
+        margin-top: -0.2%;
+        margin-left: 0.1%;
+        width: 54%;
+        height: 19%;
+
+        background-color: #313131;
+        /* 배경색 지정 */
+        z-index: -1;
+        /* 내용보다 뒤에 표시 */
+        border-radius: 10px;
+
+    }
+
+    .body3_p2 {
+        margin-left: 14%;
+        margin-top: -4.5%;
+    }
+
+    .body3_p2_product {
+        font-weight: 700;
+        font-size: 18px;
+        color: #848484;
+        letter-spacing: -0.3px;
+    }
+
+    .body3_p2_r {
+        display: flex;
+        margin-left: 28%;
+        margin-top: -12.2%;
+    }
+
+    .use {
+        background-color: #ddebf8;
+        width: 53px;
+        height: 19px;
+        border-radius: 3px;
+        font-size: 13px;
+        color: #232323;
+        text-align: center;
+        margin-top: 5.5%;
+    }
+
+    .body4_date {
+        font-size: 18px;
+        color: #b1aeaf;
+        margin-left: 2%;
+        font-weight: 400;
+    }
+
+    .body5 {
+        width: 600px;
+        height: 140px;
+        /* background-color: #313131; */
+        border-radius: 10px;
+        padding-left: 20px;
+        padding-top: 17px;
+        margin-left: 0.3%;
+        margin-top:-4%;
+    }
+
+    .body5_circle {
+        width: 65px;
+        height: 65px;
+        border-radius: 100px;
+        background-color: #FDEFE5;
+        margin-top: 4%;
+    }
+
+    .body5_p1 {
+        margin-left: 14%;
+        margin-top: -16.8%;
+    }
+
+    .body5_p2 {
+        margin-left: 14%;
+        margin-top: -4.8%;
+    }
+
+    .body5_left {
+        font-size: 18px;
+        color: #FF6300;
+        font-weight: 700;
+    }
+
+    .body5_left2 {
+        font-size: 18px;
+        color: #b1aeaf;
+        margin-left: 0.8%;
+        font-weight: 400;
+    }
+
+    .btnn {
+        margin-left: 14%;
+        margin-top: 3%;
+    }
+
+    .btnnn {
+        background-color: #232323;
+        width: 400px;
+        height: 100px;
+        margin-top: -1%;
+    }
+
+
+    .body5 {
+        width: 600px;
+        height: 140px;
+        /* background-color: #313131; */
+        border-radius: 10px;
+        padding-left: 20px;
+        padding-top: 17px;
+        margin-left: 0.3%;
+    }
+
+    .body5_circle {
+        width: 65px;
+        height: 65px;
+        border-radius: 100px;
+        background-color: #FDEFE5;
+        margin-top: 4%;
+    }
+
+    .body5_p1 {
+        margin-left: 14%;
+        margin-top: -16.8%;
+    }
+
+    .body5_p2 {
+        margin-left: 14%;
+        margin-top: -4.8%;
+    }
+
+    .body5_left {
+        font-size: 18px;
+        color: #FF6300;
+        font-weight: 700;
+    }
+
+    .body5_left2 {
+        font-size: 18px;
+        color: #b1aeaf;
+        margin-left: 0.8%;
+        font-weight: 400;
+    }
+
+    .btnn {
+        margin-left: 28%;
+        margin-right: 31%;
+        margin-top: 9%;
+    }
+}
