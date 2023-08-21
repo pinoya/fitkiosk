@@ -153,7 +153,7 @@ function Welcome(props: any) {
   //인식 -> 회원 아이디가 넘어옴 
   if (props.detectedName == null) {
 
-    name = <p style={{ fontSize: '27px', color: '#FF6300', marginTop: '4.9%', fontWeight: '700' }}>{props.idd}</p>
+    name = <p style={{ fontSize: '27px', color: '#FF6300', marginTop: '4.9%', fontWeight: '700' }}>{props.Name}</p>
   }
   else if (props.detectedName) {
     name = <p style={{ fontSize: '27px', color: '#FF6300', marginTop: '4.9%', fontWeight: '700' }}>{props.detectedName}</p>
@@ -167,7 +167,7 @@ function Welcome(props: any) {
 
   // console.log(props.profile_img);
   //사진값이 넘어오지 않았을때 일단 대체 이미지로
-  if (props.selfieURL == null) {
+  if (props.profileImg == null) {
     if (props.profile_img != null) { //프로필 이미지가 있을때
       selfie = 
       <div className='profile2'>
@@ -186,11 +186,11 @@ function Welcome(props: any) {
       </div>
     }
   }
-  else if (props.selfieURL) {
+  else if (props.profileImg) {
     selfie = 
     <div className="profile2">
     <img 
-      src={props.selfieURL}></img>
+      src={props.profileImg}></img>
       </div>
   }
 

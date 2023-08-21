@@ -17,7 +17,7 @@ type ModalComponentProps = {
   detectedName: string | null;
   mid: string | null;
   tel: string | null;
-  selfieURL: string | null;
+  profileImg: string | null;
   mile: string | null;
   come: string | null;
   product: string | null;
@@ -39,7 +39,7 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
   detectedName,
   mid,
   tel,
-  selfieURL,
+  profileImg,
   mile,
   come,
   product,
@@ -192,7 +192,7 @@ if(tel){
         <div className="red-box"><IonGrid>
           <IonRow>
             <IonCol>
-              {selfieURL && <img src={selfieURL} className="profile" alt="Captured Selfie" />}
+              {profileImg && <img src={profileImg} className="profile" alt="Captured Selfie" />}
             </IonCol>
           </IonRow>
         </IonGrid></div>
@@ -237,7 +237,7 @@ if(tel){
           <Welcome
 
             detectedName={detectedName}
-            selfieURL={selfieURL}
+            profileImg={profileImg}
             mile={mile}
             come={come}
             product={product}

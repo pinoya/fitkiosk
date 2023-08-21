@@ -8,6 +8,7 @@ import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, Ion
 import { CapacitorHttp } from "@capacitor/core";
 import Password from "../pages/password";
 import "./FaceRecognition.css";
+import Cover from "./Loading.png"
 
 
 import { UserPhoto, usePhotoGallery } from '../hooks/usePhotoGallery';
@@ -25,6 +26,10 @@ interface FaceRecognitionProps {
   id: string | null;
   typeid: boolean;
   code: string | null;
+  isJoinModalOpen: boolean;
+  setisJoinModalOpen(arg0: boolean): unknown;
+  isNewMember: boolean;
+  setisNewMember(arg0: boolean): unknown;
 }
 
 // interface LabelTime {
@@ -36,7 +41,9 @@ interface FaceRecognitionProps {
 
 const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
 
+// console.log(props.id);
 
+// console.log(props.typeid);
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -47,6 +54,7 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
   const [detectedLabel, setDetectedLabel] = useState<string | null>(null);
   const [isModalShownForLabel, setIsModalShownForLabel] = useState<boolean>(false);
   const [isgetlabel, setIsGetLabel] = useState(false);
+  const [isLoading, setisLoading] = useState(true);
 
   const [isgetbtnlabel, setIsGetBtnLabel] = useState(false);
 
@@ -59,7 +67,7 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
 
 
   const [mid, setmid] = useState('');
-  const [idd, setidd] = useState(''); //jsondata 이름
+  const [Name, setName] = useState(''); //jsondata 이름
   const [tel, settel] = useState('');
   const [profileImg, setProfileImg] = useState('');
   const [mile, setmile] = useState('');
@@ -110,10 +118,10 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
         //drawImage(image ,canvas_x, canvas_y,canvas_width,canvas_height)
 
         // 캔버스를 이미지로 저장하여 URL을 생성합니다.
-        const URL = canvas.toDataURL("image/png");
+        const selfieURL = canvas.toDataURL("image/png");
 
-        console.log("셀피 URL:", URL);
-        // setSelfieURL(selfieURL);
+        // console.log("셀피 URL:", URL);
+        setSelfieURL(selfieURL);
 
         // const image = canvasRefSelfie.current.toDataURL('image/png');
         // const link = document.createElement('a');
@@ -128,15 +136,15 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
   };
 
 
-  // const deleteCaptureSelfie = () => {
-  //   if (canvasRefSelfie.current && videoRef.current) {
-  //     const canvas = canvasRefSelfie.current;
-  //     const context = canvas.getContext("2d");
-  //     if (context) {
-  //       context.clearRect(0, 0, canvas.width, canvas.height);
-  //     }
-  //   }
-  // };
+  const deleteCaptureSelfie = () => {
+    if (canvasRefSelfie.current && videoRef.current) {
+      const canvas = canvasRefSelfie.current;
+      const context = canvas.getContext("2d");
+      if (context) {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    }
+  };
 
 
 
@@ -183,6 +191,7 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
       // const gymLabel = props.code;
       // console.log(props.code);
       const idArray = await get_memberid();
+      console.log(idArray);
       //폴더명
       // const labels = ["33333", "11111", "44444", "22222"]; // 폴더 내에 있는 파일 이름
 
@@ -192,6 +201,7 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
           // const imgUrl = `./labels/${gymLabel}/${label}.jpg`;
 
           const imgUrl = `http://dev.wisevill.com/media/labels/${gymLabel}/${label}.jpg`;
+
           console.log(imgUrl);
           const img = await faceapi.fetchImage(imgUrl);
 
@@ -210,6 +220,7 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
 
     const setupFaceRecognition = async () => {
       const labeledFaceDescriptors = await getLabeledFaceDescriptions();
+      // setisLoading(false);
       const faceMatcher = new faceapi.FaceMatcher(
         labeledFaceDescriptors,
         UNKNOWN_THRESHOLD
@@ -299,8 +310,11 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
       return () => clearInterval(intervalId);
     };
 
-    // console.log(uniqueLabels);
 
+if(props.isNewMember){
+  setupFaceRecognition();
+  props.setisNewMember(false);
+}
     Promise.all([
       faceapi.nets.ssdMobilenetv1.loadFromUri("/models"),
       faceapi.nets.faceRecognitionNet.loadFromUri("/models"),
@@ -315,7 +329,9 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
       }
 
     };
-  }, []);
+  }, [props.isNewMember]);
+
+  
 
   useEffect(() => {
     console.log("현재 카운트");
@@ -378,46 +394,6 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
 
   }, [detectedLabel]);
 
-
-
-
-  const resetLabelAndTime = () => {
-
-    setTimeout(() => {
-      if (BeforeLabel == null || BeforeLabel == detectedLabel) {
-        setDetectedLabel("특정값");
-        setBeforeLabel("특정값");
-        console.log("리셋했습니다.");
-
-        // setrecentTime("초기화"); 
-        // console.log("인식시간을 초기화했습니다.");//일단 인식 시간 초기화
-        const currentTime = new Date().toLocaleTimeString();
-        console.log(currentTime);
-      }
-    }, 10000);
-    // 1000 = 1초 10000 =10초 60초로 지정해놓음.
-  }
-
-  // 1 1 
-
-  // 얼굴인식이 안됐거나, 얼굴인식 등록을 안한 사람 
-  //출석버튼 -> 출석 플래그 확인(0) -> 출석 하지 않았을 경우에만 비밀번호 창을 열어줌.
-  //비밀번호 성공 -> 출석(출석 플래그 올림 / 출석 시간(현재시간) db에 찍기)
-
-  //퇴실버튼 -> 출석 플래그 확인(1) -> 출석 하지 않았을 경우에만 비밀번호 창을 열어줌.
-  //비밀번호 성공 -> 출석(출석 플래그 올림 / 출석 시간(현재시간) db에 찍기)
-
-  // 얼굴인식 확인 창의 출석(출석플래그 올림/ 출석시간(현재시간) db에 찍기) -> 확인창.  
-  // 얼굴인식 확인 창의 퇴실(퇴실플래그 올림/ 퇴실시간(현재시간) db에 찍기) -> 확인창.  
-
-  // 출석 퇴실 확인할 필요가 사라짐. 30초 지났을때 다시 인식되면 퇴실시키면 됨 그냥.
-
-  //다른 사람 다시 인식될때
-
-  // 30초 뒤에 초기화
-  // 같은 사람 인식되게 
-
-
   const handleCloseModal = () => {
     setIsModalOpen(false); //모달창 닫기
     setIsModalShownForLabel(true); //모달창 닫기 (shownLabel === detectedLabel 다고 지정해놓기)
@@ -425,14 +401,12 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
     setIsTimeout(false);
     setIsGetLabel(false); //라벨 플래그 초기화
     reset(); //얼굴인식 실패 횟수 리셋
+    deleteCaptureSelfie();
     startWebcam(); //캠 시작하기
     const currentTime = new Date().toLocaleTimeString();
     console.log("모달이 닫혔습니다.");
     console.log(currentTime);
   };
-
-
-
 
   //버튼으로 들어간 모달 끄기
   const handleClosebtnModal = () => {
@@ -440,14 +414,14 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
     props.setisbtnoutOpen(false); //모달창 닫기
     setIsGetBtnLabel(false); //라벨 플래그 값 초기화
     reset(); //얼굴인식 실패 횟수 리셋
+    deleteCaptureSelfie();
     startWebcam(); //캠 시작하기
   };
-
 
   const deleteUserInfo = () => {
     setmid(''); //회원 아이디
     settel('');
-    setidd(''); //이름
+    setName(''); //이름
     setProfileImg('');
     setmile(''); //마일리지
     setcome(''); //출석횟수
@@ -460,6 +434,80 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
     console.log(mid);
   }
 
+  const get_btn_userinfo = async () => {
+    let url = 'http://dev.wisevill.com/kioskdb/get_data_from_db.php';
+
+    if (props.id) {
+      if (!props.typeid) { //회원번호
+        const options = {
+          url: url,
+          data: { id: props.id, code: gymLabel },
+          headers: { 'Content-Type': 'application/json' }
+        }
+
+        const response = await CapacitorHttp.post(options);
+        // console.log(JSON.parse(response.data));
+
+        for (let i = 0; i < JSON.parse(response.data).length; i++) {
+
+          console.log(JSON.parse(response.data)[i].id);
+          console.log(JSON.parse(response.data)[i].name);
+          console.log(JSON.parse(response.data)[i].mile);
+          setmid(JSON.parse(response.data)[i].id); //회원 아이디
+          console.log(mid);
+          setName(JSON.parse(response.data)[i].name); //이름
+          settel(JSON.parse(response.data)[i].tel);
+          setProfileImg(JSON.parse(response.data)[i].profile_img);
+          setmile(JSON.parse(response.data)[i].mile); //마일리지
+          setcome(JSON.parse(response.data)[i].comeinm); //출석횟수
+          setproduct(JSON.parse(response.data)[i].duetoproduct); //회원권 만료일
+          sethave(JSON.parse(response.data)[i].haveproduct); //회원권 상품명
+          setlocker(JSON.parse(response.data)[i].indivlockerinfo);
+          setduclass(JSON.parse(response.data)[i].duetoclass);
+          setleft(JSON.parse(response.data)[i].leftclasstime);
+          setinclass(JSON.parse(response.data)[i].inclass);
+          setrecentTime(JSON.parse(response.data)[i].recentTime);
+          setuserpassword(JSON.parse(response.data)[i].pw);
+          setflag(JSON.parse(response.data)[i].flag);
+        }
+        setIsGetBtnLabel(true);
+      }
+      else if (props.typeid) {
+        const options = {
+          url: url,
+          data: { tel: props.id, code: gymLabel},
+          headers: { 'Content-Type': 'application/json' }
+        }
+        const response = await CapacitorHttp.post(options);
+        console.log(JSON.parse(response.data));
+
+        for (let i = 0; i < JSON.parse(response.data).length; i++) {
+
+          console.log(JSON.parse(response.data)[i].id);
+          console.log(JSON.parse(response.data)[i].name);
+          console.log(JSON.parse(response.data)[i].mile);
+          setmid(JSON.parse(response.data)[i].id);
+          setName(JSON.parse(response.data)[i].name); //이름
+          settel(JSON.parse(response.data)[i].tel);
+          console.log(tel);
+          setProfileImg(JSON.parse(response.data)[i].profile_img);
+          setmile(JSON.parse(response.data)[i].mile); //마일리지
+          setcome(JSON.parse(response.data)[i].comeinm); //출석횟수
+          setproduct(JSON.parse(response.data)[i].duetoproduct); //회원권 만료일
+          sethave(JSON.parse(response.data)[i].haveproduct); //회원권 상품명
+          setlocker(JSON.parse(response.data)[i].indivlockerinfo);
+          setduclass(JSON.parse(response.data)[i].duetoclass);
+          setleft(JSON.parse(response.data)[i].leftclasstime);
+          setinclass(JSON.parse(response.data)[i].inclass);
+          setrecentTime(JSON.parse(response.data)[i].recentTime);
+          console.log(recentTime);
+          setuserpassword(JSON.parse(response.data)[i].pw);
+          setflag(JSON.parse(response.data)[i].flag);
+        }
+        setIsGetBtnLabel(true);
+      } //전화번호
+  }
+}
 
   //얼굴인식 유저 정보 가져오는 함수.
   const get_userinfo = async () => {
@@ -479,10 +527,10 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
         console.log(JSON.parse(response.data)[i].mile);
         console.log(JSON.parse(response.data)[i].recentTime);
         console.log(JSON.parse(response.data)[i].pw);
-        setmid(JSON.parse(response.data)[i].id);
-        setidd(JSON.parse(response.data)[i].name); //이름
-        settel(JSON.parse(response.data)[i].tel);
-        setProfileImg(JSON.parse(response.data)[i].profile_img);
+        setmid(JSON.parse(response.data)[i].id); //회원 아이디
+        setName(JSON.parse(response.data)[i].name); //이름 
+        settel(JSON.parse(response.data)[i].tel); //전화번호
+        setProfileImg(JSON.parse(response.data)[i].profile_img); //프로필 이미지
         setmile(JSON.parse(response.data)[i].mile); //마일리지
         setcome(JSON.parse(response.data)[i].comeinm); //출석횟수
         setproduct(JSON.parse(response.data)[i].duetoproduct); //회원권 만료일
@@ -496,13 +544,10 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
         setflag(JSON.parse(response.data)[i].flag);
 
       }
+      setIsGetLabel(true);
     }
-
-    setIsGetLabel(true);
-    // countTime();
   }
-
-
+  
   useEffect(() => {
     countTime();
   }, [recentTime]);
@@ -535,6 +580,7 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
 
       if (diffMinutes >= 1) {
         setIsTimeout(true);
+        handleCaptureSelfie();
         stopWebcam(); //캠 끄기
         //시간 계산하는 함수 // 5분 이상일 경우
         // 플래그 true 
@@ -557,8 +603,8 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
 
   faceEntry = <IonModal className="baseModal" isOpen={isModalOpen && !isModalShownForLabel && isgetlabel && isTimeout} backdropDismiss={false}>
     <ModalComponent
-      detectedName={idd} //회원 id
-      selfieURL={profileImg} // Pass the selfie URL here // Show the modal only if it's open and not shown for the current detected label
+      detectedName={Name} //회원 id
+      profileImg={profileImg} // Pass the selfie URL here // Show the modal only if it's open and not shown for the current detected label
       mid={mid}
       tel={tel}
       mile={mile}
@@ -575,98 +621,29 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
       onClose={handleCloseModal} />
   </IonModal>
 
+    
+    
   //버튼일때 유저 정보 가져오는  함수
   useEffect(() => {
 
     if (props.isbtnopen) {
+      handleCaptureSelfie();
       stopWebcam();
       get_btn_userinfo(); //버튼일때 유저 정보 가져오기
     }
     if (props.isbtnoutOpen) {
+      handleCaptureSelfie();
       stopWebcam();
       get_btn_userinfo();
     }
-  }, [props.isbtnopen, props.isbtnoutOpen]);
-
-
-  //일단 모달로 해서 닫기하면 일단은 문제없음.
-
-  const get_btn_userinfo = async () => {
-    let url = 'http://dev.wisevill.com/kioskdb/get_data_from_db.php';
-
-    console.log(mid);
-    if (props.id) {
-      if (!props.typeid) { //회원번호
-        const options = {
-          url: url,
-          data: { id: props.id, code: gymLabel },
-          headers: { 'Content-Type': 'application/json' }
-        }
-
-        const response = await CapacitorHttp.post(options);
-        // console.log(JSON.parse(response.data));
-
-        for (let i = 0; i < JSON.parse(response.data).length; i++) {
-
-          console.log(JSON.parse(response.data)[i].id);
-          console.log(JSON.parse(response.data)[i].name);
-          console.log(JSON.parse(response.data)[i].mile);
-          setmid(JSON.parse(response.data)[i].id); //회원 아이디
-          console.log(mid);
-          setidd(JSON.parse(response.data)[i].name); //이름
-          settel(JSON.parse(response.data)[i].tel);
-          setProfileImg(JSON.parse(response.data)[i].profile_img);
-          setmile(JSON.parse(response.data)[i].mile); //마일리지
-          setcome(JSON.parse(response.data)[i].comeinm); //출석횟수
-          setproduct(JSON.parse(response.data)[i].duetoproduct); //회원권 만료일
-          sethave(JSON.parse(response.data)[i].haveproduct); //회원권 상품명
-          setlocker(JSON.parse(response.data)[i].indivlockerinfo);
-          setduclass(JSON.parse(response.data)[i].duetoclass);
-          setleft(JSON.parse(response.data)[i].leftclasstime);
-          setinclass(JSON.parse(response.data)[i].inclass);
-          setrecentTime(JSON.parse(response.data)[i].recentTime);
-          setuserpassword(JSON.parse(response.data)[i].pw);
-          setflag(JSON.parse(response.data)[i].flag);
-        }
-      }
-      else if (props.typeid) {
-        const options = {
-          url: url,
-          data: { tel: props.id, code: gymLabel},
-          headers: { 'Content-Type': 'application/json' }
-        }
-        const response = await CapacitorHttp.post(options);
-        console.log(JSON.parse(response.data));
-
-        for (let i = 0; i < JSON.parse(response.data).length; i++) {
-
-          console.log(JSON.parse(response.data)[i].id);
-          console.log(JSON.parse(response.data)[i].name);
-          console.log(JSON.parse(response.data)[i].mile);
-          setmid(JSON.parse(response.data)[i].id);
-          setidd(JSON.parse(response.data)[i].name); //이름
-          settel(JSON.parse(response.data)[i].tel);
-          setidd(JSON.parse(response.data)[i].name); //이름
-          console.log(tel);
-          setProfileImg(JSON.parse(response.data)[i].profile_img);
-          setmile(JSON.parse(response.data)[i].mile); //마일리지
-          setcome(JSON.parse(response.data)[i].comeinm); //출석횟수
-          setproduct(JSON.parse(response.data)[i].duetoproduct); //회원권 만료일
-          sethave(JSON.parse(response.data)[i].haveproduct); //회원권 상품명
-          setlocker(JSON.parse(response.data)[i].indivlockerinfo);
-          setduclass(JSON.parse(response.data)[i].duetoclass);
-          setleft(JSON.parse(response.data)[i].leftclasstime);
-          setinclass(JSON.parse(response.data)[i].inclass);
-          setrecentTime(JSON.parse(response.data)[i].recentTime);
-          console.log(recentTime);
-          setuserpassword(JSON.parse(response.data)[i].pw);
-          setflag(JSON.parse(response.data)[i].flag);
-        }
-      } //전화번호
-      setIsGetBtnLabel(true);
+    if(props.isJoinModalOpen){
+      console.log("호출됩니까?")
+      stopWebcam();
     }
-  }
-
+    else if(!props.isJoinModalOpen){
+      startWebcam();
+    }
+  }, [props.isbtnopen, props.isbtnoutOpen,props.isJoinModalOpen]);
 
   let idEntry;
 
@@ -676,8 +653,8 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
       idEntry = <IonModal className="baseModal" isOpen={
         props.isbtnopen && isgetbtnlabel} backdropDismiss={false} > <Password
           id={props.id}
-          idd={idd}
-          selfieURL={profileImg}
+          Name={Name}
+          profileImg={profileImg}
           mid={mid}
           tel={tel}
           mile={mile}
@@ -722,8 +699,8 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
       idEntry = <IonModal className="baseModal" isOpen={
         props.isbtnoutOpen && isgetbtnlabel} backdropDismiss={false} > <Password
           id={props.id}
-          idd={idd}
-          selfieURL={profileImg}
+          Name={Name}
+          profileImg={profileImg}
           mid={mid}
           tel={tel}
           mile={mile}
@@ -816,6 +793,11 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
       </IonCard>
   }
 
+  let LoadingCover;
+
+  // if(isLoading == true){
+  //   LoadingCover = <img src={Cover} alt="Logo" />
+  // }
 
 
 
@@ -836,56 +818,19 @@ const FaceRecognition: React.FC<FaceRecognitionProps> = (props) => {
 
       {fail}
 
-      {/*  
-      <button onClick={Time} style={{ margin: "0 auto", position: "absolute" }}>ㅋㅋ</button>*/}
-
-      <div>{count}</div>
+      {/* <div>{count}</div> */}
 
       {/* <button onClick={handleCaptureSelfie} style={{ margin: "0 auto", position: "absolute" }}>찰칵</button> */}
 
-      {/* <canvas className="Selfie" ref={canvasRefSelfie} style={{ margin: "0 auto", position: "absolute" }} /> */}
+      <canvas className="Selfie" ref={canvasRefSelfie} style={{ margin: "0 auto", position: "absolute" }} />
+      {/* {LoadingCover} */}
 
 
       {/*카메라가 꺼졌을 때 찍힌 셀피를 보여줌.*/}
 
       {faceEntry}
-
-      {/* <IonModal className = "baseModal" isOpen={isModalOpen && !isModalShownForLabel && isgetlabel} backdropDismiss={false}> */}
-
-      {/* <IonModal className="baseModal" isOpen={isModalOpen && !isModalShownForLabel && isgetlabel} backdropDismiss={false}>
-        <ModalComponent
-          detectedName={idd} //회원 id
-          selfieURL={profileImg} // Pass the selfie URL here // Show the modal only if it's open and not shown for the current detected label
-          mid={mid}
-          tel={tel}
-          mile={mile}
-          come={come}
-          product={product}
-          have={have}
-          locker={locker}
-          duclass={duclass}
-          left={left}
-          inclass={inclass}
-          recentTime={recentTime}
-          onClose={handleCloseModal} />
-      </IonModal> */}
-
-      {/* 
-      <IonModal isOpen={isidFail} backdropDismiss={false} >
-        <p>다시 입력해주세요.</p>
-        <button onClick={handleIdFail}>닫기</button>
-      </IonModal> */}
+ 
       {idEntry}
-
-
-
-      {/* <IonModal isOpen={
-        props.isbtnopen && isgetbtnlabel} backdropDismiss={false} >
-      {idEntry}
-
-      </IonModal> */}
-
-
 
     </>
   );

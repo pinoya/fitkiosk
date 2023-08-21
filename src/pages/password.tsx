@@ -9,11 +9,11 @@ import { CapacitorHttp } from "@capacitor/core";
 
 type ModalComponentProps = {
   id: string | null;
-  idd: string | null;
+  Name: string | null;
   // detectedName: string | null;
   mid: string | null;
   tel: string | null;
-  selfieURL: string | null;
+  profileImg: string | null;
   mile: string | null;
   come: string | null;
   product: string | null;
@@ -33,10 +33,10 @@ type ModalComponentProps = {
 
 const Password: React.FC<ModalComponentProps> = ({
   id,
-  idd,
+  Name,
   mid,
   tel,
-  selfieURL,
+  profileImg,
   mile,
   come,
   product,
@@ -225,7 +225,7 @@ const Password: React.FC<ModalComponentProps> = ({
                   </div>
 
                   <div className="pw_body3_second">
-                    <p className="pw_body3_second_p">{idd}</p>
+                    <p className="pw_body3_second_p">{Name}</p>
                     <p className="pw_body3_second_p2">님, 비밀번호를 입력해 주세요.</p>
                   </div>
 
@@ -310,8 +310,8 @@ const Password: React.FC<ModalComponentProps> = ({
       {isNewModalOpen && (
         <IonModal className="welcome" backdropDismiss={false} isOpen={true} onRequestClose={() => setIsNewModalOpen(false)} contentLabel="New Modal" style={modalStyles}>
           <Welcome
-            idd={idd}
-            selfieURL={selfieURL}
+            Name={Name}
+            profileImg={profileImg}
             mile={mile}
             come={come}
             product={product}

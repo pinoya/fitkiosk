@@ -53,39 +53,10 @@ export function usePhotoGallery() {
 
     const savedFileImage = await savePicture(photo, fileName);
 
-
-
-
-
-    const newPhotos = [savedFileImage, ...photos];
+    const newPhotos = [savedFileImage];
     setPhotos(newPhotos);
     Preferences.set({ key: PHOTO_STORAGE, value: JSON.stringify(newPhotos) });
   };
-
-
-  // const axios = require('axios');
-
-  // const uploadImageToServer = async (imagePath) => {
-  //   try {
-  //     const formData = new FormData();
-  //     formData.append('image', fs.createReadStream(imagePath));
-
-  //     const response = await axios.post('http://localhost:3000/upload', formData, {
-  //       headers: {
-  //         'Content-Type': 'multipart/form-data'
-  //       }
-  //     });
-
-  //     console.log(response.data.message);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-
-  // // takePhoto 함수에서 이미지 저장 후 업로드 코드 추가
-  // const savedFileImage = await savePicture(photo, fileName);
-  // await uploadImageToServer(savedFileImage.path);
-
 
   const savePicture = async (photo: Photo, fileName: string): Promise<UserPhoto> => {
     let base64Data: string;
@@ -125,6 +96,33 @@ export function usePhotoGallery() {
       };
     }
   };
+
+
+  // const axios = require('axios');
+
+  // const uploadImageToServer = async (imagePath) => {
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append('image', fs.createReadStream(imagePath));
+
+  //     const response = await axios.post('http://localhost:3000/upload', formData, {
+  //       headers: {
+  //         'Content-Type': 'multipart/form-data'
+  //       }
+  //     });
+
+  //     console.log(response.data.message);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
+  // // takePhoto 함수에서 이미지 저장 후 업로드 코드 추가
+  // const savedFileImage = await savePicture(photo, fileName);
+  // await uploadImageToServer(savedFileImage.path);
+
+
+ 
 
 
 

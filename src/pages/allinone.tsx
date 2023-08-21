@@ -12,6 +12,7 @@ import Buttons from '../components/inputBtn';
 import Welcome from './welecome';
 import Test from './test';
 import React, { useEffect, useRef, useState } from 'react';
+import Upload_image from "../components/upload_image";
 
 
 function Kiosk() {
@@ -37,12 +38,16 @@ function Kiosk() {
     const [isbtnOpen, setisbtnOpen] = useState(false);
     const [isbtnClose, setisbtnClose] = useState(false);
     const [isbtnoutOpen, setisBtnoutOpen] = useState(false);
-    const [id, setid] = useState('123');
+    const [id, setid] = useState("");
     const [typeid, settypeid] = useState(false);
     const [pw, setpw] = useState('pw');
     const [face, isface] = useState(false);
     const [jsondata, setjsondata] = useState([]);
     const [code, setcode] = useState("");
+
+    const [isJoinModalOpen, setisJoinModalOpen] = useState(false);
+
+    const [isNewMember, setisNewMember] = useState(false);
 
 
 
@@ -54,29 +59,8 @@ console.log(code);
         <>
             <IonContent>
 
-                {/* <button onClick={openGalleryModal}>모달 열기</button>
-                <button onClick={closeGalleryModal}>모달 닫기</button>
-
-
-                <IonModal isOpen={isgalleryOpen}>
-                    <Test></Test>
-                    <button onClick={closeGalleryModal}>모달 닫기</button>
-                </IonModal> */}
-                {/* <IonModal backdropDismiss={false} isOpen={isinOpen} ref={inmodal}>
-                    <Welcome idd={idd} mile={mile} come={come}
-                        product={product} have={have} locker={locker}
-                        duclass={duclass} left={left} inclass={inclass}
-                        id={id} dismiss={dismiss} />
-                </IonModal> */}
-
-                {/* <IonModal backdropDismiss={false} isOpen={isbtnOpen} ref={inmodal}>
-                    <Welcome id={id} dismiss={dismiss} />
-                </IonModal> */}
-
-                {/* <IonModal backdropDismiss={false} isOpen={isoutOpen} ref={outmodal}>
-                    <Test dismiss={dismiss} id={id} />
-                </IonModal> */}
-
+            {code &&<Upload_image code = {code} isJoinModalOpen = {isJoinModalOpen} setisJoinModalOpen = {setisJoinModalOpen}isNewMember = {isNewMember} setisNewMember = {setisNewMember}></Upload_image>}
+            
                 <div className='background-image-init' />
                 <div className='background-image-img' />
                 <div className='background-image-gradient' />
@@ -85,7 +69,7 @@ console.log(code);
                     <IonGrid class="window">
                         <IonRow class="title">
                             <IonCol>
-                                <Logo code = {code} setcode = {setcode}/>
+                                <Logo code = {code} setcode = {setcode} isJoinModalOpen = {isJoinModalOpen} setisJoinModalOpen = {setisJoinModalOpen}  isNewMember = {isNewMember} setisNewMember = {setisNewMember}/>
                             </IonCol>
                         </IonRow>
                         {window.innerWidth <= window.innerHeight ? (
@@ -99,14 +83,15 @@ console.log(code);
                         <IonRow class="bottom_side">
                             <IonCol size="8" class="main_input_box">
                                 <div className='main_input_box'>
-                                    <Input_Box AlertFunc={setid} settypeid={settypeid} />
+                                    <Input_Box AlertFunc={setid} settypeid={settypeid} isbtnOpen={isbtnOpen} isbtnoutOpen={isbtnoutOpen}/>
                                 </div>
                             </IonCol>
                             <IonCol size="4" class="btn_and_face">
                                 <IonGrid class="btn_and_face">
                                     <IonRow>
                                         <IonCol class="face">
-                                        {code && (<FaceRecognition isbtnopen={isbtnOpen} setisbtnOpen={setisbtnOpen} isbtnoutOpen={isbtnoutOpen} setisbtnoutOpen={setisBtnoutOpen}
+                                        {code && (<FaceRecognition isbtnopen={isbtnOpen} setisbtnOpen={setisbtnOpen} isbtnoutOpen={isbtnoutOpen} setisbtnoutOpen={setisBtnoutOpen} isJoinModalOpen = {isJoinModalOpen} setisJoinModalOpen = {setisJoinModalOpen}
+                                        isNewMember = {isNewMember} setisNewMember = {setisNewMember}
                                                 id={id} typeid={typeid} code = {code} />)}
                                         </IonCol>
                                     </IonRow>

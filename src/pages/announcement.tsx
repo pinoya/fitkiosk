@@ -16,7 +16,7 @@ const Announcement = (props:any) => {
   };
 
   useEffect(() => {
-    get_content();
+    // get_content();
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);

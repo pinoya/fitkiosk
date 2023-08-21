@@ -3,7 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { IonCol, IonGrid, IonRow, IonContent, IonHeader, IonToolbar, IonTitle, IonModal, IonButton, IonIcon } from '@ionic/react';
 import { CapacitorHttp } from '@capacitor/core';
 import { Preferences } from '@capacitor/preferences';
-import { settingsSharp } from 'ionicons/icons';
+import { settingsSharp, personAdd } from 'ionicons/icons';
+
+
 
 import Test from './test.svg';
 import Home from './Home';
@@ -23,6 +25,8 @@ const Logo = (props: any) => {
   const [gymcode, setGymcode] = useState("");
   const [inputpw, setInputPw] = useState("");
   // const [pw, setpw] = useState("123456");
+
+
 
 
   const setPreference = async () => {
@@ -110,10 +114,14 @@ const Logo = (props: any) => {
     setInputPw(e.target.value);
   }
 
-  const ChangeGymCode = async () => {
-    if(props.code == null){
-      setIsModalOpen(true)
-    }
+  const ChangeGymCode = () => {
+      setIsModalOpen(true);
+      console.log("눌립니다");
+  }
+  const OpenJoinModal = () => {
+    props.setisJoinModalOpen(true);
+    console.log("눌립니다");
+    console.log(props.isJoinModalOpen);
   }
 
 
@@ -122,23 +130,39 @@ const Logo = (props: any) => {
     <>
 
 
-{/* 체육관 이름 설정   */}
+      {/* 체육관 이름 설정   */}
       {/* <IonButton onClick={() => { setIsModalOpen(true) }}></IonButton> */}
 
       <button style={{
              float : 'right',
              backgroundColor: 'transparent',
-              }} onClick={() => { ChangeGymCode }}><IonIcon icon={settingsSharp} size="large"></IonIcon></button>
+              }} onClick={() => { ChangeGymCode() }}><IonIcon icon={settingsSharp} size="large"></IonIcon></button>
+
+      {/* <button style={{
+        float: 'right',
+        backgroundColor: 'transparent',
+      }} onClick={() => {OpenJoinModal()}}><IonIcon icon={settingsSharp} size="large"></IonIcon></button> */}
+
+
+<button style={{
+        float: 'left',
+        backgroundColor: 'transparent',
+      }} onClick={() => {OpenJoinModal()}}><IonIcon icon={personAdd} size="large"></IonIcon>회원가입</button>
+
+
+
+
       
-      
+
+
       <IonModal isOpen={isModalOpen} backdropDismiss={false}>
         <p>체육관 코드</p>
         <input type='text' onChange={handleChange} />
         <p>비밀번호</p>
         <input type='text' onChange={handlePassWord} />
-        <div style= {{textAlign: 'center',}}>
-        <IonButton onClick={CloseGymCode}>확인</IonButton>
-        {/* <IonButton>취소</IonButton> */}
+        <div style={{ textAlign: 'center', }}>
+          <IonButton onClick={CloseGymCode}>확인</IonButton>
+          {/* <IonButton>취소</IonButton> */}
         </div>
       </IonModal>
 
@@ -146,6 +170,7 @@ const Logo = (props: any) => {
 
 
       {window.innerWidth <= window.innerHeight ? (
+
         <IonGrid style={{ border: '0px' }}>
           <IonRow style={{ border: '0px' }}>
             <IonCol size='12' style={{ border: '0px' }}>
@@ -154,6 +179,7 @@ const Logo = (props: any) => {
                 marginLeft: '45%',
                 marginTop: '7.5%'
               }} src={Test} alt="Logo" />
+
             </IonCol>
           </IonRow>
           <IonRow>
@@ -178,6 +204,7 @@ const Logo = (props: any) => {
                 width: '100%',
                 marginLeft: '5%'
               }} src={Test} alt="Logo" />
+
             </IonCol>
             <IonCol size='auto' style={{ marginLeft: '0.7%', marginBottom: '18%', border: '0px' }}>
               <div style={{

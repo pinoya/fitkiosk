@@ -90,6 +90,33 @@ const input_num = (props: any) => {
     props.AlertFunc(inputtext);
   })
 
+  
+
+
+  // const segmentButtonRef = useRef<HTMLIonSegmentButtonElement | null>(null);
+
+  // const handleClick = () => {
+  //   if (segmentButtonRef.current) {
+  //     segmentButtonRef.current.click();
+  //     console.log("되긴하냐?");
+  //   }
+  // };
+
+  
+
+
+  // useEffect(() => {
+
+  //   if (props.isbtnopen || props.isbtnoutOpen) {
+  //     handleClick();
+  //     console.log("되긴하냐?");
+  //   }
+ 
+  // }, [props.isbtnopen, props.isbtnoutOpen]);
+
+
+
+
   return (
     <>
       <IonHeader />
@@ -122,30 +149,30 @@ const input_num = (props: any) => {
           <IonRow class="input_pad">
             <IonRow class="input_row">
               <IonCol class="input_box">
-                <IonButton class="input_btn" onClick={addtext}>1</IonButton>
-                <IonButton class="input_btn" onClick={addtext}>2</IonButton>
-                <IonButton class="input_btn" onClick={addtext}>3</IonButton>
+                <IonButton className="input_btn" onClick={addtext}>1</IonButton>
+                <IonButton className="input_btn" onClick={addtext}>2</IonButton>
+                <IonButton className="input_btn" onClick={addtext}>3</IonButton>
               </IonCol>
             </IonRow>
             <IonRow class="input_row">
               <IonCol class="input_box">
-                <IonButton class="input_btn" onClick={addtext}>4</IonButton>
-                <IonButton class="input_btn" onClick={addtext}>5</IonButton>
-                <IonButton class="input_btn" onClick={addtext}>6</IonButton>
+                <IonButton className="input_btn" onClick={addtext}>4</IonButton>
+                <IonButton className="input_btn" onClick={addtext}>5</IonButton>
+                <IonButton className="input_btn" onClick={addtext}>6</IonButton>
               </IonCol>
             </IonRow>
             <IonRow class="input_row">
               <IonCol class="input_box">
-                <IonButton class="input_btn" onClick={addtext}>7</IonButton>
-                <IonButton class="input_btn" onClick={addtext}>8</IonButton>
-                <IonButton class="input_btn" onClick={addtext}>9</IonButton>
+                <IonButton className="input_btn" onClick={addtext}>7</IonButton>
+                <IonButton className="input_btn" onClick={addtext}>8</IonButton>
+                <IonButton className="input_btn" onClick={addtext}>9</IonButton>
               </IonCol>
             </IonRow>
             <IonRow class="input_row">
               <IonCol class="input_box">
-                <IonButton class="input_btn" onClick={resettext}>취소</IonButton>
-                <IonButton class="input_btn" onClick={addtext}>0</IonButton>
-                <IonButton class="input_btn" onClick={deletetext}>←</IonButton>
+                <IonButton className="input_btn" onClick={resettext}>취소</IonButton>
+                <IonButton className="input_btn" onClick={addtext}>0</IonButton>
+                <IonButton className="input_btn" onClick={deletetext}>←</IonButton>
               </IonCol>
             </IonRow>
           </IonRow>

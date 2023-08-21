@@ -2,10 +2,10 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
 
-//import { defineCustomElements } from '@ionic/pwa-elements/loader';
+import { defineCustomElements } from '@ionic/pwa-elements/loader';
 
 // Call the element loader after the platform has been bootstrapped
-//defineCustomElements(window);
+defineCustomElements(window);
 
 
 
