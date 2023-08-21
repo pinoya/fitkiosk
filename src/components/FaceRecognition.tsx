@@ -645,6 +645,7 @@ if(props.isNewMember){
     }
   }, [props.isbtnopen, props.isbtnoutOpen,props.isJoinModalOpen]);
 
+  let temptime;
   let idEntry;
 
   if (props.isbtnopen) {
@@ -679,6 +680,14 @@ if(props.isNewMember){
         <p>이미 입장 하셨습니다.</p>
         <button onClick={handleClosebtnModal}>닫기</button>
       </IonModal>
+      if (isgetbtnlabel != false) {
+        console.log("5초 타이머 시작");
+        temptime = setTimeout(() => {
+          props.setisbtnOpen(false);
+          handleCloseModal();
+        }, 5000)
+      }
+
     }
     else {
       // -> 실패 -> 다시 입력해주세요. 일단 좀 더 생각
@@ -686,6 +695,14 @@ if(props.isNewMember){
         <p>다시 입력해주세요.</p>
         <button onClick={handleClosebtnModal}>닫기</button>
       </IonModal>
+      if (isgetbtnlabel != false) {
+        console.log("5초 타이머 시작");
+        temptime = setTimeout(() => {
+          props.setisbtnOpen(false);
+          handleCloseModal();
+        }, 5000)
+      }
+
     }
   }
 
@@ -725,6 +742,14 @@ if(props.isNewMember){
         <p>이미 퇴실 하셨습니다.</p>
         <button onClick={handleClosebtnModal}>닫기</button>
       </IonModal>
+      if (isgetbtnlabel != false) {
+        console.log("5초 타이머 시작");
+        temptime = setTimeout(() => {
+          props.setisbtnoutOpen(false);
+          handleCloseModal();
+        }, 5000)
+      }
+
     }
     else {
       // -> 실패 -> 다시 입력해주세요. 일단 좀 더 생각
@@ -732,6 +757,14 @@ if(props.isNewMember){
         <p>다시 입력해주세요.</p>
         <button onClick={handleClosebtnModal}>닫기</button>
       </IonModal>
+      if (isgetbtnlabel != false) {
+        console.log("5초 타이머 시작");
+        temptime = setTimeout(() => {
+          props.setisbtnoutOpen(false);
+          handleCloseModal();
+        }, 5000)
+      }
+
     }
   }
 
