@@ -1,11 +1,71 @@
-/*다시 입력해달라는 창*/
-ion-modal .failId {
-    --width: 100px;
-    --height: 100px;
-    --border-radius: 10px;
+ion-modal.failId {
+    --width: 420px;
+    --height: 250px;
+    --border-radius: 12px;
     --background: #FFFFFF;
 }
 
+/*에러 아이콘*/
+.bierror{
+    width : 45px;
+    height : 45px;
+    color : #313131;
+
+    margin-left: 45%;
+    margin-top: 5%;
+}
+/*다시 입력해주세요.*/
+ion-modal.failId p{
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+    color : #313131;
+    margin-top: -1%;
+
+}
+/*하단 버튼*/
+ion-modal.failId button{
+    background-color: #ff6300;
+    color : white;
+    height : 60px;
+    font-size: 20px;
+    font-weight: 600;
+    font-size: 21px;
+}
+/* .faceFail {
+    margin: "0 auto";
+    position: absolute;
+    width: 210px;
+    height: 55px;
+    left: 535px;
+    top: 662px;
+
+    background: rgba(90, 42, 11, 0.7);
+    border-radius: 5px;
+    
+
+} */
+
+/* .h1{
+    color:#FFFFFF;
+} */
+/* .faceFail {
+    margin: "0 auto";
+    position: absolute;
+    width: 210px;
+    height: 55px;
+    left: 535px;
+    top: 662px;
+
+    background: rgba(90, 42, 11, 0.7);
+    border-radius: 5px;
+    
+
+} */
+
+/* .h1{
+    color:#FFFFFF;
+} */
 /* .faceFail {
     margin: "0 auto";
     position: absolute;

@@ -5,6 +5,7 @@ setupIonicReact({ mode: 'md' })
 import {IonButton, IonCol, IonContent, IonGrid, IonHeader, IonRow, IonText, IonTitle, IonToolbar } from '@ionic/react';
 import './inputNum.css';
 import { useEffect, useRef, useState } from 'react';
+import { FiDelete } from "react-icons/fi";
 
 
 //딱 5자리 되거나 13자리 됐을때만 플레그값 고치는걸로 수정하면 좋을듯함.
@@ -172,7 +173,7 @@ const input_num = (props: any) => {
               <IonCol class="input_box">
                 <IonButton className="input_btn" onClick={resettext}>취소</IonButton>
                 <IonButton className="input_btn" onClick={addtext}>0</IonButton>
-                <IonButton className="input_btn" onClick={deletetext}>←</IonButton>
+                <IonButton className="input_btn" onClick={deletetext}><FiDelete/></IonButton>
               </IonCol>
             </IonRow>
           </IonRow>

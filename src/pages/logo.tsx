@@ -9,7 +9,7 @@ import { settingsSharp, personAdd } from 'ionicons/icons';
 
 import Test from './test.svg';
 import Home from './Home';
-// import './logo.css';
+import './logo.css';
 
 const Logo = (props: any) => {
   const [width, setWidth] = useState(window.innerWidth);
@@ -156,12 +156,14 @@ const Logo = (props: any) => {
 
 
       <IonModal isOpen={isModalOpen} backdropDismiss={false}>
-        <p>체육관 코드</p>
-        <input type='text' onChange={handleChange} />
-        <p>비밀번호</p>
-        <input type='text' onChange={handlePassWord} />
+        <p className='logo_maintitle'>체육관 연동하기</p>
+        <p className='logo_codenpwdname'>체육관 코드</p>
+        <input type='text' onChange={handleChange} className='logo_codenpwdinput' placeholder='code number'/>
+        <p className='logo_codenpwdname'>비밀번호</p>
+        <input type='text' onChange={handlePassWord} className='logo_codenpwdinput' placeholder='password'/>
         <div style={{ textAlign: 'center', }}>
-          <IonButton onClick={CloseGymCode}>확인</IonButton>
+          <IonButton onClick={CloseGymCode}
+          className='logo_button'>확인</IonButton>
           {/* <IonButton>취소</IonButton> */}
         </div>
       </IonModal>
@@ -175,9 +177,9 @@ const Logo = (props: any) => {
           <IonRow style={{ border: '0px' }}>
             <IonCol size='12' style={{ border: '0px' }}>
               <img style={{
-                width: '13%',
-                marginLeft: '45%',
-                marginTop: '7.5%'
+                width: '18%',
+                marginLeft: '37%',
+                marginTop: '6%'
               }} src={Test} alt="Logo" />
 
             </IonCol>
@@ -186,11 +188,11 @@ const Logo = (props: any) => {
             <IonCol style={{ border: '0px' }}>
               <div style={{
                 textAlign: 'center',
-                fontSize: '180%',
+                fontSize: '32px',
                 fontWeight: 700,
-                letterSpacing: '-3.12%',
+                letterSpacing:'2px',
                 color: 'white',
-                marginTop: '2%',
+                marginTop: '1%',
                 marginBottom: '5%',
               }}>{name}</div>
             </IonCol>
@@ -202,7 +204,8 @@ const Logo = (props: any) => {
             <IonCol size='auto' style={{ marginLeft: '3%', marginBottom: '18%', border: '0px' }}>
               <img style={{
                 width: '100%',
-                marginLeft: '5%'
+                marginLeft: '-20%',
+                marginTop:'18%'
               }} src={Test} alt="Logo" />
 
             </IonCol>
@@ -211,9 +214,10 @@ const Logo = (props: any) => {
                 textAlign: 'center',
                 color: 'white',
                 fontWeight: 700,
-                letterSpacing: '-3.12%',
-                fontSize: '190%',
-                marginTop: '6%',
+                letterSpacing: '2px',
+                fontSize: '32px',
+                marginLeft: '-20%',
+                marginTop: '19%',
               }}>{name}</div>
             </IonCol>
           </IonRow>

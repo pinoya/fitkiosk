@@ -9,7 +9,7 @@ import { CapacitorHttp } from "@capacitor/core";
 import Password from "../pages/password";
 import "./FaceRecognition.css";
 import Cover from "./Loading.png"
-
+import { BiError } from "react-icons/bi";
 
 import { UserPhoto, usePhotoGallery } from '../hooks/usePhotoGallery';
 
@@ -677,7 +677,8 @@ if(props.isNewMember){
     }
     else if ((mid == props.id && flag == '1' || tel == props.id && flag == '1')) {
       idEntry = <IonModal className="failId" isOpen={props.isbtnopen && isgetbtnlabel} backdropDismiss={false} >
-        <p>이미 입장 하셨습니다.</p>
+        <BiError className="bierror"/>
+        <p>이미 입장하셨습니다.</p>
         <button onClick={handleClosebtnModal}>닫기</button>
       </IonModal>
       if (isgetbtnlabel != false) {
@@ -692,6 +693,7 @@ if(props.isNewMember){
     else {
       // -> 실패 -> 다시 입력해주세요. 일단 좀 더 생각
       idEntry = <IonModal className="failId" isOpen={props.isbtnopen && isgetbtnlabel} backdropDismiss={false} >
+         <BiError className="bierror"/>
         <p>다시 입력해주세요.</p>
         <button onClick={handleClosebtnModal}>닫기</button>
       </IonModal>
@@ -739,7 +741,8 @@ if(props.isNewMember){
     }
     else if ((mid == props.id && flag == '0' || tel == props.id && flag == '0')) {
       idEntry = <IonModal className="failId" isOpen={props.isbtnoutOpen && isgetbtnlabel} backdropDismiss={false} >
-        <p>이미 퇴실 하셨습니다.</p>
+         <BiError className="bierror"/>
+        <p>이미 퇴실하셨습니다.</p>
         <button onClick={handleClosebtnModal}>닫기</button>
       </IonModal>
       if (isgetbtnlabel != false) {
@@ -754,6 +757,7 @@ if(props.isNewMember){
     else {
       // -> 실패 -> 다시 입력해주세요. 일단 좀 더 생각
       idEntry = <IonModal className="failId" isOpen={props.isbtnoutOpen && isgetbtnlabel} backdropDismiss={false} >
+        <BiError className="bierror"/>
         <p>다시 입력해주세요.</p>
         <button onClick={handleClosebtnModal}>닫기</button>
       </IonModal>

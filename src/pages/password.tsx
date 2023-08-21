@@ -6,6 +6,7 @@ import './password.css';
 import './allinone.css';
 import Welcome from '../pages/welecome';
 import { CapacitorHttp } from "@capacitor/core";
+import { FiDelete } from "react-icons/fi";
 
 type ModalComponentProps = {
   id: string | null;
@@ -292,7 +293,7 @@ const Password: React.FC<ModalComponentProps> = ({
               <IonCol class="input_boxx">
                 <IonButton class="input_btnn" style={{ fontSize: '26px' }} onClick={resettext}>취소</IonButton>
                 <IonButton class="input_btnn" onClick={() => addtext("0")}>0</IonButton>
-                <IonButton class="input_btnn" onClick={deletetext}>X</IonButton>
+                <IonButton class="input_btnn" onClick={deletetext}><FiDelete/></IonButton>
               </IonCol>
 
             </IonRow>

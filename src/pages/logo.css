@@ -1,3 +1,44 @@
-ion-button{
-    --background : #ffffff;
+.logo_button{
+    width: 400px; 
+    height: 80px;
+    font-size:26px;
+    font-weight:700;
+    margin-bottom : 18%;
+    --border-radius : 12px;
+}
+/*체육관 연동하기 - 제목*/
+.logo_maintitle{
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 10%;
+}
+
+/*체육관 코드번호*/
+.logo_codenpwdname{
+    font-size: 22px;
+    font-weight: 700;
+    margin-left: 13%;
+    margin-top: -8%;
+}
+
+/*체육관 코드번호 - input*/
+.logo_codenpwdinput{
+    width: 450px;
+    height: 60px;
+    border-radius: 12px;
+    background-color: #f2f3f7;
+    border: 1px solid #f2f3f7;
+    font-size: 17px;
+    
+    margin-left: 12%;
+    margin-top: -12%;
+    padding-left : 4%;
+    color : rgba(161, 164, 178,0.5) ;
+
+    
+}
+.logo_codenpwdinput:hover{
+    color : black;
+    font-size: 17px;
 }
